@@ -2,7 +2,21 @@
 
 ## 工作流程
 
-每个开发者创建一个分支，并且在自己的分支中即使push方便大家学习交流，并且利于观察开发进度
+每个开发者创建一个分支，并且在自己的分支中即使push方便大家学习交流，并且利于观察开发进度。比如
+
+```shell
+git branch hjh
+git checkout hjh
+coding...
+git push -u origin hjh：hjh
+```
+
+1.提交文件至缓存:`git add file/folder`
+2.提交文件至版本库:`git commit -m "description"`
+3.本地新建分支:`branch_name:git branch branch_name`
+4.切换到新建分支:`git checkout branch_name`
+5.提交本地分支到云端:`git push -u origin branch_name:cloud_branch_name`
+6.切换到主分支:` git checkout master`
 
 ## 开发计划
 
