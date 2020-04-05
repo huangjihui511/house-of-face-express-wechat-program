@@ -1,0 +1,18 @@
+<!--pages/login/login.wxml-->
+<!-- <text>pages/login/login.wxml</text> -->
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title">{{appName}}</view>
+        <!-- <view class="page__desc">{{appDes}}</view> -->
+    </view>
+    <view wx:for="{{infos}}">
+        <view class="page__hd">
+            <view class="page__title">{{item.title}}</view>
+            <view class="page__desc">{{item.text}}</view>
+        </view>
+    </view>
+    <view class="button-sp-area">
+        <button class="weui-btn" type="primary" open-type="getUserInfo" bindgetuserinfo="login">登陆</button>
+        <button class="weui-btn" type="warn" bindtap="nolog">不登陆</button>
+    </view>
+</view>
