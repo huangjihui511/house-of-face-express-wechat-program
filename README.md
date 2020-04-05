@@ -45,3 +45,22 @@ git push -u origin hjh：hjh
   5. 通过用户id获得其收藏的表情容器
 - 帮助
   - [云开发](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)
+  - [演示小程序](https://github.com/wechat-miniprogram/miniprogram-demo)
+
+##### 前端分工：
+
+G：小程序的整体UI，大的框架
+
+P：表情部分的UI
+
+H：用户的配置
+
+##### 后端分工：
+
+Y：通过云数据库上传下载功能
+
+L：文件的压缩命名，500kb
+
+Z：用户和表情相关的接口
+
+##### 下次开会4.6 晚7点
