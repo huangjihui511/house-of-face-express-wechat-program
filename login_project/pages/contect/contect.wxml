@@ -1,0 +1,19 @@
+<!--pages/contect/contect.wxml-->
+<!-- <text>pages/contect/contect.wxml</text> -->
+
+<view class="page">
+<view class="page__hd">
+  <view class="page__title">从本地加入你喜欢的表情</view>
+  <view class="page__desc">初始只能上传5张</view>
+</view>
+<view class="button-sp-area">
+  <button class="weui-btn" type="primary" bindtap="chooseImage" >上传照片</button>
+</view>
+<view class="page__hd">
+<view class="page__title">发挥创意制作表情</view>
+<view class="page__desc">通过图片和文字</view>
+</view>
+<view class="button-sp-area">
+  <button class="weui-btn" type="primary" bindtap="chooseImage" >制作表情</button>
+</view>
+</view>
