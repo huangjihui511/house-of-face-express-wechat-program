@@ -1,0 +1,24 @@
+// 云函数入口文件
+const cloud = require('wx-server-sdk')
+
+cloud.init({
+  env:"program-byiln"
+})
+const db = cloud.database()
+const _ = db.command
+// 云函数入口函数
+exports.main = async (event, context) => {
+  var user_id = event.user_id
+  var expression = event.expression
+  try{
+    return await db.collection('user').where({
+      _id:user_id
+    }).update({
+      data:{
+        expression_set:_.pull(expression)
+      }
+    })
+  } catch(e) {
+    console.log(e)
+  }
+}
