@@ -1,10 +1,10 @@
 <!--index.wxml-->
 <view class="button_list">
-  <button class='time' style="width:250rpx">收藏时间</button>
-  <button class='freq' style="width:250rpx">使用频率</button>
+  <button class='time' style="width:250rpx" bindtap="time_order">收藏时间</button>
+  <button class='freq' style="width:250rpx" bindtap="freq_order">使用频率</button>
   <picker style="width:250rpx" class='classify' bindchange="bindPickerChange" value="{{index}}" range="{{classes}}">
     <view class="picker">          
-      请选择类别：{{classes[index]}}        
+      选择类别：{{classes[index]}}        
     </view>      
   </picker>
 </view>

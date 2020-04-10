@@ -1,0 +1,8 @@
+<!--index.wxml-->
+<view class='layout'>
+  <image class='money_logo' src="../../images/money_logo.png"></image>
+  <view class='my_money'>我的剩余金币:</view>
+  <text>\n\n</text>
+  <button class='cash_out' style="width:400rpx">提现</button>
+  <button class='cash_in' style="width:400rpx">充值</button>
+</view>
