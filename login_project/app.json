@@ -1,10 +1,9 @@
 {
   "pages": [
-    
+    "pages/contect/contect",
     "pages/login/login",
     "pages/index/index",
-    "pages/logs/logs",
-    "pages/contect/contect"
+    "pages/logs/logs"
   ],
   "window": {
     "backgroundTextStyle": "light",
