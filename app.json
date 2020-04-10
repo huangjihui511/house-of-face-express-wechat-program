@@ -1,0 +1,36 @@
+{
+  "pages": [
+    "pages/main/main",
+    "pages/index/index",
+    "pages/search/search",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#F8F8F8",
+    "navigationBarTitleText": "input",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "color": "#7A7E83",
+    "selectedColor": "#3cc51f",
+    "borderStyle": "black",
+    "backgroundColor": "#ffffff",
+    "list": [
+      {
+        "pagePath":"pages/main/main",
+        "iconPath":"images/icon_main.png",
+        "selectedIconPath":"images/icon_main_HL.png",
+        "text":"主页"
+      },
+      {
+        "pagePath":"pages/search/search",
+        "iconPath":"images/icon_1.png",
+        "selectedIconPath":"images/icon_1_HL.png",
+        "text":"搜索"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

@@ -1,0 +1,16 @@
+@import "/lib/shared.wxss";
+@import "/lib/weui.wxss";
+
+.page-section{
+  margin-bottom: 20rpx;
+}
+
+.button_confirm{
+  size:default;
+  background-color: blue;
+  font: menu;
+}
+
+.showWhatToSearch{
+  font-size: medium;
+}
