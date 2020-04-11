@@ -9,7 +9,20 @@ Page({
   data: {
     imgurl: null,
     imgid: null,
-    tag: []
+    tags: [],
+    selectedTags: []
+  },
+
+  add_tag:function (e) {
+    if (true) {
+      this.setData(
+        {
+          selectedTags: this.selectedTags + e
+        }
+      )
+      console.log(this.selectedTags)
+      console.log(e)
+    }
   },
 
   /**

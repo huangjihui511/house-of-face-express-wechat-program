@@ -118,3 +118,12 @@ page{
 .hover {
   background:  rgb(236, 179, 156);
 }
+
+.weui-grid {
+  text-align: center;
+  padding: 6px 10px;
+}
+.weui-grid:hover {
+  background-color: #F8F8F8;
+  opacity: 1;
+}
