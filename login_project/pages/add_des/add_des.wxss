@@ -1,4 +1,17 @@
+/* pages/add_des/add_des.wxss */
+
+
+.page-section-ctn {
+  text-align: center;
+}
+
+.image {
+  margin-top: 30rpx;
+  
+}
+
 /* pages/login/login.wxss */
+
 
 page{
   background-color: #F8F8F8;

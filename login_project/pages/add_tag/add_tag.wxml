@@ -1,0 +1,15 @@
+<!--pages/add_tag/add_tag.wxml-->
+<!-- <text>pages/add_tag/add_tag.wxml</text> -->
+<view class="page-section-ctn">
+  <image class="image" src="{{imgurl}}" mode="aspectFill"/>
+</view>
+<view class="page__hd">
+      <view class="page__title">从以下标签中选择你觉得合适的</view>
+</view>
+<view class="page__hd">
+      <view class="textarea-wrp">
+        <textarea auto-focus="true" style="height: 10em" placeholder="在这里输入描述" placeholder-style="color:grey;" bindinput="bindinput"/>
+      </view>
+</view>
+<button class="weui-btn" type="primary" bindtap="add_des">提交</button>
+<button class='goodbutton'  hover-class="hover">激活</button>
