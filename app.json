@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/shop/shop",
     "pages/main/main",
     "pages/index/index",
     "pages/search/search",
@@ -28,6 +29,12 @@
         "iconPath":"images/icon_1.png",
         "selectedIconPath":"images/icon_1_HL.png",
         "text":"搜索"
+      },
+      {
+        "pagePath":"pages/shop/shop",
+        "iconPath":"images/icon_main.png",
+        "selectedIconPath":"images/icon_main_HL.png",
+        "text":"商店"
       }
     ]
   },

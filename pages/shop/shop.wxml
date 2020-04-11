@@ -1,0 +1,43 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo">
+    <button class="userHead" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image class="userHead" bindtap="bindViewTap" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="search">
+    <view class="showWhatToSearch">搜索内容：{{inputValue}}</view>
+    <view class="searchInputConfirm">
+      <input class="input" auto-focus bindconfirm="bindConfirmClick" data-input="input"
+         laceholder="请输入搜索关键字">
+      </input>
+      <button class="button_confirm" bindtap="confirm" >
+        <view class="confirmFont">确认</view>
+      </button>
+    </view>
+  </view>
+  <view class="showWhatToSearch">将要搜索：{{toSearch}}</view>
+  <view class="line"></view>
+  <view class="picShowList">
+    <view class="picShowRow">
+      <button class="buttonImage" bindtap="shop_image_pagejump" data-image="{{toSearch}}">
+        <image class="image_search" src="{{toSearch}}"></image>
+      </button>
+      <button class="buttonImage"><image class="image_search" src="{{toSearch}}"></image></button>
+      <button class="buttonImage"><image class="image_search" src="{{toSearch}}"></image></button>
+  <!-- <image class="image_search" src="{{showPicList[1]}}"></image>-->
+    <!--<view wx:for="{{array}}"> {{showPicList[]}} </view>-->
+    </view>
+    <view class="picShowRow">
+      <button class="buttonImage"><image class="image_search" src="{{toSearch}}"></image></button>
+      <button class="buttonImage"><image class="image_search" src="{{toSearch}}"></image></button>
+      <button class="buttonImage"><image class="image_search" src="{{toSearch}}"></image></button>
+    </view> 
+  </view>
+  <view class="line"></view>
+  <view class="page-section">
+
+  </view>
+</view>

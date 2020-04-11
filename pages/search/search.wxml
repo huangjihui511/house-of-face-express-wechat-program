@@ -22,7 +22,11 @@
     </view>
     <view class="showWhatToSearch">将要搜索：{{toSearch}}，{{testButton}}</view>
   </view>
+  <view class="line"></view>
   <view class="page-section">
-    <image src="{{testButton}}"> </image>
+    <image class="image_search" src="{{testButton}}"></image>
+  
+   <image class="image_search" src="{{showPicList[1]}}"></image>
+    <!--<view wx:for="{{array}}"> {{showPicList[]}} </view>-->
   </view>
 </view>

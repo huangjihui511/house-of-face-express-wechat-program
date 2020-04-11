@@ -1,7 +1,7 @@
 <!--main.wxml-->
 <view class="container">
   <view class="pic">
-    <image class="image" src="/images/test.jpg">
+    <image class="image" src="{{imagePath}}">
     </image>
   </view>
   <view class="usermotto">

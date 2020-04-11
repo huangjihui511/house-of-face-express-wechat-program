@@ -14,3 +14,14 @@
 .showWhatToSearch{
   font-size: medium;
 }
+
+.line{
+  background: #E0E3DA;
+  width: 100%;
+  height: 5rpx;
+}
+
+.image_search{
+  width: 100px;
+  height: 100px;
+}

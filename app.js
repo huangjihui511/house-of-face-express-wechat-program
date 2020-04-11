@@ -1,5 +1,26 @@
 //app.js
 App({
+  globalData: {
+    imagePath:'',
+    userInfo: null,
+    data:{}
+  },
+  
+  //app 全局属性监听
+ watch: function (method) {
+  var obj = this.globalData;
+  Object.defineProperty(obj, "data", { //这里的 data 对应 上面 globalData 中的 data
+  configurable: true,
+  enumerable: true,
+  set: function (value) { //动态赋值，传递对象，为 globalData 中对应变量赋值
+  this.imagePath = value.imagePath;
+  method(value);
+  },
+  get: function () { //获取全局变量值，直接返回全部
+  return this.globalData;
+  }
+  })
+  },
   onLaunch: function () {
     // 展示本地存储能力
     var logs = wx.getStorageSync('logs') || []
@@ -33,7 +54,5 @@ App({
       }
     })
   },
-  globalData: {
-    userInfo: null
-  }
 })
+//module.exports.imagePath = this.globalData.imagePath;
