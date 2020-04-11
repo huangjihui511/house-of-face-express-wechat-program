@@ -7,9 +7,9 @@
   <view class="page__title">从以下标签中选择你觉得合适的</view>
 </view>
 <view class="page__hd">
-  <view class="weui-grids">
-    <button wx:for = "{{tags}}" type="default" size="mini" bindtap="add_tag">{{item}}</button>
+  <view class="tags">
+    <button wx:for = "{{printTags}}" type="{{item.type}}" size="mini" bindtap="add_tag" data-index='{{item.name}}'>{{item.name}}</button>
   </view>
+  
 </view>
-
-<button class="weui-btn" type="primary" bindtap="add_des">提交</button>
+<button class="weui-btn" type="primary" bindtap="submit">提交</button>

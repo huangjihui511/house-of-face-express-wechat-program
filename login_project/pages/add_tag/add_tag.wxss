@@ -127,3 +127,8 @@ page{
   background-color: #F8F8F8;
   opacity: 1;
 }
+.tags {
+  /* display: flex; */
+  /* flex-flow:row wrap; */
+  flex-direction:row;
+}

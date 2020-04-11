@@ -11,7 +11,7 @@ Page({
     imgid: null,
     desc: null
   },
-  add_des: function () {
+  submit: function () {
     console.log(this.data.desc)
     // 调用云函数的接口
   },
