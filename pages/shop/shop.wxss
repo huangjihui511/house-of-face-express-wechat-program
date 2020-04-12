@@ -65,6 +65,35 @@
   font-size: medium;
 }
 
+.userNameDetail {
+  display:flex;
+  flex-direction: column;
+}
+
+.userName {
+  padding-left: 20rpx;
+}
+
+.userDetail {
+  display:flex;
+  flex-direction: row;
+  margin-left:20rpx;
+  margin-right: 20rpx;
+  margin-top:20rpx;
+  margin-bottom: 20rpx;
+}
+
+.userDetailCell {
+  display:flex;
+  flex-direction: column;
+  margin-left: 10rpx;
+  margin-right: 10rpx;
+}
+
+.userDetailText {
+  font-size: small;
+}
+
 .usermotto {
   margin-top: 200px;
 }
@@ -109,12 +138,9 @@
   border: none;
 }
 
-
-.fuck{
-  border: 0 solid #ffffff;
-}
-
-.fuck::after{
-  border:0;
+.cline {
+  background: #E0E3DA;
+  width: 5rpx;
+  height: 80rpx;
 }
 

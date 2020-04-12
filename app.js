@@ -55,4 +55,5 @@ App({
     })
   },
 })
-//module.exports.imagePath = this.globalData.imagePath;
+//imagePath:'',
+//module.exports.imagePath = this.imagePath;

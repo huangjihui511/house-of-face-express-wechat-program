@@ -26,8 +26,10 @@ Page({
     });
   },
   onLoad: function () {
+   // var app = getApp()
+    console.log("indexVisitGlobal"+app.globalData.imagePath)
     this.setData({
-      imagePath : path
+      imagePath : app.globalData.imagePath
     })
     
     if (app.globalData.userInfo) {

@@ -18,7 +18,9 @@ Page({
     console.log(e)
     var imagepath = e.currentTarget.dataset['image']
     var app = getApp()
-    app.globalData.data = {'imagepath':imagepath}
+   // app.globalData.data = {'imagepath':imagepath}
+   app.globalData.imagePath = imagepath
+   console.log(app.globalData.imagePath+"test")
     wx.navigateTo({
       url: '/pages/index/index',
     })
