@@ -10,15 +10,17 @@ page {
   height: 160rpx;
   width: 160rpx;
 }
-.images_struct{
+.struct{
   display: flex;
   flex-wrap:wrap;
   justify-content:space-around;
+
 }
 .image_struct{
   flex-direction: column;
   flex-wrap:wrap;
   justify-content:space-around;
+  margin: 30rpx;
 }
 .image_title{
   text-align:center;

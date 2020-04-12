@@ -10,9 +10,9 @@
 </view>
 <view class="divLine"></view>
 <text>\n</text>
-<view class="images_struct">
+<view class="struct">
   <view wx:for="{{images}}" wx:key="{{index}}">
-    <view class="image-struct">
+    <view class="image_struct">
       <image class="image" src="{{item.image_address}}" bindlongtap="previewImage"></image>
       <view class="image_title">{{item.image_name}}</view>
     </view>
