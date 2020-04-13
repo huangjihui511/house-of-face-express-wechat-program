@@ -1,14 +1,46 @@
 //index.js
 //获取应用实例
 const app = getApp()
-//var path = require('app.js')
+
 Page({
   data: {
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
-    imagePath: '',
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    focus: false,
+      inputValue: '',
+      toSearch: '/images/timg.jfif',
+      testButton: '',
+      showPicList: ["/images/test.jpg","/images/test1.jpg"]
+  },
+  shop_image_pagejump:function(e) {
+    console.log(e)
+    var imagepath = e.currentTarget.dataset['image']
+    var app = getApp()
+   // app.globalData.data = {'imagepath':imagepath}
+   app.globalData.imagePath = imagepath
+   console.log(app.globalData.imagePath+"test")
+    wx.navigateTo({
+      url: '/pages/index/index',
+    })
+  },
+  bindConfirmClick: function(e) {
+    var value = e.detail.value
+
+    this.setData(
+      {
+        inputValue:value
+      }
+    );
+    this.getShowPicList();
+  },
+  getShowPicList: function() {
+    
+  },
+  confirm: function() {
+        var v = this.data.inputValue
+        this.setData({toSearch:v})
   },
   //事件处理函数
   bindViewTap: function() {
@@ -16,22 +48,7 @@ Page({
       url: '../logs/logs'
     })
   },
-  
- 
-//定义监听回调方法
-//app 监听回调方法
-  watchBack: value=> { //这里的value 就是 app.js 中 watch 方法中的 set, 返回整个 globalData
-    this.setData({
-      imagePath : value.imagePath
-    });
-  },
   onLoad: function () {
-   // var app = getApp()
-    console.log("indexVisitGlobal"+app.globalData.imagePath)
-    this.setData({
-      imagePath : app.globalData.imagePath
-    })
-    
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

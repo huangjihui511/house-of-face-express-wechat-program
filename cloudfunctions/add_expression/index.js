@@ -2,7 +2,7 @@
 const cloud = require('wx-server-sdk')
 
 cloud.init({
-  env:"alpha-project-6ja8k"
+  env:"alpha-project-bvqxh"
 })
 const db = cloud.database()
 const _ = db.command
