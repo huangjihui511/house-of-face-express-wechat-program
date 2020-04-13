@@ -1,0 +1,15 @@
+<!--pages/add_des/add_des.wxml-->
+<!-- <text>pages/add_des/add_des.wxml</text> -->
+<view class="page-section-ctn">
+  <image class="image" src="{{imgurl}}" mode="aspectFill"/>
+</view>
+<view class="page__hd">
+      <view class="page__title">用一句话形容这个图片</view>
+      <view class="page__desc">例子：这是一个可爱的笑脸</view>
+</view>
+<view class="page__hd">
+      <view class="textarea-wrp">
+        <textarea auto-focus="true" style="height: 10em" placeholder="在这里输入描述" placeholder-style="color:grey;" bindinput="bindinput"/>
+      </view>
+</view>
+<button class="weui-btn" type="primary" bindtap="submit">提交</button>
