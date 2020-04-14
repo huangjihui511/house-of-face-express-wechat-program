@@ -3,6 +3,7 @@ App({
   globalData: {
     imagePath:'',
     userInfo: null,
+    userCoin:777,
     data:{}
   },
   

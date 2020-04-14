@@ -4,10 +4,10 @@ Page(
         motto: '主页',
         imagePath:''
     },
-  //  onLoad: function(params) {
-  //    this.setData({
-  //      imagePath : getApp().globalData.imagePath
-  //    })
-  //  } 
+    onLoad: function(params) {
+      this.setData({
+      imagePath : getApp().globalData.imagePath
+      })
+    } 
   }
 )

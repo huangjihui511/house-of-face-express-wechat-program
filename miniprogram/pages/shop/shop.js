@@ -1,18 +1,32 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
+/**<view class="picShowRow">
+      <button class="buttonImage" bindtap="shop_image_pagejump" data-image="{{toSearch}}">
+        <image class="image_search" src="{{toSearch}}"></image>
+      </button>
+      <button class="buttonImage"><image class="image_search" src="{{toSearch}}"></image></button>
+      <button class="buttonImage"><image class="image_search" src="{{toSearch}}"></image></button>
+  <!-- <image class="image_search" src="{{showPicList[1]}}"></image>-->
+    <!--<view wx:for="{{array}}"> {{showPicList[]}} </view>-->
+    </view>
+    <view class="picShowRow">
+      <button class="buttonImage"><image class="image_search" src="{{toSearch}}"></image></button>
+      <button class="buttonImage"><image class="image_search" src="{{toSearch}}"></image></button>
+      <button class="buttonImage"><image class="image_search" src="{{toSearch}}"></image></button>
+    </view> */
 Page({
   data: {
+    user_coin:0,
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     focus: false,
       inputValue: '',
-      toSearch: '/images/timg.jfif',
+      toSearch: '/images/test1.jfif',
       testButton: '',
-      showPicList: ["/images/test.jpg","/images/test1.jpg"]
+      showPicList: ["/images/test.jpg","/images/test1.jfif","/images/test2.jpg"]
   },
   shop_image_pagejump:function(e) {
     console.log(e)
@@ -23,6 +37,11 @@ Page({
    console.log(app.globalData.imagePath+"test")
     wx.navigateTo({
       url: '/pages/index/index',
+    })
+  },
+  bindCoinClick:function(e) {
+    wx.navigateTo({
+      url: '/pages/coin/coin',
     })
   },
   bindConfirmClick: function(e) {
@@ -49,6 +68,22 @@ Page({
     })
   },
   onLoad: function () {
+    wx.cloud.init()
+    wx.cloud.callFunction({
+      name:"upload_image",
+      data:{
+        a:1,
+        b:2
+      },
+      success:function(res) {
+        console.log(res.result.sum)
+      },
+      fail:console.log("fuck")
+    })
+    var coins = app.globalData.userCoin
+    this.setData({
+      user_coin:coins
+    })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
