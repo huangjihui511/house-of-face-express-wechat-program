@@ -1,0 +1,32 @@
+<!-- <view class="pagebody">
+  <view class="search1">
+    <text class="text1">搜索内容：{{inputValue}}</text>
+    <input class="input1" bindinput="bindKeyInput" placeholder="请输入搜索关键字"></input>
+  </view>
+  <view class="showpic">
+    <text class="text2">推荐内容：</text>
+    <image class="imageShow" src="{{showPicList[0]}}"></image>
+    <image class="imageShow" src="{{showPicList[1]}}"></image>
+  </view>
+</view> -->
+
+<view class="page-body">
+  <view class="page-section">
+    <view class="weui-cells__title">搜索内容：{{inputValue}}</view>
+    <view class="weui-cells weui-cells_after-title">
+      <view class="weui-cell weui-cell_input">
+        <input class="weui-input" auto-focus bindconfirm="bindConfirmClick" data-input="input"
+         laceholder="请输入搜索关键字"/>
+        <button class="button_confirm" bindtap="confirm" >确认</button>
+      </view>
+    </view>
+    <view class="showWhatToSearch">将要搜索：{{toSearch}}，{{testButton}}</view>
+  </view>
+  <view class="line"></view>
+  <view class="page-section">
+    <image class="image_search" src="{{testButton}}"></image>
+  
+   <image class="image_search" src="{{showPicList[1]}}"></image>
+    <!--<view wx:for="{{array}}"> {{showPicList[]}} </view>-->
+  </view>
+</view>
