@@ -31,35 +31,36 @@ exports.main = async (event, context) => {
     var tags = event.tags
     for (tag in tags) {
       var tag_num
-      db.collection("expression").where({
+      return await db.collection("expression").where({
         id:id
-      }).get().then(
-        
-        res => {
-          console.log(res)
-          tag_num = res["tags"][tag]
-          tag_num = num + 1
-          db.collection("expression").where({
-            id:id
-          }).update({
-            data:{
-              tags:_.push([{name:tag1,num: tag_num}])
-            },
-          })
-        }
-      )
+      }).get()
+      // .then(
+      //   res => {
+      //     console.log(res)
+      //     tag_num = res["tags"][tag]
+      //     tag_num = num + 1
+      //     db.collection("expression").where({
+      //       id:id
+      //     }).update({
+      //       data:{
+      //         tags:_.push([{name:tag1,num: tag_num}])
+      //       },
+      //     })
+      //   }
+      // )
 
     }
-    try {
-      return await db.collection('expression').where({
-        id:id
-      }).update({
-        data:{
-          tags:_.push([{name:tag1,num: 0}])
-        },
-      })
-    } catch (e) {
-      console.log(e)
-    }
+    return 0
+    // try {
+    //   return await db.collection('expression').where({
+    //     id:id
+    //   }).update({
+    //     data:{
+    //       tags:_.push([{name:tag1,num: 0}])
+    //     },
+    //   })
+    // } catch (e) {
+    //   console.log(e)
+    // }
   }
 }

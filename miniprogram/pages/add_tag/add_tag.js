@@ -24,12 +24,19 @@ Page({
     this.setData({
       ["printTags[" + index + "].type"]: newType
     })
+    console.log(this.data)
   },
   submit: function () {
     var markedTags = []
     for ( var i = 0; i <this.data.tags.length; i++){
       if (this.data.printTags[i].type != "default") {
-        markedTags.pop(this.data.printTags[i].name)
+        var name = this.data.printTags[i].name
+        console.log(name)
+        markedTags.pop(name)
+        this.setData({
+          ["markedTags[" + i + "]"]: name
+        })
+
       }
     }
     var result = {
@@ -44,6 +51,8 @@ Page({
       data: result,
       success:res => {
         console.log("suc")
+        console.log(result)
+        console.log(res)
       },
       fail: err => {
         console.log(err)
