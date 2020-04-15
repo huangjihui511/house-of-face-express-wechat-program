@@ -24,43 +24,35 @@ exports.main = async (event, context) => {
     .get()
   }
   if (request == "add_des") {
-
+    var id = event.id
+    var des = event.des
+    await db.collection("expression").where({
+      id:id
+    }).update({
+      data: {
+        des:_.push(des),
+        des_num:_.inc(1)
+      }
+    })
   }
   if (request == "add_tag") {
     var id = event.id
     var tags = event.tags
     for (tag in tags) {
-      var tag_num
-      return await db.collection("expression").where({
+      await db.collection("expression").where({
         id:id
-      }).get()
-      // .then(
-      //   res => {
-      //     console.log(res)
-      //     tag_num = res["tags"][tag]
-      //     tag_num = num + 1
-      //     db.collection("expression").where({
-      //       id:id
-      //     }).update({
-      //       data:{
-      //         tags:_.push([{name:tag1,num: tag_num}])
-      //       },
-      //     })
-      //   }
-      // )
-
+      }).update({
+        data: {
+          ["tags." + tags[tag]]:_.inc(1)
+        }
+      })
     }
-    return 0
-    // try {
-    //   return await db.collection('expression').where({
-    //     id:id
-    //   }).update({
-    //     data:{
-    //       tags:_.push([{name:tag1,num: 0}])
-    //     },
-    //   })
-    // } catch (e) {
-    //   console.log(e)
-    // }
+  }
+  if (request == "get_tags") {
+    var id = event.id
+    return await db.collection("expression").where({
+      id:id
+    })
+    .get()
   }
 }

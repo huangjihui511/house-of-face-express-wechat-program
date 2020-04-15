@@ -13,6 +13,14 @@ Page({
   },
   submit: function () {
     console.log(this.data.desc)
+    wx.cloud.callFunction({
+      name: "add_des_tag",
+      data: {
+        id: this.data.imgid,
+        request: "add_des",
+        des:this.data.desc
+      } 
+    })
     wx.navigateBack()
     // 调用云函数的接口
   },
@@ -29,7 +37,7 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      imgid:app.globalData.fileID,
+      imgid: options.id,
       imgurl:app.globalData.tempUrl, // 最终替换为通过fileID得到url
     })
   },

@@ -31,20 +31,28 @@ Page({
     for ( var i = 0; i <this.data.tags.length; i++){
       if (this.data.printTags[i].type != "default") {
         var name = this.data.printTags[i].name
-        console.log(name)
-        markedTags.pop(name)
-        this.setData({
-          ["markedTags[" + i + "]"]: name
-        })
-
+        
+        markedTags.push(name)
+        // this.setData({
+        //   ["markedTags[" + i + "]"]: name,
+        // })
       }
     }
-    var result = {
-      //id: this.data.imgid,
-      id: 1,
+    var result = {}
+    result = {
+      id: this.data.imgid,
       tags: markedTags,
       request: "add_tag"
     }
+    // this.setData({
+    //   //id: this.data.imgid,
+    //   result: {
+    //     id: 1,
+    //     tags: markedTags,
+    //     request: "add_tag"
+    //   }
+    // })
+    console.log(result)
     var that = this
     wx.cloud.callFunction({
       name: "add_des_tag",
@@ -52,6 +60,7 @@ Page({
       success:res => {
         console.log("suc")
         console.log(result)
+        console.log(markedTags)
         console.log(res)
       },
       fail: err => {
@@ -65,20 +74,40 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      imgid:app.globalData.fileID,
-      imgurl:app.globalData.tempUrl, // 最终替换为通过fileID得到url
-      tags: ["tag1", "tag2", "tag3", "tag4", "tag5", "tag6", "tag7", "tag8"] // 最终替换为通过fileID得到url
+    wx.cloud.callFunction({
+      name: "add_des_tag",
+      data: {
+        request:"get_tags",
+        id: options.id
+      },
+      success: res => {
+        var temp
+        var t
+        console.log(res)
+        this.setData({
+          imgid:options.id,
+          imgurl:app.globalData.tempUrl, // 最终替换为通过fileID得到url
+          //temp: res.result.data[0].tags // 最终替换为通过fileID得到url
+        })
+        temp = res.result.data[0].tags
+        for (t in temp) {
+          this.data.tags.push(t)
+          this.data.printTags.push({
+            name: t,
+            type: "default"
+          })
+        }
+        console.log(this.data.printTags)
+        this.setData({
+          printTags: this.data.printTags
+        })
+      },
+      fail: err => {
+        console.log("error")
+        // handle error
+      }
     })
-    for ( var i = 0; i <this.data.tags.length; i++){
-      this.data.printTags.push({
-        name: this.data.tags[i],
-        type: "default"
-      })
-    }
-    this.setData({
-      printTags: this.data.printTags
-    })
+    
   },
 
   /**

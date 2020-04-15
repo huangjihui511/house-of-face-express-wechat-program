@@ -23,11 +23,14 @@ Page({
       },
       success: res => {
         console.log("succ")
-        that.setData({
-          des_list: res.result.data,
-          des_time: res.result.data.length
-        })
+        // that.setData({
+        //   des_list: res.result.data,
+        //   des_time: res.result.data.length
+        // })
+        this.data.des_list = res.result.data
+        this.data.des_time = res.result.data.length
         console.log(this.data.des_list)
+        this.onShow()
       },
       fail: err => {
         console.log("error")
@@ -41,11 +44,14 @@ Page({
       },
       success: res => {
         console.log("succ")
-        that.setData({
-          tag_list: res.result.data,
-          tag_time: res.result.data.length
-        })
+        // that.setData({
+        //   tag_list: res.result.data,
+        //   tag_time: res.result.data.length
+        // })
+        this.data.tag_list = res.result.data
+        this.data.tag_time = res.result.data.length
         console.log(this.data.tag_list)
+        this.onShow()
       },
       fail: err => {
         console.log("error")
@@ -68,20 +74,19 @@ Page({
    */
   onShow: function () {
     console.log(this.data.des_time)
-    // if (this.data.des_time != 1) {
-    //   this.setData({
-    //     des_time: this.data.des_time - 1
-    //   })
-    //   wx.navigateTo({
-    //     url: '../add_des/add_des',
-    //   })
-    // }
-    if (this.data.tag_time != 1) {
-      this.setData({
-        tag_time: this.data.tag_time - 1
-      })
+    while(this.data.des_time == null || this.data.tag_time == null){
+      return
+    }
+    if (this.data.des_time != 0) {
+      this.data.des_time -= 1
       wx.navigateTo({
-        url: '../add_tag/add_tag',
+        url: '../add_des/add_des?id=' + this.data.des_list[this.data.des_time].id,
+      })
+    }
+    if (this.data.tag_time != 0) {
+      this.data.tag_time -= 1
+      wx.navigateTo({
+        url: '../add_tag/add_tag?id=' + this.data.tag_list[this.data.tag_time].id,
       })
     }
     wx.navigateBack({
