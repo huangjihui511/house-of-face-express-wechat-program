@@ -13,6 +13,7 @@ Page({
   },
   submit: function () {
     console.log(this.data.desc)
+    wx.navigateBack()
     // 调用云函数的接口
   },
   bindinput: function(e) {

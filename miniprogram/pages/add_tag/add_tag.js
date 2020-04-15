@@ -33,9 +33,24 @@ Page({
       }
     }
     var result = {
-      id: this.data.imgid,
-      tags: markedTags
+      //id: this.data.imgid,
+      id: 1,
+      tags: markedTags,
+      request: "add_tag"
     }
+    var that = this
+    wx.cloud.callFunction({
+      name: "add_des_tag",
+      data: result,
+      success:res => {
+        console.log("suc")
+      },
+      fail: err => {
+        console.log(err)
+        // handle error
+      }
+    })
+    wx.navigateBack()
   },
   /**
    * 生命周期函数--监听页面加载

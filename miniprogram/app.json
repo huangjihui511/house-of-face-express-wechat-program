@@ -1,16 +1,15 @@
 {
   "pages": [
-    
+    "pages/test/test",
     "pages/login/login",
     "pages/shop/shop",
     "pages/edit_functions/edit_functions",
     "pages/add_des/add_des",
-    
-    
     "pages/main/main",
     "pages/index/index",
     "pages/search/search",
     "pages/logs/logs"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -25,28 +24,28 @@
     "backgroundColor": "#ffffff",
     "list": [
       {
-        "pagePath":"pages/main/main",
-        "iconPath":"images/icon_main.png",
-        "selectedIconPath":"images/icon_main_HL.png",
-        "text":"主页"
+        "pagePath": "pages/main/main",
+        "iconPath": "images/icon_main.png",
+        "selectedIconPath": "images/icon_main_HL.png",
+        "text": "主页"
       },
       {
-        "pagePath":"pages/edit_functions/edit_functions",
-        "iconPath":"images/icon_component.png",
-        "selectedIconPath":"images/icon_component_HL.png",
-        "text":"编辑"
+        "pagePath": "pages/edit_functions/edit_functions",
+        "iconPath": "images/icon_component.png",
+        "selectedIconPath": "images/icon_component_HL.png",
+        "text": "编辑"
       },
       {
-        "pagePath":"pages/search/search",
-        "iconPath":"images/icon_1.png",
-        "selectedIconPath":"images/icon_1_HL.png",
-        "text":"搜索"
+        "pagePath": "pages/search/search",
+        "iconPath": "images/icon_1.png",
+        "selectedIconPath": "images/icon_1_HL.png",
+        "text": "搜索"
       },
       {
-        "pagePath":"pages/shop/shop",
-        "iconPath":"images/icon_main.png",
-        "selectedIconPath":"images/icon_main_HL.png",
-        "text":"商店"
+        "pagePath": "pages/shop/shop",
+        "iconPath": "images/icon_main.png",
+        "selectedIconPath": "images/icon_main_HL.png",
+        "text": "商店"
       }
     ]
   },
