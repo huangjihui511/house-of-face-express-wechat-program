@@ -15,15 +15,15 @@
 
 4. 每日例会的照片
 
-   
+   ![image-20200412203024979.png](https://i.loli.net/2020/04/15/Vxz7dc6STZy8AUk.png)
 
 5. 代码或文档签入记录
 
    ![image-20200414205506604](/Users/huangjihui/Library/Application Support/typora-user-images/image-20200414205506604.png)
 
-   ![image-20200414205517223](/Users/huangjihui/Library/Application Support/typora-user-images/image-20200414205517223.png)
+   ![image-20200414205543007.png](https://i.loli.net/2020/04/15/OTBUVrgEAFGRjJp.png)
 
-   ![image-20200414205543007](/Users/huangjihui/Library/Application Support/typora-user-images/image-20200414205543007.png)
+   ![image-20200414205506604.png](https://i.loli.net/2020/04/15/31ojJhSl4pGYECI.png)
 
 6. 燃尽图：
 

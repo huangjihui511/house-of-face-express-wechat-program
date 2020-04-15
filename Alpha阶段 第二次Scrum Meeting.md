@@ -13,17 +13,17 @@
 
 4. 每日例会的照片
 
-   ![image-20200411200218835](/Users/huangjihui/Library/Application Support/typora-user-images/image-20200411200218835.png)
+   ![image-20200411200218835.png](https://i.loli.net/2020/04/15/ejyxH6NMlKYFZmX.png)
 
 5. 代码或文档签入记录
 
-   ![image-20200412195305905](/Users/huangjihui/Library/Application Support/typora-user-images/image-20200412195305905.png)
+   ![image-20200412195326510.png](https://i.loli.net/2020/04/15/zJ1Ux2dhSFaRYeo.png)
 
-   ![image-20200412195314785](/Users/huangjihui/Library/Application Support/typora-user-images/image-20200412195314785.png)
+   ![image-20200412195343517.png](https://i.loli.net/2020/04/15/1RCsO3HiYWcmdzF.png)
 
-   ![image-20200412195326510](/Users/huangjihui/Library/Application Support/typora-user-images/image-20200412195326510.png)
+   ![image-20200412195314785.png](https://i.loli.net/2020/04/15/d8Hx7mXeN6ZAJa5.png)
 
-   ![image-20200412195343517](/Users/huangjihui/Library/Application Support/typora-user-images/image-20200412195343517.png)
+   ![image-20200412195305905.png](https://i.loli.net/2020/04/15/1S8cFozDiyCtlem.png)
 
 6. 燃尽图：
 
