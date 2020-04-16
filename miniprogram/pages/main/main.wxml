@@ -1,0 +1,12 @@
+<!--main.wxml-->
+<view class="container">
+  <view class="pic">
+    <image class="image" src="{{imagePath}}">
+    </image>
+  </view>
+  <view class="usermotto">
+    <text class="user-motto">
+    {{motto}}
+    </text>
+  </view>
+</view>

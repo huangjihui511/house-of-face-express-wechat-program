@@ -1,0 +1,68 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo">
+    <button class="userHead" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image class="userHead" bindtap="bindViewTap" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <view class="userNameDetail">
+
+       <!-- <view  -->
+        <text class="userName">{{userInfo.nickName}}</text>
+
+        <view class="userDetail">
+          <view class="cline"></view>
+          <view class="userDetailCell">
+            <text class="userDetailText">我的创作</text>
+          </view>
+          <view class="cline"></view>
+          <view class="userDetailCell">
+            <text class="userDetailText">我的购买</text>
+          </view>
+          <view class="cline"></view>
+          <view class="userDetailCell">
+            <text class="userDetailText">我的收藏</text>
+          </view>
+          <view class="cline"></view>
+          <view class="userDetailCell">
+            <text class="userDetailText">最近使用</text>
+          </view>
+          <view class="cline"></view>
+        </view>
+      </view>
+    </block>
+  </view>
+  <view class="line"></view>
+  <view class="search">
+    <view class="showWhatToSearch">查找你想要的表情：</view>
+    <view class="searchInputConfirm">
+      <input class="input" auto-focus bindconfirm="bindConfirmClick" data-input="input"
+         laceholder="请输入搜索关键字">
+      </input>
+      <button class="button_confirm" bindtap="confirm" >
+        <view class="confirmFont">确认</view>
+      </button>
+    </view>
+  </view>
+  <view class="showWhatToSearch">将要搜索：{{toSearch}}</view>
+  <view class="line"></view>
+  <view class="picShowList">
+    <view class="picShowRow">
+      <button class="buttonImage" bindtap="shop_image_pagejump" data-image="{{toSearch}}">
+        <image class="image_search" src="{{toSearch}}"></image>
+      </button>
+      <button class="buttonImage"><image class="image_search" src="{{toSearch}}"></image></button>
+      <button class="buttonImage"><image class="image_search" src="{{toSearch}}"></image></button>
+  <!-- <image class="image_search" src="{{showPicList[1]}}"></image>-->
+    <!--<view wx:for="{{array}}"> {{showPicList[]}} </view>-->
+    </view>
+    <view class="picShowRow">
+      <button class="buttonImage"><image class="image_search" src="{{toSearch}}"></image></button>
+      <button class="buttonImage"><image class="image_search" src="{{toSearch}}"></image></button>
+      <button class="buttonImage"><image class="image_search" src="{{toSearch}}"></image></button>
+    </view> 
+  </view>
+  <view class="line"></view>
+  <view class="page-section">
+
+  </view>
+</view>

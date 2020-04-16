@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "mp-icon": "../../icon/icon",
+    "canvas-drag": "/components/canvas-drag/index"
+  }
+}
