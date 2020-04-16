@@ -1,4 +1,9 @@
 // pages/contect/contect.js
+wx.cloud.init({
+  env:"pyb-database-n2c6s"
+})
+
+const db = wx.cloud.database()
 Page({
 
   /**
@@ -6,6 +11,7 @@ Page({
    */
 data: {
   title: '上传图片',
+  file_id: "",
   maxCount: 10,
   currentFiles: [],
   showPreview: false,
@@ -13,7 +19,7 @@ data: {
   files: [],
   imageSrc : null,
   label_list:[
-    {title:"label1",selected:false},
+    {title:"公开",selected:false},
     {title:"label2",selected:false},
     {title:"label3",selected:false},
     {title:"label4",selected:false},
@@ -21,7 +27,7 @@ data: {
     {title:"label6",selected:false},
     {title:"label7",selected:false},
   ],
-  labels:[],
+  labels:['未公开'],
   image_src:"",
   time:"",
 },
@@ -34,6 +40,10 @@ checkboxChange(e){
       let detailValue = this.data.label_list.filter(it => it.selected).map(it => it.title)
       let flags="labels"
       console.log('所有选中的值为：', detailValue)
+      if(this.data.label_list[0].selected==false){
+        console.log("未公开")
+        detailValue[detailValue.length]='未公开'
+      }
       this.setData({
         [flags]: detailValue
     })
@@ -66,7 +76,20 @@ chooseImage: function chooseImage(e) {
         icon: 'success',
         duration: 1000
       })
-      
+      wx.cloud.uploadFile({
+        cloudPath:'test'+Math.round(Math.random()*1000)+'.jpg',
+        filePath:_this.data.image_src,
+        config:"pyb-database-n2c6s",
+        success: res => {
+          console.log("图片file_id", res.fileID)
+          const file1 = res.fileID
+          let file2 = "file_id"
+          _this.setData({
+            [file2]:file1,
+          })
+        },
+        fail: console.error
+      })
     },
 
     fail({errMsg}) {
@@ -100,6 +123,39 @@ submitted: function submitted(e) {
     console.log(this.data.image_src)
     console.log(this.data.labels)
     console.log(this.data.time)
+    console.log(this.data.file_id)
+    let that = this
+    wx.cloud.callFunction({
+      name:"add_expression",
+      data:{
+        request:"add_picture",
+        data1:"test002",
+        data2:this.data.time,
+        data3:this.data.labels
+        //data2:["fun", "wdnmd"]
+      },
+      success:function(res){
+        console.log("获取表情成功",res)
+      },fail:function(res){
+        console.log("获取表情失败",res)
+      }
+    })
+    wx.cloud.callFunction({
+      name:"add_expression",
+      data:{
+        request:"add_expression",
+        data1:"f149f6775e9862590040a95f532f204c",
+        data2:that.data.file_id,
+        data3:this.data.labels
+        //data3:this.data.labels
+        //data2:["fun", "wdnmd"]
+      },
+      success:function(res){
+        console.log("获取表情成功",res)
+      },fail:function(res){
+        console.log("获取表情失败",res)
+      }
+    })
     wx.showToast({
       title: '成功提交',
       icon: 'success',
@@ -112,6 +168,7 @@ submitted: function submitted(e) {
         }, 1000) //延迟时间
       }
     })
+
   }
 },
   /**

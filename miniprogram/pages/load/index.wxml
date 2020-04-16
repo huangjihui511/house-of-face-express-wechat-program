@@ -15,7 +15,7 @@
         bindtap="checkboxChange"
         checked="{{item.selected}}"
         wx:for="{{label_list}}" 
-        wx:key="{{index}}" 
+        wx:key="index" 
         class="button {{item.selected ? 'button-selected' : ''}}"><view class='text'>{{item.title}}</view></button>
   </view>
   <text>\n</text>
