@@ -1,6 +1,9 @@
 // pages/edit_functions/edit_functions.js
-import CanvasDrag from '../../components/canvas-drag/canvas-drag';
 const app = getApp()
+
+const SW = 750
+const SH = Math.trunc(SW * wx.getSystemInfoSync().windowHeight / wx.getSystemInfoSync().windowWidth)
+
 Page({
 
   /**
@@ -10,7 +13,6 @@ Page({
     cWidth: 0,
     cHeight: 0, // canvas的完整高度
     textToPrint:'',
-    graph: {},
     btnInfo: [
       {
         type: 'text',
@@ -47,7 +49,7 @@ Page({
       success (res) {
         that.setData({
           cWidth: res.windowWidth,
-          cHeight: res.windowHeight/2,
+          cHeight: Math.trunc((SH - 100) / SH * res.windowHeight),
         })
       }
     })
@@ -60,39 +62,22 @@ Page({
         wx.getImageInfo({
           src: res.tempFilePaths[0],
           success (res) {
-            var rate = res.height/res.width
             console.log(res.path)
-            that.setData({
-              graph: {
-                w: 200,
-                h: 200*rate,
-                type: 'image',
-                url: res.path,
-              }
-            })
-          //   let width = 0
-          //   let height = 0
-          //   //let ctx = wx.createCanvasContext('edit')
-          //   if (res.width > res.height) {
-          //     width = that.data.cWidth-10
-          //     height = Math.trunc(res.height/res.width*width)
-          //     //ctx.drawImage(res.path, 5, (that.data.cHeight-height)/2, width, height)
-          //   } else {
-          //     height = that.data.cHeight-10
-          //     width = Math.trunc(res.width/res.height*height)
-          //     //ctx.drawImage(res.path, (that.data.cWidth-width)/2, 5, width, height)
-          //   }
-          //  //ctx.draw()
-          //   console.log(width)
-          //   console.log(height)
-          //   that.setData({
-          //     graph: {
-          //       w: width,
-          //       h: height,
-          //       type: 'image',
-          //       url: res.path
-          //     }
-          //   })
+            let width = 0
+            let height = 0
+            let ctx = wx.createCanvasContext('edit')
+            if (res.width > res.height) {
+              width = that.data.cWidth-10
+              height = Math.trunc(res.height/res.width*width)
+              ctx.drawImage(res.path, 5, (that.data.cHeight-height)/2, width, height)
+            } else {
+              height = that.data.cHeight-10
+              width = Math.trunc(res.width/res.height*height)
+              ctx.drawImage(res.path, (that.data.cWidth-width)/2, 5, width, height)
+            }
+            ctx.draw()
+            console.log(width)
+            console.log(height)
           },
           fail(err){
             console.log(err)
@@ -103,14 +88,31 @@ Page({
   },
 
   onAddText() {
+  },
+
+    /**
+   * 选择第一行的颜色
+   */
+  chooseColorF(e) {
+    console.log(e)
+    let indexNum = e.currentTarget.id
+    console.log(indexNum)
     var that = this
-    var obj = that.data;
     that.setData({
-      graph: {
-        type: 'text',
-        text: obj.textToPrint,
-      }
-    });
+      currentColor: indexNum
+    })
+    console.log(this.data.currentColor)
+  },
+
+  /**
+   * 选择第二行的颜色
+   */
+  chooseColorS(e) {
+    let indexNum = e.currentTarget.id
+    this.setData({
+      currentColor: indexNum
+    })
+    CanvasDrag.changFontColor(indexNum);
   },
 
   touchStart: function() {
@@ -153,28 +155,21 @@ Page({
 
   textFinish(e) {
     let text = e.detail.value
-    let that = this
     if(text.length > 0){
-      that.setData({
+      this.setData({
         maxLen: true
       })
     } else {
-      that.setData({
+      this.setData({
         maxLen: false
       })
     }
-    that.setData({
+    this.setData({
       textToPrint: text
     })
   },
 
   onAddText() {
-    this.setData({
-      graph: {
-        type: 'text',
-        text: this.data.textToPrint,
-      }
-    })
   },
 
   chooseColor(e) {
@@ -183,7 +178,6 @@ Page({
     this.setData({
       currentColor: indexNum
     })
-    CanvasDrag.changFontColor(indexNum)
   },
 
   /**

@@ -1,20 +1,8 @@
-<!--pages/edit_functions/edit_functions.wxml-->
-<!-- <canvas
+<canvas
   canvas-id="edit"
-  disable-scroll="false"
   bindtouchstart="touchStart"
-  style="height: {{cHeight}}px; width: {{cWidth}}px;"
-></canvas> -->
-
-<canvas-drag 
-  id="canvas-drag" 
-  graph="{{graph}}" 
-  bindtouchstart="touchStart"
-  style='width:{{cWidth}}px;'
-  height='600'
-></canvas-drag>
-
-<!-- <canvas-drag id="canvas-drag" graph="{{graph}}" style='width:{{imageWidth}}px;' height="600"></canvas-drag> -->
+  style="width: {{cWidth}}px; height: {{cHeight}}px"
+/>
 
 <view class="bottom">
   <block wx:for="{{btnInfo}}" wx:key="index">
@@ -22,55 +10,86 @@
   </block>
 </view>
 
-<view class="choose-box" wx:if="{{text}}">
-  <view class='addText'>
-    <input class='textInput' placeholder='整两句儿' maxlength="10" bindblur='textFinish'></input>
-  </view>
-  <view class='btnView'>
-    <button class='addTextBtn' type='primary' disabled = '{{!maxLen}}'  bindtap='onAddText'>
-      添加文字
-    </button>
+<view class="{{text ? 'weui-show' :'weui-hidden'}}">
+  <view class="weui-mask init" bindtap="touchStart" data-type="tap"></view>
+
+  <view class="weui-half-screen-dialog">
+
+    <view class="weui-half-screen-dialog__hd">
+      <view class="weui-half-screen-dialog__hd__side" bindtap="touchStart" data-type="close">
+        <view class="weui-icon-btn weui-icon-btn_close">关闭</view>
+      </view>
+      <view class="weui-half-screen-dialog__hd__main">
+        <block>
+          <text class="weui-half-screen-dialog__title">文字添加</text>
+        </block>
+      </view>
+    </view>
+
+    <view class="weui-half-screen-dialog__bd">
+      <block>
+        <view class="weui-cell_input">
+          <input class="weui-input" maxlength="10" placeholder="整一句儿" bindblur="textFinish" />
+        </view>
+        <view class='btnView'>
+          <button class='addTextBtn' type='primary' disabled = '{{!maxLen}}'  bindtap='onAddText'>
+            添加文字
+          </button>
+        </view>
+      </block>
+    </view>
+
+    <view class="weui-half-screen-dialog__ft">
+      <block>
+        <view class='chooseColorView'>
+          <view wx:for='{{colorArrF}}' wx:for-item="itemColor" wx:for-index="idx" wx:key='FirstColor' bindtap='chooseColorF' id='{{itemColor}}'>
+            <view  wx:if='{{currentColor == itemColor}}' class='colorView' style='background-color:{{itemColor}}; border: 1px solid #515151; width:29px; height:29px'></view>
+            <view wx:else class='colorView' style='background-color:{{itemColor}};'>
+            </view>
+          </view>
+        </view>
+        <view class='chooseColorView'>
+          <view wx:for='{{colorArrS}}' wx:for-item="itemColor" wx:for-index="idx" wx:key='FirstColor' bindtap='chooseColorF' id='{{itemColor}}'>
+            <view  wx:if='{{currentColor == itemColor}}' class='colorView' style='background-color:{{itemColor}}; border: 1px solid #515151; width:29px; height:29px'></view>
+            <view wx:else class='colorView' style='background-color:{{itemColor}};'>
+            </view>
+          </view>
+        </view>
+      </block>
+    </view>
+
   </view>
 </view>
 
-<view class="choose-box" wx:if="{{paint}}">
-  <slider min="1" max="50" step="1" show-value="true" activeColor="black" value="{{w}}" bindchange="changeWidth"/>
-  <slider min="0" max="255" step="1" show-value="true" activeColor="red" value="{{r}}" data-color="r" bindchange="changeColor"/>
-  <slider min="0" max="255" step="1" show-value="true" activeColor="green" value="{{g}}" data-color="g" bindchange="changeColor"/>
-  <slider min="0" max="255" step="1" show-value="true" activeColor="blue" value="{{b}}" data-color="b" bindchange="changeColor"/>
-<view class="color-box" style="background: {{'rgb(' + r + ', ' + g + ', ' + b + ')'}}; height: {{w}}px; border-radius: {{w/2}}px"></view>
-</view>
+<view class="{{paint ? 'weui-show' :'weui-hidden'}}"> 
+  <view class="weui-mask init" bindtap="touchStart" data-type="tap"></view>
+  <view class="weui-half-screen-dialog">
+    <view class="weui-half-screen-dialog__hd">
+      <view class="weui-half-screen-dialog__hd__side" bindtap="touchStart" data-type="close">
+        <view class="weui-icon-btn weui-icon-btn_close">关闭</view>
+      </view>
+      <view class="weui-half-screen-dialog__hd__main">
+        <block>
+          <text class="weui-half-screen-dialog__title">涂鸦</text>
+        </block>
+      </view>
+    </view>
 
-<view class='chooseColorView' wx:if="{{text}}">
-  <view 
-    wx:for='{{colorArrF}}' 
-    wx:for-item="itemColor" 
-    wx:for-index="idx" 
-    wx:key='FirstColor' 
-    bindtap='chooseColor' 
-    id='{{itemColor}}'>
-    <view 
-      wx:if='{{currentColor == itemColor}}' 
-      class='colorView' 
-      style='background-color:{{itemColor}}; border: 1px solid #515151; width:29px; height:29px'
-    ></view>
-    <view wx:else class='colorView' style='background-color:{{itemColor}}'></view>
-  </view>
-</view>
+    <view class="weui-half-screen-dialog__bd">
+      <block>
+        <view class="color-box" 
+          style="background: {{'rgb(' + r + ', ' + g + ', ' + b + ')'}}; height: {{w}}px; border-radius: {{w/2}}px"
+        ></view>
+      </block>
+    </view>
 
-<view class='chooseColorView' wx:if="{{text}}">
-  <view 
-    wx:for='{{colorArrS}}' 
-    wx:for-item="itemColor" 
-    wx:for-index="idx" 
-    wx:key='FirstColor' 
-    bindtap='chooseColor' 
-    id='{{itemColor}}'>
-    <view 
-      wx:if='{{currentColor == itemColor}}' 
-      class='colorView' 
-      style='background-color:{{itemColor}}; border: 1px solid #515151; width:29px; height:29px'
-    ></view>
-    <view wx:else class='colorView' style='background-color:{{itemColor}};'></view>
+    <view class="weui-half-screen-dialog__ft">
+      <block>
+        <slider min="1" max="50" step="1" show-value="true" activeColor="black" value="{{w}}" bindchange="changeWidth"/>
+        <slider min="0" max="255" step="1" show-value="true" activeColor="red" value="{{r}}" data-color="r" bindchange="changeColor"/>
+        <slider min="0" max="255" step="1" show-value="true" activeColor="green" value="{{g}}" data-color="g" bindchange="changeColor"/>
+        <slider min="0" max="255" step="1" show-value="true" activeColor="blue" value="{{b}}" data-color="b" bindchange="changeColor"/>
+      </block>
+    </view>
   </view>
 </view>

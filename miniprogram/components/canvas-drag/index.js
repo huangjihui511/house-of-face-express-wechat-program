@@ -1,30 +1,33 @@
 // components/canvas-drag/index.js
-const dragGraph = function ({ x, y, w, h, type, text, fontSize = 20, color = 'black', url }, canvas, factor) {
-    if (type === 'text') {
-        canvas.setFontSize(fontSize);
-        const textWidth = canvas.measureText(this.text).width;
-        const textHeight = fontSize + 10;
-        const halfWidth = textWidth / 2;
-        const halfHeight = textHeight / 2;
-        this.x = x + halfWidth;
-        this.y = y + halfHeight;
-    } else {
-        this.x = x;
-        this.y = y;
+class dragGraph {
+    constructor({ x, y, w, h, type, text, fontSize = 20, color = 'black', url }, canvas, factor) {
+        if (type === 'text') {
+            canvas.setFontSize(fontSize);
+            const textWidth = canvas.measureText(this.text).width;
+            const textHeight = fontSize + 10;
+            const halfWidth = textWidth / 2;
+            const halfHeight = textHeight / 2;
+            this.x = x + halfWidth;
+            this.y = y + halfHeight;
+        }
+        else {
+            this.x = x;
+            this.y = y;
+        }
+        this.w = w;
+        this.h = h;
+        this.fileUrl = url;
+        this.text = text;
+        this.fontSize = fontSize;
+        this.color = color;
+        this.ctx = canvas;
+        this.rotate = 0;
+        this.type = type;
+        this.selected = true;
+        this.factor = factor;
+        this.MIN_WIDTH = 50;
+        this.MIN_FONTSIZE = 10;
     }
-    this.w = w;
-    this.h = h;
-    this.fileUrl = url;
-    this.text = text;
-    this.fontSize = fontSize;
-    this.color = color;
-    this.ctx = canvas;
-    this.rotate = 0;
-    this.type = type;
-    this.selected = true;
-    this.factor = factor;
-    this.MIN_WIDTH = 50;
-    this.MIN_FONTSIZE = 10;
 }
 
 dragGraph.prototype = {
@@ -111,15 +114,6 @@ dragGraph.prototype = {
 
         const moveX = this.type === 'text' ? this.x - (selectW / 2) : this.x;
         const moveY = this.type === 'text' ? this.y - (selectH / 2) : this.y;
-
-        // 测试使用
-        // this.ctx.setLineWidth(1);
-        // this.ctx.setStrokeStyle('red');
-        // this.ctx.strokeRect(transformDelX, transformDelY, delW, delH);
-
-        // this.ctx.setLineWidth(1);
-        // this.ctx.setStrokeStyle('black');
-        // this.ctx.strokeRect(transformScaleX, transformScaleY, scaleW, scaleH);
 
         if (x - transformScaleX >= 0 && y - transformScaleY >= 0 &&
             transformScaleX + scaleW - x >= 0 && transformScaleY + scaleH - y >= 0) {
@@ -295,8 +289,8 @@ Component({
             this.drawArr.push(new dragGraph(Object.assign({
                 x: 30,
                 y: 30,
-            }, n), this.ctx, this.factor));
-            this.draw();
+            }, n), this.ctx, this.factor))
+            this.draw()
         },
         draw() {
             if (this.data.bgImage !== '') {
@@ -321,7 +315,7 @@ Component({
             const { x, y } = e.touches[0];
             this.tempGraphArr = [];
             this.drawArr && this.drawArr.forEach((item, index) => {
-                item.selected = false;
+                item.selected = false
                 const action = item.isInGraph(x, y);
                 if (action) {
                     if (action === 'del') {
@@ -333,7 +327,6 @@ Component({
                         this.tempGraphArr.push(item);
                         // 保存点击时的坐标
                         this.currentTouch = { x, y };
-
                     }
                 }
             });
