@@ -1,8 +1,7 @@
 <!--index.wxml-->
 <view class="button_list">
-  <button class='time' style="width:250rpx" bindtap="time_order">收藏时间</button>
-  <button class='freq' style="width:250rpx" bindtap="freq_order">使用频率</button>
-  <picker style="width:250rpx" class='classify' bindchange="bindPickerChange" value="{{index}}" range="{{classes}}">
+  <button class='freq' style="width:375rpx" bindtap="freq_order">使用频率</button>
+  <picker style="width:375rpx" data-index="{{index}}" class='classify' bindchange="bindPickerChange" value="{{index}}" range="{{classes}}">
     <view class="picker">          
       选择类别：{{classes[index]}}        
     </view>      
@@ -11,10 +10,10 @@
 <view class="divLine"></view>
 <text>\n</text>
 <view class="struct">
-  <view wx:for="{{images}}" wx:key="{{index}}">
+  <view wx:for="{{images_view_srcs}}" wx:key="{{index}}">
     <view class="image_struct">
-      <image class="image" src="{{item.image_address}}" bindlongtap="previewImage"></image>
-      <view class="image_title">{{item.image_name}}</view>
+      <image class="image" data-src="{{item}}" data-srcs="{{images_view_srcs}}" src="{{item}}" bindlongtap="previewImage"></image>
+      <!--<view class="image_title">{{item.image_name}}</view>-->
     </view>
   </view>
 </view>

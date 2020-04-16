@@ -32,7 +32,7 @@ checkboxChange(e){
           [string]: !this.data.label_list[e.currentTarget.dataset.index].selected
       })
       let detailValue = this.data.label_list.filter(it => it.selected).map(it => it.title)
-      let flags="detailValue"
+      let flags="labels"
       console.log('所有选中的值为：', detailValue)
       this.setData({
         [flags]: detailValue
@@ -85,22 +85,32 @@ submitted: function submitted(e) {
     wx.showToast({
       title: '提交失败',
       icon: 'loading',
-      duration: 1000
+      duration: 1000,
+      success(data) {
+        setTimeout(function () {
+          wx.redirectTo({
+            url: 'index',
+          })
+        }, 1000) //延迟时间
+      }
     })
-    wx.redirectTo({
-      url: 'index',
-    })
-    
   }
   else{
+    //传回参数
+    console.log(this.data.image_src)
+    console.log(this.data.labels)
+    console.log(this.data.time)
     wx.showToast({
       title: '成功提交',
       icon: 'success',
-      duration: 1000
-    })
-    //传回参数
-    wx.redirectTo({
-      url: 'index',
+      duration: 1000,
+      success(data) {
+        setTimeout(function () {
+          wx.redirectTo({
+            url: 'index',
+          })
+        }, 1000) //延迟时间
+      }
     })
   }
 },

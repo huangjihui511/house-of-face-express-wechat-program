@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/my/index",
     "pages/favorite_expression/index",
     "pages/load/index"
   ],
