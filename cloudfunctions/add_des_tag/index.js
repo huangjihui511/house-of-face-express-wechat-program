@@ -55,4 +55,11 @@ exports.main = async (event, context) => {
     })
     .get()
   }
+  if (request == "get_url") {
+    var id = event.id
+    return await db.collection("expression").where({
+      id:id
+    })
+    .get()
+  }
 }

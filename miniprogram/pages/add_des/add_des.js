@@ -36,10 +36,23 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      imgid: options.id,
-      imgurl:app.globalData.tempUrl, // 最终替换为通过fileID得到url
+    var temp_id = parseInt(options.id)
+    wx.cloud.callFunction({
+      name: "add_des_tag",
+      data: {
+        id: temp_id,
+        request: "get_url"
+      },
+      success: res => {
+        console.log(options)
+        console.log(res)
+        this.setData({
+          imgid: temp_id,
+          imgurl: res.result.data[0].url // 最终替换为通过fileID得到url
+        })
+      } 
     })
+    
   },
 
   /**
