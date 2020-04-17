@@ -3,6 +3,9 @@ App({
   globalData: {
     imagePath:'',
     userInfo: null,
+    userCoin:777,
+    fileID: null,
+    tempUrl: "http://t7.baidu.com/it/u=3616242789,1098670747&fm=79&app=86&f=JPEG?w=900&h=1350",
     data:{}
   },
   
@@ -26,11 +29,7 @@ App({
     var logs = wx.getStorageSync('logs') || []
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
-    wx.cloud.init({
 
-      traceUser: true,
-
-  })
     // 登录
     wx.login({
       success: res => {
@@ -58,11 +57,6 @@ App({
       }
     })
   },
-  globalData: {
-    userInfo: null,
-    fileID: null,
-    tempUrl: "http://t7.baidu.com/it/u=3616242789,1098670747&fm=79&app=86&f=JPEG?w=900&h=1350"
-  }
 })
 //imagePath:'',
 //module.exports.imagePath = this.imagePath;

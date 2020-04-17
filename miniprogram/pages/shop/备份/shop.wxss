@@ -86,64 +86,13 @@
 }
 
 .userName {
-  margin-left: 20rpx;
-  margin-right: 20rpx;
+  padding-left: 20rpx;
 }
 
 .Coin {
   display: flex;
   flex-direction: row;
   /**padding: 20rpx;**/
-}
-
-.nameExp {
-  display: flex;
-  flex-direction: row;
-}
-
-.userRank {
-  font-size: small;
-  margin-left: 20rpx;
-  margin-right: 10rpx;
-  margin-top: 5rpx;
-}
-
-.exp_bar {
-  display:flex;
-  flex-direction: row;
-}
-
-.expBar {
-  border-top-width: 2rpx;
-  border-top-style: solid;
-  border-top-color: #E0E3DA;
-  border-left-width: 2rpx;
-  border-left-style: solid;
-  border-left-color: #E0E3DA;
-  border-bottom-width: 2rpx;
-  border-bottom-style: solid;
-  border-bottom-color: #E0E3DA;
-  border-top-left-radius: 10%;
-  border-bottom-left-radius: 10%;
-  margin-top: 10rpx;
-  /*background-color:burlywood ;*/
-  background-color:rgb(164, 164, 236);
-}
-
-.expBar_bg {
-  border-top-width: 2rpx;
-  border-top-style: solid;
-  border-top-color: #E0E3DA;
-  border-right-width: 2rpx;
-  border-right-style: solid;
-  border-right-color: #E0E3DA;
-  border-bottom-width: 2rpx;
-  border-bottom-style: solid;
-  border-bottom-color: #E0E3DA;
-  border-top-right-radius: 10%;
-  border-bottom-right-radius: 10%;
-  margin-top: 10rpx;
-  background-color: white;
 }
 
 .coinAmount {

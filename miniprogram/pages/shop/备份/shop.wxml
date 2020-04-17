@@ -6,14 +6,7 @@
       <image class="userHead" bindtap="bindViewTap" src="{{userInfo.avatarUrl}}" mode="cover"></image>
       <view class="userNameDetail">
         <view class="nameAndCoin">
-          <view class="nameExp">
-            <text class="userName">{{userInfo.nickName}}</text>
-            <text class="userRank">等级：{{user_rank}}</text>
-            <view class="exp_bar" style="width:200rpx;height:30rpx">
-              <view class="expBar" style="width:{{(user_exp/user_exp_Upbound)*200}}rpx;height:30rpx"></view>
-              <view class="expBar_bg" style="width:{{(1-user_exp/user_exp_Upbound)*200}}rpx;height:30rpx"></view>
-            </view>
-          </view>
+          <text class="userName">{{userInfo.nickName}}</text>
           <view class="Coin"> 
             <text class="coinAmount">金币余额：{{user_coin}}</text>
             <!-- <image class="image_coin" src="/images/coin.jpg" ></image>-->

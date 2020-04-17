@@ -1,0 +1,73 @@
+/**index.wxss**/
+.container {
+  display: flex;
+  flex-direction: column;
+ /** margin: 20rpx;
+  padding: 10rpx;**/
+}
+
+.userinfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.userinfo-avatar {
+  width: 128rpx;
+  height: 128rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+}
+
+.userinfo-nickname {
+  color: #aaa;
+}
+
+.usercoin {
+  margin-left: 20rpx;
+}
+
+.usermotto {
+  margin-top: 200px;
+}
+
+.getCoinMethods {
+  display: flex;
+  flex-direction: column;
+}
+
+.line{
+  background: #E0E3DA;
+  width: 100%;
+  height: 5rpx;
+}
+
+.coinmethods {
+  background-color: white;
+}
+
+.getCoinCells {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin-bottom: 20rpx;
+}
+
+.getCoinCell {
+  display: flex;
+  flex-direction: column;
+  margin:20rpx;
+}
+
+.image_coin{
+  width:200rpx;
+  height: 200rpx;
+  border:none;
+}
+
+.coinButtonImage {
+  padding: 0;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}

@@ -1,0 +1,48 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+  <view class="usercoin">
+    <text>您的金币余额：{{userCoinNum}}</text>
+  </view>
+  <view class="getCoinMethods">
+    <text style="margin-left:20rpx">获取金币：</text>
+    <view class="line"></view>
+    <view class="coinmethods">
+    <view class="getCoinCells">
+      <view class="getCoinCell">
+        <button class="coinButtonImage" style="width:200rpx;height:200rpx">
+          <image class="image_coin" src="/images/test1.jfif"> </image>
+        </button> 
+        <text class="coinCellText">我要创作</text>
+      </view>
+      <view class="getCoinCell">
+        <button class="coinButtonImage" style="width:200rpx;height:200rpx">
+          <image class="image_coin" src="/images/test2.jpg"> </image>
+        </button> 
+        <text class="coinCellText">我要审核</text>
+      </view>
+    </view>
+    <view class="getCoinCells">
+      <view class="getCoinCell">
+        <button class="coinButtonImage" style="width:200rpx;height:200rpx">
+          <image class="image_coin" src="/images/test3.jpg"> </image>
+        </button> 
+        <text class="coinCellText">我要推广</text>
+      </view>
+      <view class="getCoinCell">
+        <button class="coinButtonImage" style="width:200rpx;height:200rpx">
+          <image class="image_coin" src="/images/test4.jpg"> </image>
+        </button> 
+        <text class="coinCellText">我要充值</text>
+      </view>
+    </view>
+    </view>
+    <view class="line"></view>
+  </view>
+</view>

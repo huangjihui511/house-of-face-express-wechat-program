@@ -28,7 +28,7 @@
         "pagePath": "pages/main/main",
         "iconPath": "images/icon_main.png",
         "selectedIconPath": "images/icon_main_HL.png",
-        "text": "主页"
+        "text": "主页_暂时空缺"
       },
       {
         "pagePath": "pages/edit_functions/edit_functions",
@@ -40,13 +40,13 @@
         "pagePath": "pages/search/search",
         "iconPath": "images/icon_1.png",
         "selectedIconPath": "images/icon_1_HL.png",
-        "text": "搜索"
+        "text": "用户_第二组"
       },
       {
         "pagePath": "pages/shop/shop",
         "iconPath": "images/icon_main.png",
         "selectedIconPath": "images/icon_main_HL.png",
-        "text": "商店"
+        "text": "商店_第三组"
       }
     ]
   },
