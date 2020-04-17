@@ -1,6 +1,6 @@
 {
   "pages": [
-    "pages/test/test",
+    
     "pages/login/login",
     "pages/shop/shop",
     "pages/edit_functions/edit_functions",
@@ -8,6 +8,7 @@
     "pages/main/main",
     "pages/index/index",
     "pages/search/search",
+    "pages/mark_expression/mark_expression",
     "pages/logs/logs"
     
   ],

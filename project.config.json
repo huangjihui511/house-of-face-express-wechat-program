@@ -30,7 +30,7 @@
 	"projectname": "alpha_project",
 	"miniprogramRoot": "miniprogram/",
 	"cloudfunctionRoot": "cloudfunctions/",
-	"cloudfunctionTemplateRoot": "",
+	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",
 	"watchOptions": {
 		"ignore": []
 	},
@@ -40,7 +40,6 @@
 	"scripts": {},
 	"simulatorType": "wechat",
 	"simulatorPluginLibVersion": {},
-	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",
 	"condition": {
 		"search": {
 			"current": -1,
