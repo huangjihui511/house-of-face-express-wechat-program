@@ -12,14 +12,14 @@ exports.main = async (event, context) => {
 
   if (request == "add_expression") {
     var id = event.data1
-    var value1 = event.data2
-
+    var file_id = event.data2
+    var tags1 = event.data3
     try {
     return await db.collection('user').where({
       _id:id
     }).update({
       data:{
-        expression_set:_.push(value1)
+        expression_set:_.push([{file_id:file_id, times:0, tags:tags1}])
       },
     })
   } catch (e) {
@@ -80,11 +80,16 @@ exports.main = async (event, context) => {
     }
   } else if (request == "get_set") {
     var user_id = event.data1
-
+    //var res_file = new Array()
+    var path_file = new Array()
     try{
-      return await db.collection('user').where({
+      var res_file =  db.collection('user').where({
         _id:user_id
+      }).field({
+        expression_set:true
       }).get()
+      console.log("转移", res_file)
+      return res_file
     }catch(e){
       console.log(e)
     }
@@ -144,6 +149,22 @@ exports.main = async (event, context) => {
       } catch (e) {
         console.log(e)
       }
+    }
+  } else if (request == "add_times") {
+    var id = event.data1
+    var path = event.data2
+
+    try {
+      await db.collection('user').where({
+        _id:id,
+        'expression_set.file_id':path
+      }).update({
+        data:{
+          'expression_set.$.times':_.inc(1)
+        },
+      })
+    } catch (e) {
+      console.log(e)
     }
   }
 }
