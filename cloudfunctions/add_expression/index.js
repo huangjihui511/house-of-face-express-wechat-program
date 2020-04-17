@@ -2,7 +2,7 @@
 const cloud = require('wx-server-sdk')
 
 cloud.init({
-  env:"alpha-project-bvqxh"
+  env:"pyb-database-n2c6s"
 })
 const db = cloud.database()
 const _ = db.command

@@ -1,0 +1,62 @@
+/**index.wxss**/
+
+page {
+  background:white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.image{
+  height: 160rpx;
+  width: 160rpx;
+}
+.struct{
+  display: flex;
+  flex-wrap:wrap;
+  justify-content:space-around;
+
+}
+.image_struct{
+  flex-direction: column;
+  flex-wrap:wrap;
+  justify-content:space-around;
+  margin: 30rpx;
+}
+.image_title{
+  text-align:center;
+  font-weight:700;
+}
+.button_list{
+  display: flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+}
+.time{
+  color: black;
+  font-size: 30rpx;
+}
+.time:hover {
+  background-color:orange;
+  color: white;
+}
+.freq{
+  color: black;
+  font-size: 30rpx;
+}
+.freq:hover {
+  background-color: orange;
+  color: white;
+}
+.picker{
+  color: black;
+  font-weight:600;
+  font-size: 30rpx;
+}
+.divLine{
+  background: black;
+  width: 100%;
+  height: 5rpx;
+ }
+ .classify{
+   text-align: center;
+ }

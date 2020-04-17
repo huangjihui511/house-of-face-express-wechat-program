@@ -1,0 +1,15 @@
+/**index.wxss**/
+
+page {
+  background:white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.image_code{
+  color:white;
+  background-color: rgb(18, 138, 62);
+}
+.friend_code{
+  text-align: center;
+}

@@ -1,0 +1,25 @@
+/**index.wxss**/
+page {
+  background:white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.list{
+  background-color: white;
+}
+.list_hd{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.arrow{
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid #999;
+  border-right: 2px solid #999;
+  position: absolute;
+  right: 20rpx;
+  transform: rotate(45deg);
+  margin-top:10rpx;
+}  

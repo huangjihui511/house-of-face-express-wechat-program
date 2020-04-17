@@ -1,6 +1,5 @@
 {
   "pages": [
-    
     "pages/login/login",
     "pages/shop/shop",
     "pages/edit_functions/edit_functions",
@@ -9,8 +8,8 @@
     "pages/index/index",
     "pages/search/search",
     "pages/mark_expression/mark_expression",
-    "pages/logs/logs"
-    
+    "pages/logs/logs",
+    "pages/team2/my/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -28,7 +27,7 @@
         "pagePath": "pages/main/main",
         "iconPath": "images/icon_main.png",
         "selectedIconPath": "images/icon_main_HL.png",
-        "text": "主页_暂时空缺"
+        "text": "主页_空缺"
       },
       {
         "pagePath": "pages/edit_functions/edit_functions",
@@ -47,6 +46,12 @@
         "iconPath": "images/icon_main.png",
         "selectedIconPath": "images/icon_main_HL.png",
         "text": "商店_第三组"
+      },
+      {
+        "pagePath": "pages/team2/my/index",
+        "iconPath": "images/icon_main.png",
+        "selectedIconPath": "images/icon_main_HL.png",
+        "text": "本地-team2"
       }
     ]
   },

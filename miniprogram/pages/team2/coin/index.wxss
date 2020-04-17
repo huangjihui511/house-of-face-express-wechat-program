@@ -1,0 +1,25 @@
+/**index.wxss**/
+page {
+  background:white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.layout{
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  align-items: center;
+}
+.money_logo{
+  width: 300rpx;
+  height: 300rpx;
+}
+.cash_out{
+  background-color: rgb(233, 220, 220);
+  color: rgb(18, 138, 62);
+}
+.cash_in{
+  color:white;
+  background-color: rgb(18, 138, 62);
+}

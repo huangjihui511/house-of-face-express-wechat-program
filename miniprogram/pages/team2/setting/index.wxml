@@ -1,0 +1,10 @@
+<!--index.wxml-->
+<view class='list' wx:for="{{list}}" wx:key="{{index}}">
+  <navigator url="{{item.url}}">
+    <view class='list_hd'>
+      <text>\n\n\n</text>
+      <view>{{item.name}}</view>
+      <view class='arrow'></view>
+    </view>
+  </navigator>
+</view>
