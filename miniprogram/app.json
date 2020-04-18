@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/team2/favorite_expression/index",
     "pages/login/login",
     "pages/shop/shop",
     "pages/edit_functions/edit_functions",

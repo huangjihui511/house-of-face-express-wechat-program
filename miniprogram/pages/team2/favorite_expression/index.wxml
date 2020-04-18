@@ -1,7 +1,9 @@
 <!--index.wxml-->
+<view class='all'>
+<view class='select'>选择</view>
 <view class="button_list">
   <button class='freq' style="width:375rpx" bindtap="freq_order">使用频率</button>
-  <picker style="width:375rpx" data-index="{{index}}" class='classify' bindchange="bindPickerChange" value="{{index}}" range="{{classes}}">
+  <picker style="width:375rpx"  data-index="{{index}}" class='classify' bindchange="bindPickerChange" value="{{index}}" range="{{classes}}">
     <view class="picker">          
       选择类别：{{classes[index]}}        
     </view>      
@@ -16,4 +18,5 @@
       <!--<view class="image_title">{{item.image_name}}</view>-->
     </view>
   </view>
+</view>
 </view>

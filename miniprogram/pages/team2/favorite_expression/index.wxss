@@ -6,6 +6,16 @@ page {
   flex-direction: column;
   justify-content: flex-start;
 }
+.all{
+  
+  display: flex;
+  flex-direction: column;
+}
+.select{
+  position: fixed;
+  top: 0px;
+  right: 0px;
+}
 .image{
   height: 160rpx;
   width: 160rpx;
@@ -27,19 +37,13 @@ page {
   font-weight:700;
 }
 .button_list{
+
   display: flex;
   flex-wrap:wrap;
   align-items:baseline;
 }
-.time{
-  color: black;
-  font-size: 30rpx;
-}
-.time:hover {
-  background-color:orange;
-  color: white;
-}
 .freq{
+  background-color:transparent;
   color: black;
   font-size: 30rpx;
 }
@@ -53,6 +57,7 @@ page {
   font-size: 30rpx;
 }
 .divLine{
+  position: fixed;
   background: black;
   width: 100%;
   height: 5rpx;
