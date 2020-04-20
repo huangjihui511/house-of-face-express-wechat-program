@@ -8,11 +8,11 @@
   justify-content:center; 
   align-items:center;
 }
-.text{
-  color: rgb(161, 155, 155);
-}
 .empty{
   display: none;
+}
+.text{
+  color: rgb(161, 155, 155);
 }
 .button-selected{
   border: 1px solid #06a380;
