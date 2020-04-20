@@ -9,7 +9,6 @@ const _ = db.command
 // 云函数入口函数
 exports.main = async (event, context) => {
   var request = event.request
-
   if (request == "add_expression") {
     var id = event.data1
     var file_id = event.data2
@@ -116,7 +115,9 @@ exports.main = async (event, context) => {
         _id:user_id
       }).update({
         data:{
-          expression_set:_.pull(expression)
+          expression_set:_.pull({
+            file_id:_.eq(expression)
+          })
         }
       })
     } catch(e) {
@@ -166,5 +167,7 @@ exports.main = async (event, context) => {
     } catch (e) {
       console.log(e)
     }
+  } else if (request == "add_times") {
+    
   }
 }

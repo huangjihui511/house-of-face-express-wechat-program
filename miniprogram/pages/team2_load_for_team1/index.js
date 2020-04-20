@@ -1,18 +1,18 @@
 // pages/contect/contect.js
-
+//只需传给页面地址
 wx.cloud.init({
-  env:"pyb-database-n2c6s",traceUser:true
+  env:"pyb-database-n2c6s"
 })
+
 const db = wx.cloud.database()
 Page({
+
   /**
    * 页面的初始数据
    */
 data: {
-  empty:true,
   title: '上传图片',
   file_id: "",
-  before_file_id:"",
   maxCount: 10,
   currentFiles: [],
   showPreview: false,
@@ -49,78 +49,8 @@ checkboxChange(e){
         [flags]: detailValue
     })
 },
-
-chooseImage: function chooseImage(e) {
-  let file3 = "before_file_id"
-  this.setData({
-    [file3]:this.data.file_id,
-  })
-  var _this = this;
-  console.log("choose")
-  wx.chooseImage({
-    count: 1,
-    sizeType: ['compressed'],
-    sourceType: ['album', 'camera'],
-    success(res) {
-      console.log('chooseImage success, temp path is', res.tempFilePaths[0])
-      let empty='empty'
-      let src="image_src"
-      _this.setData({
-        [empty]:false,
-        [src]:res.tempFilePaths[0]
-      })
-      var timestamp =new Date();
-      let cu_time="time"
-      _this.setData({
-        [cu_time]:timestamp
-      })
-      console.log("上传时间"+_this.data.time)
-      console.log("图片地址"+_this.data.image_src)
-      wx.showToast({
-        title: '请等待',
-        icon: 'loading',
-        duration: 1000
-      })
-      wx.cloud.uploadFile({
-        cloudPath:'test'+Math.round(Math.random()*1000)+'.jpg',
-        filePath:_this.data.image_src,
-        config:"pyb-database-n2c6s",
-        success: res => {
-          console.log("图片file_id", res.fileID)
-          const file1 = res.fileID
-          let file2 = "file_id"
-          _this.setData({
-            [file2]:file1,
-          })
-          wx.showToast({
-            title: '上传成功',
-            icon: 'success',
-            duration: 1000  
-          })
-        },
-        fail: console.error
-      })
-    },
-    fail({errMsg}) {
-      console.log('chooseImage fail, err is', errMsg)
-      let empty='empty'
-      let file='file_id'
-      let before_file='before_file_id'
-      _this.setData({
-        [empty]:true,
-        [file]:"",
-        [before_file]:""
-      })
-      wx.showToast({
-        title: '上传失败',
-        icon: 'loading',
-        duration: 1000
-      })
-    }
-  });
-},
 submitted: function submitted(e) {
-  if(this.data.file_id==this.data.before_file_id){
+  if(this.data.file_id==''){
     return
   }
   var that = this;
@@ -143,7 +73,6 @@ submitted: function submitted(e) {
     console.log(this.data.image_src)
     console.log(this.data.labels)
     console.log(this.data.time)
-    console.log(this.data.file_id)
     let that = this
     wx.cloud.callFunction({
       name:"add_expression",
@@ -165,7 +94,7 @@ submitted: function submitted(e) {
       data:{
         request:"add_expression",
         data1:"f149f6775e9862590040a95f532f204c",
-        data2:that.data.file_id,
+        data2:this.data.file_id,
         data3:this.data.labels
         //data3:this.data.labels
         //data2:["fun", "wdnmd"]
@@ -183,51 +112,113 @@ submitted: function submitted(e) {
       success(data) {
         setTimeout(function () {
           wx.redirectTo({
-            url: 'index',
+            url: '../favorite_expression/index',
           })
         }, 1000) //延迟时间
       }
     })
+
   }
 },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+
   },
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
   onReady: function () {
+
   },
+
   /**
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    var _this=this
+    console.log(this.options.src)
+    wx.cloud.callFunction({
+      name:"add_expression",
+      data:{
+        request:"sub_expression",
+        data1:"f149f6775e9862590040a95f532f204c",
+        data2:this.options.src
+      }
+    })
+    wx.cloud.downloadFile({
+      fileID: this.options.src,
+      success(result) {
+        console.log(result.tempFilePath)
+        let temp_src="image_src"
+        var src=result.tempFilePath
+        console.log(src)
+        _this.setData({
+          [temp_src]:src
+        })
+        console.log("src"+_this.data.image_src)
+        var timestamp =new Date();
+        let cu_time="time"
+        _this.setData({
+          [cu_time]:timestamp
+        })
+        wx.cloud.uploadFile({
+          cloudPath:'test'+Math.round(Math.random()*1000)+'.jpg',
+          filePath:src,
+          config:"pyb-database-n2c6s",
+          success: res => {
+            console.log("图片file_id", res.fileID)
+            const file1 = res.fileID
+            let file2 = "file_id"
+            _this.setData({
+              [file2]:file1,
+            })
+            wx.showToast({
+              title: '上传成功',
+              icon: 'success',
+              duration: 1000  
+            })
+          },
+          fail: console.error
+        })
+      }
+    })
   },
+
   /**
    * 生命周期函数--监听页面隐藏
    */
   onHide: function () {
+
   },
+
   /**
    * 生命周期函数--监听页面卸载
    */
   onUnload: function () {
+
   },
+
   /**
    * 页面相关事件处理函数--监听用户下拉动作
    */
   onPullDownRefresh: function () {
+
   },
+
   /**
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+
   },
-  /*
+
+  /**
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+
   }
 })
