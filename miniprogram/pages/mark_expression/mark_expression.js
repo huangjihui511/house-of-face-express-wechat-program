@@ -48,6 +48,7 @@ Page({
         //   tag_list: res.result.data,
         //   tag_time: res.result.data.length
         // })
+        console.log(res)
         this.data.tag_list = res.result.data
         this.data.tag_time = res.result.data.length
         console.log(this.data.tag_list)

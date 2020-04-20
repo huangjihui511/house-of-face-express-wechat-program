@@ -1,5 +1,7 @@
 {
   "pages": [
+    "pages/mark_expression/mark_expression",
+    
     "pages/login/login",
     "pages/shop/shop",
     "pages/edit_functions/edit_functions",
@@ -7,7 +9,7 @@
     "pages/main/main",
     "pages/index/index",
     "pages/search/search",
-    "pages/mark_expression/mark_expression",
+    
     "pages/logs/logs",
     "pages/team2/my/index",
     "pages/team2/favorite_expression/index"
