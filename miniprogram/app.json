@@ -1,6 +1,5 @@
 {
   "pages": [
-    "pages/team2/favorite_expression/index",
     "pages/login/login",
     "pages/shop/shop",
     "pages/edit_functions/edit_functions",
@@ -10,7 +9,8 @@
     "pages/search/search",
     "pages/mark_expression/mark_expression",
     "pages/logs/logs",
-    "pages/team2/my/index"
+    "pages/team2/my/index",
+    "pages/team2/favorite_expression/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
