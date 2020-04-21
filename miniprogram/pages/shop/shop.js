@@ -1,50 +1,50 @@
 //index.js
 //获取应用实例
 const app = getApp()
-/**<view class="picShowRow">
-      <button class="buttonImage" bindtap="shop_image_pagejump" data-image="{{toSearch}}">
-        <image class="image_search" src="{{toSearch}}"></image>
-      </button>
-      <button class="buttonImage"><image class="image_search" src="{{toSearch}}"></image></button>
-      <button class="buttonImage"><image class="image_search" src="{{toSearch}}"></image></button>
-  <!-- <image class="image_search" src="{{showPicList[1]}}"></image>-->
-    <!--<view wx:for="{{array}}"> {{showPicList[]}} </view>-->
-    </view>
-    <view class="picShowRow">
-      <button class="buttonImage"><image class="image_search" src="{{toSearch}}"></image></button>
-      <button class="buttonImage"><image class="image_search" src="{{toSearch}}"></image></button>
-      <button class="buttonImage"><image class="image_search" src="{{toSearch}}"></image></button>
-    </view> */
+const db = wx.cloud.database()
+
 Page({
   data: {
+    images: [
+      /*{
+        file_id : "cloud://ybw17373380-bu509.7962-ybw17373380-bu509-1301775711/test.jpg"
+      },
+      {
+        file_id : "cloud://ybw17373380-bu509.7962-ybw17373380-bu509-1301775711/test1.jpg"
+      },
+      {
+        file_id : "cloud://ybw17373380-bu509.7962-ybw17373380-bu509-1301775711/test2.jpg"
+      }*/,
+      {file_id : "/images/test1.jfif"
+      },
+      {file_id :  "/images/test3.jpg"},
+      {file_id : "/images/test2.jpg"}
+    ],
     user_coin:0,
-    user_rank:5,
-    user_exp:20,
-    user_exp_Upbound:0,
     motto: 'Hello World',
     userInfo: {},
     hasUserInfo: false,
+    image_url: '',
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     focus: false,
-      inputValue: '',
-      toSearch: '/images/test1.jfif',
-      testButton: '',
-      showPicList: ["/images/test.jpg","/images/test1.jfif","/images/test2.jpg"]
+    inputValue: '',
+    toSearch: '/images/timg.jfif',
+    testButton: '',
+    showPicList: ["/images/test.jpg","/images/test1.jpg"],
+    user_rank:5,
+    user_exp:20,
+    user_openid: '123',
+    rankExp:[0,5,15,30,50,100,200,500,1000,2000,3000,6000,10000,18000,30000,60000,
+      100000,300000],
+    user_exp_Upbound:25
   },
+  
   shop_image_pagejump:function(e) {
-    console.log(e)
-    var imagepath = e.currentTarget.dataset['image']
     var app = getApp()
-   // app.globalData.data = {'imagepath':imagepath}
-   app.globalData.imagePath = imagepath
-   console.log(app.globalData.imagePath+"test")
+    console.log(e)
+    // app.globalData.data = {'imagepath':imagepath}
     wx.navigateTo({
-      url: '/pages/index/index',
-    })
-  },
-  bindCoinClick:function(e) {
-    wx.navigateTo({
-      url: '/pages/coin/coin',
+      url: '/pages/index/index?url='+ e.currentTarget.dataset.fileid
     })
   },
   bindConfirmClick: function(e) {
@@ -55,14 +55,44 @@ Page({
         inputValue:value
       }
     );
-    this.getShowPicList();
   },
-  getShowPicList: function() {
-    
-  },
+  
   confirm: function() {
-        var v = this.data.inputValue
-        this.setData({toSearch:v})
+    var v = this.data.inputValue
+      this.setData({toSearch:v})
+      let that = this
+      wx.cloud.init()
+      wx.cloud.callFunction({
+      name:"add_expression",
+      data:{
+        request:"searchByLabel",
+        data1:"0d9cdb685e981a3d002f9f6a46bf8d0b",
+        data2:this.data.toSearch
+      },
+      success:function(res) {
+        console.log("获取表情成功:",res.result.data)
+        var path = res.result.data[0]['file_id']
+        console.log("path:",path)
+        that.data.showPicList[0] = path
+        that.setData({
+          showPicList:that.data.showPicList
+        }) 
+        console.log("表情地址:",path)
+      }
+    })
+   /* wx.cloud.callFunction({    
+      name: 'login'  
+    }).then(res=>{        
+      console.log(res.result.openid)
+      db.collection('expression').where({         
+        openid: res.result.openid      
+      }).get().then(res2=>{          
+        console.log(res2);         
+        this.setData({          
+          images: res2.data        
+        })      
+      })    
+    }) */
   },
   //事件处理函数
   bindViewTap: function() {
@@ -70,29 +100,28 @@ Page({
       url: '../logs/logs'
     })
   },
+  calUserRank: function(exp) {
+    //根据用户的经验计算等级
+   // var exp = this.data.user_exp
+    var expList = this.data.rankExp
+    var upbound
+    var i = 0
+    for (;i < 17;i++) {
+      if ((exp >= expList[i]) && (exp < expList[i+1])) {
+        upbound = expList[i+1]
+        break
+      }
+    }
+    if (i == 17) {
+      upbound = expList[17]
+    }
+    this.setData({
+      user_rank: i+1,
+      user_exp_Upbound: upbound
+    })
+    console.log("rank:"+this.data.user_rank+"expup:"+this.data.user_exp_Upbound)
+  },
   onLoad: function () {
-    var temp = this.data.user_rank*this.data.user_rank
-    this.setData({
-      user_exp_Upbound : temp
-    })
-    console.log("expup"+this.data.user_exp_Upbound)
-    wx.cloud.init()
-    wx.cloud.callFunction({
-      name:"upload_image",
-      data:{
-        a:1,
-        b:2
-      },
-      success:function(res) {
-        console.log(res.result.sum)
-      },
-      fail:console.log("fuck")
-    })
-    var coins = app.globalData.userCoin
-    console.log("coinnum:"+app.globalData.imagePath)
-    this.setData({
-      user_coin:coins
-    })
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -119,6 +148,28 @@ Page({
         }
       })
     }
+    var tempid = '123'
+    wx.cloud.callFunction({
+      name:'login',
+      success: res => {
+        console.log('success:', res)
+        this.setData({
+          user_openid: res.result.openid
+        })
+        tempid = res.result.openid
+        console.log(tempid)
+        db.collection('user').where({
+          openid: tempid
+        }).get().then(res=>{          
+          console.log(res);         
+          this.setData({          
+            user_exp: res.data[0].exp     
+          })   
+        })    
+      },
+      fail :console.error
+    })
+    this.calUserRank(this.data.user_exp)
   },
   getUserInfo: function(e) {
     console.log(e)

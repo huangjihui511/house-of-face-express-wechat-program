@@ -74,7 +74,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var temp_id = parseInt(options.id)
+    var temp_id = options.id
     wx.cloud.callFunction({
       name: "add_des_tag",
       data: {
@@ -86,7 +86,7 @@ Page({
         console.log(res)
         this.setData({
           imgid: temp_id,
-          imgurl: res.result.data[0].url // 最终替换为通过fileID得到url
+          imgurl: res.result.data[0].file_id // 最终替换为通过fileID得到url
         })
       } 
     })

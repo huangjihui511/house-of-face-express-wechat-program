@@ -1,0 +1,13 @@
+<!--miniprogram/pages/userpage/userpage.wxml-->
+<view class="container">
+  <text>制作者名字：{{uploader[0].name}}</text>
+  <text>公开表情:</text>
+  <view class='content'>
+    <view class='content-item' wx:for="{{collection}}" wx:for-item="item">
+      <!-- 图片 -->
+      <button class='content-item' data-fileid='{{item.file_id}}' bindtap="shop_image_pagejump" >
+        <image class="image_search" src="{{item.file_id}}" mode='scaleToFill'></image>
+      </button>
+    </view>
+  </view>
+</view>

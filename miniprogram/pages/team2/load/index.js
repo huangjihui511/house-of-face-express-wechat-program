@@ -85,7 +85,7 @@ chooseImage: function chooseImage(e) {
       wx.cloud.uploadFile({
         cloudPath:'test'+Math.round(Math.random()*1000)+'.jpg',
         filePath:_this.data.image_src,
-        config:"pyb-database-n2c6s",
+        config:"alpha-project-bvqxh",
         success: res => {
           console.log("图片file_id", res.fileID)
           const file1 = res.fileID
@@ -214,6 +214,8 @@ submitted: function submitted(e) {
    * 生命周期函数--监听页面显示
    */
   onShow:async function () {
+    console.log(app)
+    console.log(app.globalData.open_id)
     var res = await wx.cloud.callFunction({
       name:"add_expression",
       data:{
@@ -221,6 +223,7 @@ submitted: function submitted(e) {
         data1:app.globalData.open_id,
       }
     })
+    console.log(res)
     var cur_size=res.result.data[0].expression_set.length
     console.log(res.result.data[0].expression_set.length)
     if(cur_size>=app.globalData.max_exp){
