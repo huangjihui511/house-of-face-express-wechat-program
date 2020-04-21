@@ -2,13 +2,33 @@
 const cloud = require('wx-server-sdk')
 
 cloud.init({
-  env:"pyb-database-n2c6s"
+  env:"alpha-project-bvqxh"
 })
 const db = cloud.database()
 const _ = db.command
 // 云函数入口函数
 exports.main = async (event, context) => {
   var request = event.request
+
+  if (request == "searchByLabel") {
+    var id = event.data1
+    var label = event.data2
+    try {
+      //var tags = db.collection('expression')
+      return await db.collection('expression').where({
+       // _id:id,
+        tags:{
+          name:label
+        }
+      }).get({
+        success:function(res) {
+          console.log(res.data)
+        }
+      })
+    } catch (e) {
+      console.log(e)
+    }
+  }
 
   if (request == "add_expression") {
     var id = event.data1

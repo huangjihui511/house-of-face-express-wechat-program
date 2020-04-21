@@ -18,7 +18,7 @@ const app = getApp()
 Page({
   data: {
     user_coin:0,
-    user_rank:5,
+    user_rank:0,
     user_exp:20,
     user_exp_Upbound:0,
     motto: 'Hello World',
@@ -26,10 +26,14 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo'),
     focus: false,
-      inputValue: '',
-      toSearch: '/images/test1.jfif',
-      testButton: '',
-      showPicList: ["/images/test.jpg","/images/test1.jfif","/images/test2.jpg"]
+    inputValue: '',
+    toSearch: '/images/test1.jfif',
+    testButton: '',
+    showPicList: ["/images/test1.jfif",
+    "/images/test3.jpg",
+    "/images/test2.jpg"],
+    rankExp:[0,5,15,30,50,100,200,500,1000,2000,3000,6000,10000,18000,30000,60000,
+    100000,300000]
   },
   shop_image_pagejump:function(e) {
     console.log(e)
@@ -61,8 +65,27 @@ Page({
     
   },
   confirm: function() {
-        var v = this.data.inputValue
-        this.setData({toSearch:v})
+      var v = this.data.inputValue
+      this.setData({toSearch:v})
+      let that = this
+      wx.cloud.init()
+      wx.cloud.callFunction({
+      name:"add_expression",
+      data:{
+        request:"searchByLabel",
+        data1:"0d9cdb685e981a3d002f9f6a46bf8d0b",
+        data2:this.data.toSearch
+      },
+      success:function(res) {
+        console.log("获取表情成功:",res.result.data)
+        var path = res.result.data[0]['file_id']
+        that.data.showPicList[0] = path
+        that.setData({
+          showPicList:that.data.showPicList
+        }) 
+        console.log("表情地址:",path)
+      }
+    })
   },
   //事件处理函数
   bindViewTap: function() {
@@ -70,12 +93,53 @@ Page({
       url: '../logs/logs'
     })
   },
-  onLoad: function () {
-    var temp = this.data.user_rank*this.data.user_rank
+  uploadimage: function() {
+        // 让用户选择一张图片
+    wx.chooseImage({
+    success: chooseResult => {
+    // 将图片上传至云存储空间
+    /*wx.cloud.uploadFile({
+      // 指定上传到的云路径
+      cloudPath: 'my-photo.png',
+      // 指定要上传的文件的小程序临时文件路径
+      filePath: chooseResult.tempFilePaths[0],
+      // 成功回调
+      success: res => {
+        console.log('上传成功', res)
+      },
+    }) */
+  },
+})
+  },
+  calUserRank: function(exp) {
+    //根据用户的经验计算等级
+   // var exp = this.data.user_exp
+    var expList = this.data.rankExp
+    var upbound
+    var i = 0
+    for (;i < 17;i++) {
+      if ((exp >= expList[i]) && (exp < expList[i+1])) {
+        upbound = expList[i+1]
+        break
+      }
+    }
+    if (i == 17) {
+      upbound = expList[17]
+    }
     this.setData({
-      user_exp_Upbound : temp
+      user_rank: i+1,
+      user_exp_Upbound: upbound
     })
-    console.log("expup"+this.data.user_exp_Upbound)
+    console.log("rank:"+this.data.user_rank+"expup:"+this.data.user_exp_Upbound)
+  }
+  ,
+  onLoad: function () {
+    
+    //用户经验暂时从页面data字段获取
+    var exp = this.data.user_exp
+    //无返回值，在函数内部将运算结果提交至视图层
+    this.calUserRank(exp)
+
     wx.cloud.init()
     wx.cloud.callFunction({
       name:"upload_image",
@@ -89,7 +153,6 @@ Page({
       fail:console.log("fuck")
     })
     var coins = app.globalData.userCoin
-    console.log("coinnum:"+app.globalData.imagePath)
     this.setData({
       user_coin:coins
     })

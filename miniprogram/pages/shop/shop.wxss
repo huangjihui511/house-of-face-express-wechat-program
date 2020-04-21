@@ -250,3 +250,9 @@
   height: 50rpx;
 }
 
+.expFont {
+  font-size: small;
+  color: rgb(164, 164, 236) ;
+  margin-top: 5rpx;
+}
+
