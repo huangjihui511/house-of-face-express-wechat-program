@@ -41,13 +41,13 @@
         "pagePath": "pages/shop/shop",
         "iconPath": "images/icon_main.png",
         "selectedIconPath": "images/icon_main_HL.png",
-        "text": "商店_第三组"
+        "text": "商店"
       },
       {
         "pagePath": "pages/team2/my/index",
         "iconPath": "images/icon_main.png",
         "selectedIconPath": "images/icon_main_HL.png",
-        "text": "本地-team2"
+        "text": "本地"
       }
     ]
   },
