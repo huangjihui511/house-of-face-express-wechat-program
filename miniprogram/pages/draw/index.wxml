@@ -1,0 +1,4 @@
+ <view class="placeHoder"></view>
+ <canvas style="width:{{canvasWidth}}px; height:{{canvasHeight}}px;" canvas-id="myCanvas" />
+ <button bindtap="two2one">aaa</button>
+ <image src="{{src}}"></image>

@@ -32,6 +32,49 @@ data: {
   image_src:"",
   time:"",
 },
+two2one(a) {
+  let that = this
+  var imgs = ['',"../../images/code.jpg"]
+      imgs[0]=a
+      console.log(imgs[0])
+      const ctx = wx.createCanvasContext("myCanvas", that)
+      var imgH1,imgW1,imgH2,imgW2,imgPath1,imgPath2
+      wx.getImageInfo({
+        src: imgs[0],
+        success: function(res) {
+          imgW1 = res.width
+          imgH1 = res.height
+          imgPath1 = res.path
+          console.log(res)
+          wx.getImageInfo({
+            src: imgs[1],
+            success: function(res) {
+              imgW2 = res.width
+              imgH2 = res.height
+              imgPath2 = res.path
+              console.log(res)
+              ctx.drawImage(imgPath1, 0, 0, imgW1, imgH1)
+              ctx.drawImage(imgPath2, 0, imgH1, imgW1, imgH2/imgW2*imgW1)
+              ctx.draw()
+              console.log(ctx)
+              setTimeout(() => {wx.canvasToTempFilePath({
+                canvasId: 'myCanvas',
+                success: function(res) {
+                  console.log("合成的带有小程序码的图片success》》》", res)
+                  let empty='empty'
+                  let src="image_src"
+                  _this.setData({
+                    [empty]:false,
+                    [src]:res.tempFilePaths
+                  })
+                }
+              })},1500)
+              console.log("合成的带有小程序码的图片success》》》")
+          }
+        })
+        }
+      })
+},
 checkboxChange(e){
   console.log('checkboxChange e:',e);
   let string = "label_list["+e.currentTarget.dataset.index+"].selected"
@@ -51,6 +94,7 @@ checkboxChange(e){
 },
 
 chooseImage: function chooseImage(e) {
+  let that = this
   let file3 = "before_file_id"
   this.setData({
     [file3]:this.data.file_id,
@@ -76,10 +120,11 @@ chooseImage: function chooseImage(e) {
       })
       console.log("上传时间"+_this.data.time)
       console.log("图片地址"+_this.data.image_src)
+      _this.two2one(_this.data.image_src)
       wx.showToast({
         title: '请等待',
         icon: 'loading',
-        duration: 1000
+        duration: 2000
       })
       wx.cloud.uploadFile({
         cloudPath:'test'+Math.round(Math.random()*1000)+'.jpg',
