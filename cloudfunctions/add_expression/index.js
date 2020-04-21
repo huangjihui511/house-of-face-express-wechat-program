@@ -19,7 +19,7 @@ exports.main = async (event, context) => {
       _id:id
     }).update({
       data:{
-        expression_set:_.push([{file_id:file_id, times:0, tags:tags1}])
+        expression_set:_.push([{file_id:file_id, times:1, tags:tags1, exp:0}])
       },
     })
   } catch (e) {
@@ -29,14 +29,20 @@ exports.main = async (event, context) => {
     var id = event.data1
     var time = event.data2
     var tags = event.data3
+    var openid = event.data4
+    var path = event.data5
 
     try {
       return await db.collection('expression').add({
         data:{
           id:id,
-          description:null,
+          description:[],
           time:time,
-          tags:tags
+          tags:tags,
+          open_id:openid,
+          file_id:path,
+          des_num:0,
+          tag_num:0
         }
       })
     } catch(e) {
@@ -48,7 +54,8 @@ exports.main = async (event, context) => {
     try {
       return await db.collection('tag').add({
         data:{
-          name:name1
+          name:name1,
+          expression_id:[]
         }
       })
     } catch(e) {
@@ -102,7 +109,7 @@ exports.main = async (event, context) => {
         id:docid
       }).update({
         data:{
-          description:vdata1
+          description:_.push(vdata1)
         }
       })
     } catch(e) {
@@ -116,7 +123,9 @@ exports.main = async (event, context) => {
         _id:user_id
       }).update({
         data:{
-          expression_set:_.pull(expression)
+          expression_set:_.pull({
+            file_id:_.eq(expression)
+          })
         }
       })
     } catch(e) {
