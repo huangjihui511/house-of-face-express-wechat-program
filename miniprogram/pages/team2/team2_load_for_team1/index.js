@@ -3,7 +3,7 @@
 wx.cloud.init({
   env:"pyb-database-n2c6s"
 })
-
+var app = getApp();
 const db = wx.cloud.database()
 Page({
 
@@ -88,7 +88,7 @@ submitted: function submitted(e) {
         data1:"test002",
         data2:this.data.time,
         data3:temp,
-        data4:"open4",
+        data4:app.globalData.open_id,
         data5:this.data.file_id
         //data2:["fun", "wdnmd"]
       },
@@ -102,7 +102,7 @@ submitted: function submitted(e) {
       name:"add_expression",
       data:{
         request:"add_expression",
-        data1:"f149f6775e9862590040a95f532f204c",
+        data1:app.globalData.open_id,
         data2:this.data.file_id,
         data3:temp
         //data3:this.data.labels
@@ -153,7 +153,7 @@ submitted: function submitted(e) {
       name:"add_expression",
       data:{
         request:"sub_expression",
-        data1:"f149f6775e9862590040a95f532f204c",
+        data1:app.globalData.open_id,
         data2:this.options.src
       }
     })

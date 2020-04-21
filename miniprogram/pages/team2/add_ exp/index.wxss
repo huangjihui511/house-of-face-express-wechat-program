@@ -1,0 +1,128 @@
+/**index.wxss**/
+
+page {
+  background:white;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.empty{
+  display: none;
+}
+.delete_logo{
+  width: 50rpx;
+  height: 50rpx;
+}
+.delete{
+  position: fixed;
+  bottom: 0rpx;
+  height: 70rpx;
+  width: 100%;
+  background-color: rgb(252, 251, 251);
+  color: rgb(76, 196, 126);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.image{
+  height: 160rpx;
+  width: 160rpx;
+}
+.image_selected{
+  border: 3px double rgb(76, 196, 126);
+}
+.struct{
+  display: flex;
+  flex-wrap:wrap;
+  justify-content:space-around;
+
+}
+.image_struct{
+  flex-direction: column;
+  flex-wrap:wrap;
+  justify-content:space-around;
+  margin: 30rpx;
+}
+.image_title{
+  text-align:center;
+  font-weight:700;
+}
+.button_list{
+  display: flex;
+  flex-wrap:wrap;
+  align-items:baseline;
+}
+.time{
+  color: black;
+  font-size: 30rpx;
+}
+.time:hover {
+  background-color:orange;
+  color: white;
+}
+.freq{
+  font-size: 30rpx;
+  text-align: center;
+}
+.picker{
+  font-size: 30rpx;
+}
+.fix{
+  background-color:rgb(252, 251, 251);
+  position: fixed;
+  top: 60rpx;
+}
+.divLine{
+  display: flex;
+  flex-direction: row;
+}
+.divLine_freq{
+  width: 50%;
+  height: 3rpx;
+ }
+.divLine_kind{
+  width: 50%;
+  height: 3rpx;
+ }
+ .classify{
+   text-align: center;
+ }
+ .select{
+   display: flex;
+   flex-direction:row;
+   align-items: baseline;
+ }
+ .all_select{
+  background-color: rgb(252, 251, 251);
+  color: rgb(76, 196, 126);
+  position: fixed;
+  top: 0rpx;
+  left: 0rpx;
+  font-size: 30rpx;
+  text-align: center;
+  height: 60rpx;
+  width: 100rpx;
+ }
+ .select_number{
+  background-color: rgb(252, 251, 251);
+  position: fixed;
+  top: 0rpx;
+  left: 100rpx;
+  font-size: 40rpx;
+  height: 60rpx;
+  width: 560rpx;
+  text-align: center;
+  color: rgb(100, 97, 97);
+ }
+ .select_text{
+   color: rgb(76, 196, 126);
+   background-color: rgb(252, 251, 251);
+  position: fixed;
+  top: 0rpx;
+  right: 0rpx;
+  font-size: 30rpx;
+  text-align: center;
+  height: 60rpx;
+  width: 100rpx;
+ }
