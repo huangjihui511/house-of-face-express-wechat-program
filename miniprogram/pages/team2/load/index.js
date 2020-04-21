@@ -145,13 +145,22 @@ submitted: function submitted(e) {
     console.log(this.data.time)
     console.log(this.data.file_id)
     let that = this
+    var j
+    var temp=new Array()
+    console.log(temp)
+    for(j=0;j<this.data.labels.length;j++){
+      temp.push({name:this.data.labels[j],num:0})
+    }
+    console.log(temp)
     wx.cloud.callFunction({
       name:"add_expression",
       data:{
         request:"add_picture",
         data1:"test002",
         data2:this.data.time,
-        data3:this.data.labels
+        data3:temp,
+        data4:"open4",
+        data5:this.data.file_id
         //data2:["fun", "wdnmd"]
       },
       success:function(res){
@@ -166,7 +175,7 @@ submitted: function submitted(e) {
         request:"add_expression",
         data1:"f149f6775e9862590040a95f532f204c",
         data2:that.data.file_id,
-        data3:this.data.labels
+        data3:temp
         //data3:this.data.labels
         //data2:["fun", "wdnmd"]
       },
