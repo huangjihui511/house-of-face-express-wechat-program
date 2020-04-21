@@ -1,9 +1,13 @@
 {
   "pages": [
+<<<<<<< HEAD
+=======
     
     
     "pages/login/login",
+>>>>>>> 342002416396625ca4e21e4f6b2d215e3ffda3f0
     "pages/shop/shop",
+    "pages/login/login",
     "pages/edit_functions/edit_functions",
     "pages/add_des/add_des",
     "pages/main/main",

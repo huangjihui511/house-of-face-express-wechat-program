@@ -6,7 +6,12 @@ const cloud = require('wx-server-sdk')
 // 初始化 cloud
 cloud.init({
   // API 调用都保持和云函数当前所在环境一致
+<<<<<<< HEAD
   env: cloud.DYNAMIC_CURRENT_ENV
+=======
+  //env: cloud.DYNAMIC_CURRENT_ENV
+  env:"alpha-project-bvqxh"
+>>>>>>> f309fd6fc4c1c2207ad3286e0ac11515ccfc460a
 })
 
 /**
