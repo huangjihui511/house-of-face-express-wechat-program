@@ -59,22 +59,41 @@ Page({
     })
     console.log('往下执行')
   },
+  async user(res){
+      var open_id = res.result.openid
+      console.log("open_id")
+      console.log(open_id)
+      app.globalData.open_id = open_id
+      var res = await wx.cloud.callFunction({
+        name:"add_expression",
+        data:{
+          request:"find_user",
+          data1:app.globalData.open_id,
+        },
+      })
+      console.log(res)
+      if(res.result.data.length==0){
+        console.log("需要注册到数据库")
+        var res = await wx.cloud.callFunction({
+          name:"add_expression",
+          data:{
+            request:"add_user",
+            data1:app.globalData.open_id,
+          },
+        })
+      }
+      // app.setData({
+      //   open_id:open_id
+      // })
+  },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
+    var _this=this
     wx.cloud.callFunction({
       name:"login",
-      success: res => {
-        var open_id = res.result.openid
-        console.log("open_id")
-        console.log(open_id)
-        console.log("现在因为open_id undefined,所以team2里页面错误，请将login/login.js第73行注释掉，才正确")
-        app.globalData.open_id = open_id
-        // app.setData({
-        //   open_id:open_id
-        // })
-      }
+      success: res => _this.user(res)
     })
     
     if (app.globalData.userInfo) {

@@ -121,7 +121,7 @@ submitted: function submitted(e) {
       success(data) {
         setTimeout(function () {
           wx.redirectTo({
-            url: '../favorite_expression/index',
+            url: '../../login/login',
           })
         }, 1000) //延迟时间
       }

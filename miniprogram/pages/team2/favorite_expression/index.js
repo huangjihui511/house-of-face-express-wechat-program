@@ -57,7 +57,14 @@ Page({
         data1:app.globalData.open_id,
       }
     })
-    var num = res.result.data[0].expression_set.length
+    console.log(res)
+    var num 
+    if(res.result.data[0].expression_set==undefined){
+      num=0
+    }
+    else{
+      num = res.result.data[0].expression_set.length
+    }
     for (var i = 0; i < num; i++) {
       freq1[i] = res.result.data[0].expression_set[i].times
       label1[i] = res.result.data[0].expression_set[i].tags

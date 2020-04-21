@@ -1,6 +1,5 @@
 {
   "pages": [
-    
     "pages/login/login",
     "pages/shop/shop",
     "pages/edit_functions/edit_functions",

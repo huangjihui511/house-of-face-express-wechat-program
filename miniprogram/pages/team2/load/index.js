@@ -83,7 +83,7 @@ chooseImage: function chooseImage(e) {
         duration: 1000
       })
       wx.cloud.uploadFile({
-        cloudPath:'test'+Math.round(Math.random()*1000)+'.jpg',
+        cloudPath:'test'+app.globalData.open_id+Math.round(Math.random()*10000)+'.jpg',
         filePath:_this.data.image_src,
         config:"alpha-project-bvqxh",
         success: res => {
@@ -224,8 +224,15 @@ submitted: function submitted(e) {
       }
     })
     console.log(res)
-    var cur_size=res.result.data[0].expression_set.length
-    console.log(res.result.data[0].expression_set.length)
+    console.log(app.globalData.max_exp)
+    var cur_size
+    if(res.result.data[0].expression_set==undefined){
+      cur_size=0
+    }
+    else{
+      cur_size=res.result.data[0].expression_set.length
+      console.log(res.result.data[0].expression_set.length)
+    }
     if(cur_size>=app.globalData.max_exp){
       wx.showToast({
         title: '经验不足',

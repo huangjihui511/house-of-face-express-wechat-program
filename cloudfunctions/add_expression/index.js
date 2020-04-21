@@ -68,7 +68,31 @@ exports.main = async (event, context) => {
     } catch(e) {
       console.log(e)
     }
-  }  else if (request == "add_tag") {
+  }
+  else if(request=="add_user"){
+    var id = event.data1
+
+    try {
+      return await db.collection('user').add({
+        data:{
+          open_id:id
+        }
+      })
+    } catch(e) {
+      console.log(e)
+    }
+  }
+  else if(request=="find_user"){
+    var id = event.data1
+    try {
+      return await db.collection('user').where({
+        open_id:id
+      }).get()
+    } catch(e) {
+      console.log(e)
+    }
+  }
+  else if (request == "add_tag") {
     var name1 = event.data1
 
     try {
