@@ -1,11 +1,6 @@
 {
   "pages": [
-<<<<<<< HEAD
-=======
-    
-    
-    "pages/login/login",
->>>>>>> 342002416396625ca4e21e4f6b2d215e3ffda3f0
+    "pages/team2/favorite_expression/index",
     "pages/shop/shop",
     "pages/login/login",
     "pages/edit_functions/edit_functions",
@@ -15,8 +10,7 @@
     "pages/search/search",
     "pages/mark_expression/mark_expression",
     "pages/logs/logs",
-    "pages/team2/my/index",
-    "pages/team2/favorite_expression/index"
+    "pages/team2/my/index"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -31,22 +25,16 @@
     "backgroundColor": "#ffffff",
     "list": [
       {
-        "pagePath": "pages/main/main",
-        "iconPath": "images/icon_main.png",
-        "selectedIconPath": "images/icon_main_HL.png",
-        "text": "主页_空缺"
+        "pagePath": "pages/team2/favorite_expression/index",
+        "iconPath": "images/icon_component.png",
+        "selectedIconPath": "images/icon_component_HL.png",
+        "text": "主页"
       },
       {
         "pagePath": "pages/edit_functions/edit_functions",
         "iconPath": "images/icon_component.png",
         "selectedIconPath": "images/icon_component_HL.png",
         "text": "编辑"
-      },
-      {
-        "pagePath": "pages/search/search",
-        "iconPath": "images/icon_1.png",
-        "selectedIconPath": "images/icon_1_HL.png",
-        "text": "用户_第二组"
       },
       {
         "pagePath": "pages/shop/shop",

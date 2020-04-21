@@ -30,7 +30,18 @@ Page({
     inputValue: '',
     toSearch: '/images/timg.jfif',
     testButton: '',
-    showPicList: ["/images/test.jpg","/images/test1.jpg"],
+    showPicList: [
+      [
+      {file_id : "cloud://alpha-project-bvqxh.616c-alpha-project-bvqxh-1301841365/test959.jpg"},
+      {file_id : "cloud://alpha-project-bvqxh.616c-alpha-project-bvqxh-1301841365/test959.jpg" },
+      {file_id : "cloud://alpha-project-bvqxh.616c-alpha-project-bvqxh-1301841365/test959.jpg"}
+    ],
+      [
+      {file_id : "cloud://alpha-project-bvqxh.616c-alpha-project-bvqxh-1301841365/test959.jpg"},
+      {file_id :  "cloud://alpha-project-bvqxh.616c-alpha-project-bvqxh-1301841365/test519.jpg"},
+      {file_id : "cloud://alpha-project-bvqxh.616c-alpha-project-bvqxh-1301841365/test7.jpg"}
+    ]
+    ],
     user_rank:5,
     user_exp:20,
     user_openid: '123',
@@ -61,24 +72,44 @@ Page({
     var v = this.data.inputValue
       this.setData({toSearch:v})
       let that = this
+
+    var labels=['label2','label3']
+    var globalPicIndex = 0
       wx.cloud.init()
+
+    for (var i = 0;i < labels.length;i++) {
+      var label = labels[i]
       wx.cloud.callFunction({
       name:"add_expression",
       data:{
         request:"searchByLabel",
         data1:"0d9cdb685e981a3d002f9f6a46bf8d0b",
-        data2:this.data.toSearch
+        data2:label
       },
       success:function(res) {
-        console.log("获取表情成功:",res.result.data)
+      /*  console.log("获取表情成功:",res.result.data)
         var path = res.result.data[0]['file_id']
         console.log("path:",path)
-        that.data.showPicList[0] = path
+        that.data.showPicList[0][0]['file_id'] = path
+        that.data.showPicList[0][1]['file_id'] = path
+        that.data.showPicList[0][2]['file_id'] = path
         that.setData({
           showPicList:that.data.showPicList
         }) 
-        console.log("表情地址:",path)
+        console.log("表情地址:",path) */
+
+        console.log("获取表情成功:",res.result.data)
+        var datas = res.result.data
+        for (var j = 0;j < datas.length;j++) {
+          var path = datas[j]['file_id']
+          console.log("路径:",path)
+          that.data.showPicList[globalPicIndex%2][globalPicIndex%3]['file_id'] = path
+        }
       }
+      }) 
+    }
+    this.setData({
+      showPicList:that.data.showPicList
     })
    /* wx.cloud.callFunction({    
       name: 'login'  

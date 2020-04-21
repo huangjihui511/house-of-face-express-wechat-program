@@ -2,11 +2,17 @@
 <view class="container">
   <view class="userinfo">
     <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
+    <block >
       <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
       <text class="userinfo-nickname">{{userInfo.nickName}}</text>
     </block>
   </view>
-  <image src="{{imagePath}}"></image>
-  <text>路径：{{imagePath}}</text>
+  <view class='content'>
+    <image class="image_show"  src="{{imagePath}}"></image>
+  </view>
+  
+  <text>上传者openid:oCOIC5fjYENaI3jCb8T8JNrt-flk</text>
+  <button class='goodbutton'  hover-class="hover" bindtap="storeImage" data-fileid="{{imagePath}}">收藏</button>
+  <button class='goodbutton'  hover-class="hover" bindtap="download" data-fileid="{{imagePath}}">下载</button>
+  <button class='goodbutton'  hover-class="hover" bindtap="jump2userpage" data-fileid="{{imagePath}}">了解作者的收藏</button>
 </view>
