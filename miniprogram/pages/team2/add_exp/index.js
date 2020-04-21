@@ -11,6 +11,9 @@ Page({
   add(){
     app.globalData.max_exp++;
     console.log(app.globalData.max_exp)
+    wx.redirectTo({
+      url: '../../mark_expression/mark_expression',
+    })
   },
   /**
    * 生命周期函数--监听页面加载
