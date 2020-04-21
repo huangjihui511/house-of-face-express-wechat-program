@@ -29,7 +29,8 @@ Page({
         // })
         this.data.des_list = res.result.data
         this.data.des_time = res.result.data.length
-        console.log(this.data.des_list)
+        console.log("destime")
+        console.log(this.data.des_time)
         this.onShow()
       },
       fail: err => {
@@ -51,7 +52,7 @@ Page({
         console.log(res)
         this.data.tag_list = res.result.data
         this.data.tag_time = res.result.data.length
-        console.log(this.data.tag_list)
+        console.log(this.data.tag_time)
         this.onShow()
       },
       fail: err => {
@@ -74,6 +75,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    console.log("onshow")
     console.log(this.data.des_time)
     while(this.data.des_time == null || this.data.tag_time == null){
       return
@@ -83,12 +85,14 @@ Page({
       wx.navigateTo({
         url: '../add_des/add_des?id=' + this.data.des_list[this.data.des_time].id,
       })
+      return
     }
     if (this.data.tag_time != 0) {
       this.data.tag_time -= 1
       wx.navigateTo({
         url: '../add_tag/add_tag?id=' + this.data.tag_list[this.data.tag_time].id,
       })
+      return
     }
     wx.navigateBack({
       complete: (res) => {},
