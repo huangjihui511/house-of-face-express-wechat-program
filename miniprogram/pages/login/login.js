@@ -63,6 +63,19 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function () {
+    wx.cloud.callFunction({
+      name:"login",
+      success: res => {
+        var open_id = res.result.openid
+        console.log("open_id")
+        console.log(open_id)
+        app.globalData.open_id = open_id
+        // app.setData({
+        //   open_id:open_id
+        // })
+      }
+    })
+    
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

@@ -6,7 +6,8 @@ App({
     userCoin:777,
     fileID: null,
     tempUrl: "http://t7.baidu.com/it/u=3616242789,1098670747&fm=79&app=86&f=JPEG?w=900&h=1350",
-    data:{}
+    data:{},
+    open_id:null
   },
   
   //app 全局属性监听
