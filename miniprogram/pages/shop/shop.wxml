@@ -8,25 +8,26 @@
         <view class="nameAndCoin">
           <view class="nameExp">
             <text class="userName">{{userInfo.nickName}}</text>
+          </view>
+          <view class="Coin">
             <text class="userRank">等级：{{user_rank}}</text>
             <view class="exp_bar" style="width:200rpx;height:30rpx">
               <view class="expBar" style="width:{{(user_exp/user_exp_Upbound)*200}}rpx;height:30rpx"></view>
               <view class="expBar_bg" style="width:{{(1-user_exp/user_exp_Upbound)*200}}rpx;height:30rpx"></view>
+              <text class="expFont">{{user_exp}}/{{user_exp_Upbound}}</text>
             </view>
           </view>
-          <view class="Coin"> 
+          <!--view class="Coin"> 
             <text class="coinAmount">金币余额：{{user_coin}}</text>
-            <!-- <image class="image_coin" src="/images/coin.jpg" ></image>-->
             <view class="coinButtonClass">
               <button class="coinButton" style="width:30rpx" bindtap="bindCoinClick">
                 <image class="image_coin" src="/images/coin.jpg" ></image>
               </button>
             </view>
-             <!--mode='aspectFill'-->
             
-          </view>
+          </view-->
         </view>
-        <view class="userDetail">
+        <!--view class="userDetail">
           <view class="cline"></view>
           <view class="userDetailCell">
             <text class="userDetailText">我的创作</text>
@@ -44,7 +45,7 @@
             <text class="userDetailText">最近使用</text>
           </view>
           <view class="cline"></view>
-        </view>
+        </view-->
       </view>
     </block>
   </view>
@@ -61,7 +62,7 @@
       </button>
     </view>
   </view>
-  <view class="showWhatToSearch">将要搜索：{{toSearch}}</view>
+  <view class="showWhatToSearch">猜你想要：</view>
   <view class="line"></view>
   <view class="picShowList">
     <view class="picShowRow">
@@ -75,6 +76,10 @@
   </view>
 
   <view class="line"></view>
+
+  <button class="uploadimage" bindtap="uploadimage">
+    <text class="上传"></text>
+  </button>
   <view class="page-section">
 
   </view>

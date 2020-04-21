@@ -1,7 +1,7 @@
 // pages/contect/contect.js
 
 wx.cloud.init({
-  env:"pyb-database-n2c6s",traceUser:true
+  env:"alpha-project-bvqxh",traceUser:true
 })
 const db = wx.cloud.database()
 Page({
@@ -84,7 +84,7 @@ chooseImage: function chooseImage(e) {
       wx.cloud.uploadFile({
         cloudPath:'test'+Math.round(Math.random()*1000)+'.jpg',
         filePath:_this.data.image_src,
-        config:"pyb-database-n2c6s",
+        config:"alpha-project-bvqxh",
         success: res => {
           console.log("图片file_id", res.fileID)
           const file1 = res.fileID
