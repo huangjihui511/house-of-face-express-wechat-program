@@ -38,12 +38,47 @@ exports.main = async (event, context) => {
   if (request == "add_tag") {
     var id = event.id
     var tags = event.tags
+    var addr
+    
     for (tag in tags) {
       await db.collection("expression").where({
         id:id
       }).update({
         data: {
           ["tags." + tags[tag]]:_.inc(1)
+        }
+      })
+      
+      // return tag
+      let is_have = await db.collection('tags')
+      .where({
+        name:tags[tag]
+      }).get()
+      console.log("is have")
+      console.log(is_have)
+      if (
+        is_have.data.length == 0
+      ) 
+      {
+        await db.collection('tags').add({
+          data:{
+            name:tags[tag],
+            expression_id:{}
+          }
+        })
+      }
+
+      addr = "expression_id."+id
+      console.log("this is addr")
+      console.log(addr)
+
+      await db.collection('tags')
+      .where({
+        name:tags[tag]
+      })
+      .update({
+        data:{
+          [addr]:_.inc(1)
         }
       })
     }
