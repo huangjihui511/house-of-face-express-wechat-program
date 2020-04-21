@@ -16,6 +16,22 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+    // console.log("search")
+    // wx.cloud.callFunction({
+    //   name:"add_des_tag",
+    //   data:{
+    //     request:"search_by_tag",
+    //     tag_name:"tag1"
+    //   },
+    //   success: res => {
+       
+    //     console.log("suc")
+    //   },
+    //   fail: res => {
+    //     console.log("error")
+    //   }
+    // })
+    return 
     wx.cloud.callFunction({
       name:"add_des_tag",
       data:{

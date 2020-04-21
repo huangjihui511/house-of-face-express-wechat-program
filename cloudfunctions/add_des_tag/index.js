@@ -97,4 +97,12 @@ exports.main = async (event, context) => {
     })
     .get()
   }
+  if (request == "search_by_tag") {
+    var tag_name = event.tag_name
+    return await db.collection("tags")
+    .where({
+      name:tag_name
+    })
+    .get()
+  }
 }
