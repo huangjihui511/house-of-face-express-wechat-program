@@ -54,7 +54,7 @@ Page({
       name:"add_expression",
       data:{
         request:"get_set",
-        data1:"f149f6775e9862590040a95f532f204c",
+        data1:app.globalData.open_id,
       }
     })
     var num = res.result.data[0].expression_set.length
@@ -258,7 +258,7 @@ Page({
           name:"add_expression",
           data:{
             request:"sub_expression",
-            data1:"f149f6775e9862590040a95f532f204c",
+            data1:app.globalData.open_id,
             data2:this.data.images_view_srcs[i]
           }
         })

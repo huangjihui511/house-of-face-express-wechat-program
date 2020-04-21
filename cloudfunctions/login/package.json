@@ -9,6 +9,10 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+<<<<<<< HEAD
+    "wx-server-sdk": "~1.8.3"
+=======
     "wx-server-sdk": "^1.8.3"
+>>>>>>> f309fd6fc4c1c2207ad3286e0ac11515ccfc460a
   }
 }

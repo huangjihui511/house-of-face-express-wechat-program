@@ -2,7 +2,7 @@
 const cloud = require('wx-server-sdk')
 
 cloud.init({
-  env:"alpha-project-bvqxh"
+  env:"pyb-database-n2c6s"
 })
 const db = cloud.database()
 const _ = db.command
@@ -36,7 +36,7 @@ exports.main = async (event, context) => {
     var tags1 = event.data3
     try {
     return await db.collection('user').where({
-      _id:id
+      open_id:id
     }).update({
       data:{
         expression_set:_.push([{file_id:file_id, times:1, tags:tags1, exp:0}])
@@ -111,7 +111,7 @@ exports.main = async (event, context) => {
     var path_file = new Array()
     try{
       var res_file =  db.collection('user').where({
-        _id:user_id
+        open_id:user_id
       }).field({
         expression_set:true
       }).get()
@@ -140,7 +140,7 @@ exports.main = async (event, context) => {
     var expression = event.data2
     try{
       return await db.collection('user').where({
-        _id:user_id
+        open_id:user_id
       }).update({
         data:{
           expression_set:_.pull({
@@ -185,7 +185,7 @@ exports.main = async (event, context) => {
 
     try {
       await db.collection('user').where({
-        _id:id,
+        open_id:id,
         'expression_set.file_id':path
       }).update({
         data:{

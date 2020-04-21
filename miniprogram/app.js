@@ -6,7 +6,9 @@ App({
     userCoin:777,
     fileID: null,
     tempUrl: "http://t7.baidu.com/it/u=3616242789,1098670747&fm=79&app=86&f=JPEG?w=900&h=1350",
-    data:{}
+    data:{},
+    open_id:"1234567890",
+    max_exp:5
   },
   
   //app 全局属性监听
@@ -33,7 +35,7 @@ App({
           //   env 参数决定接下来小程序发起的云开发调用（wx.cloud.xxx）会默认请求到哪个云环境的资源
           //   此处请填入环境 ID, 环境 ID 可打开云控制台查看
           //   如不填则使用默认环境（第一个创建的环境）
-          env: 'alpha-project-bvqxh',
+          env: 'pyb-database-n2c6s',
           traceUser: true,
         })
       }

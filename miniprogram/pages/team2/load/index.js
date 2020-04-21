@@ -1,9 +1,10 @@
 // pages/contect/contect.js
-
+var app=getApp()
 wx.cloud.init({
-  env:"alpha-project-bvqxh",traceUser:true
+  env:"pyb-database-n2c6s",traceUser:true
 })
 const db = wx.cloud.database()
+var app = getApp();
 Page({
   /**
    * 页面的初始数据
@@ -159,7 +160,7 @@ submitted: function submitted(e) {
         data1:"test002",
         data2:this.data.time,
         data3:temp,
-        data4:"open4",
+        data4:app.globalData.open_id,
         data5:this.data.file_id
         //data2:["fun", "wdnmd"]
       },
@@ -173,7 +174,7 @@ submitted: function submitted(e) {
       name:"add_expression",
       data:{
         request:"add_expression",
-        data1:"f149f6775e9862590040a95f532f204c",
+        data1:app.globalData.open_id,
         data2:that.data.file_id,
         data3:temp
         //data3:this.data.labels
@@ -212,7 +213,31 @@ submitted: function submitted(e) {
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
+  onShow:async function () {
+    console.log(app)
+    console.log(app.globalData.open_id)
+    var res = await wx.cloud.callFunction({
+      name:"add_expression",
+      data:{
+        request:"get_set",
+        data1:app.globalData.open_id,
+      }
+    })
+    console.log(res)
+    var cur_size=res.result.data[0].expression_set.length
+    console.log(res.result.data[0].expression_set.length)
+    if(cur_size>=app.globalData.max_exp){
+      wx.showToast({
+        title: '经验不足',
+        icon: 'loading',
+        duration: 2000
+      })
+      setTimeout(function () {
+        wx.redirectTo({
+          url: '../add_exp/index',
+        })
+      }, 1000) 
+    }
   },
   /**
    * 生命周期函数--监听页面隐藏

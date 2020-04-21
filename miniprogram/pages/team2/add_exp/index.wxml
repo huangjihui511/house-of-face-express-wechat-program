@@ -1,0 +1,2 @@
+<!--pages/team2/add_exp/index.wxml-->
+<button bindtap="add">点我加经验，点一次加一张图片内存</button>
