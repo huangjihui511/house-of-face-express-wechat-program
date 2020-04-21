@@ -65,11 +65,11 @@
   <view class="showWhatToSearch">猜你想要：</view>
   <view class="line"></view>
   <view class="picShowList">
-    <view class="picShowRow">
+    <view class="picShowRow" wx:for="{{showPicList}}" wx:for-index="index">
       <!--view wx:for="{{showPicList}}" wx:for-item="item" wx:key="*this"-->
-        <button class="buttonImage" wx:for="{{showPicList}}" wx:for-item="item" wx:key="*this"
-           bindtap="shop_image_pagejump" data-image="{{item}}">
-          <image class='image_search' src="{{item}}"></image>
+        <button class="buttonImage" wx:for="{{showPicList[index]}}" wx:for-item="item" wx:key="*this"
+           bindtap="shop_image_pagejump" data-image="{{item}}" data-fileid='{{item.file_id}}'>
+          <image class='image_search' src="{{item.file_id}}"></image>
         </button>
       <!--/view-->
     </view> 

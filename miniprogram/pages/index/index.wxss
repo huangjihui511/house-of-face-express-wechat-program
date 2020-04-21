@@ -1,4 +1,31 @@
 /**index.wxss**/
+
+.goodbutton {  
+  margin-top: 30px; 
+  width: 80%;  
+  background-color: rgb(252, 126, 67);  
+  color: white;  
+  border-radius: 98rpx;  
+  background: bg_red;
+} /* 按下变颜色 */
+  
+.hover {  
+  background:  rgb(236, 179, 156);
+}
+
+
+.image_show{
+  width: 300rpx;
+  height: 300rpx;
+  border: tomato;
+  border-radius: 10%;
+}
+
+.content{
+  display:flex;                    
+ justify-content: center; 
+}
+
 .userinfo {
   display: flex;
   flex-direction: column;

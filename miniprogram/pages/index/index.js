@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
+const db = wx.cloud.database()
 //var path = require('app.js')
 Page({
   data: {
@@ -8,7 +9,9 @@ Page({
     userInfo: {},
     hasUserInfo: false,
     imagePath: '',
-    canIUse: wx.canIUse('button.open-type.getUserInfo')
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
+    uploaduser: ''
+
   },
   //事件处理函数
   bindViewTap: function() {
@@ -25,13 +28,13 @@ Page({
       imagePath : value.imagePath
     });
   },
-  onLoad: function () {
+  onLoad: function (option) {
    // var app = getApp()
-    console.log("indexVisitGlobal"+app.globalData.imagePath)
+    console.log(option)
     this.setData({
-      imagePath : app.globalData.imagePath
+      imagePath : option.url
     })
-    
+
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -58,6 +61,15 @@ Page({
         }
       })
     }
+
+    db.collection('expression').where({
+      file_id: this.data.imagePath
+    }).get().then(res=>{
+      this.setData({
+        uploaduser: res.data[0].openid
+      })
+      console.log(this.data.uploaduser)
+    })
   },
   getUserInfo: function(e) {
     console.log(e)
@@ -66,5 +78,66 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
-  }
+  },
+  //下载图片
+  download(e) {
+    let fileUrl = e.currentTarget.dataset.fileid
+    wx.cloud.downloadFile({
+      fileID: fileUrl,
+      success: res => {
+        console.log('下载成功', res)
+        this.saveImage(res.tempFilePath)
+      },
+      fail: res => {
+        console.log('下载失败', res)
+      }
+    })
+  },
+  // 保存图片到相册
+  saveImage(imgUrl){
+    wx.saveImageToPhotosAlbum({
+      filePath:imgUrl,
+      success(res) {
+        wx.showToast({                
+          title: '下载成功',                
+          icon: 'success',                
+          duration: 1500,                
+          mask: false,             
+        })
+      },
+      fail(res) {
+        console.log('保存失败', res)
+      }
+    })
+  },
+  //收藏图片
+  storeImage(e){
+    const _ = db.command
+    var temp_image = {
+      file_id: e.currentTarget.dataset.fileid
+    }
+    console.log(imageUrl)
+    var userid = "d77a8c995e98146b00290cf74a98c9cb"
+    db.collection('user').doc('d77a8c995e98146b00290cf74a98c9cb').update({
+      data:{
+        expression_set: _.push(temp_image)
+      }
+    }).then(res=>{
+      console.log(res.data)
+      wx.showToast({                
+        title: '收藏成功',                
+        icon: 'success',                
+        duration: 1500,                
+        mask: false,             
+      })
+   	})
+  },
+  jump2userpage:function(e) {
+    var app = getApp()
+    console.log(e)
+    // app.globalData.data = {'imagepath':imagepath}
+    wx.navigateTo({
+      url: '/pages/userpage/userpage?upload='+this.data.uploaduser
+    })
+  },
 })
