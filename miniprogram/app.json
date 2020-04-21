@@ -1,12 +1,7 @@
 {
   "pages": [
-<<<<<<< HEAD
-    "pages/team2/favorite_expression/index",
-=======
     
-    "pages/mark_expression/mark_expression",
     "pages/login/login",
->>>>>>> b6885ffe690be322863b967cd664e3fb3e222d4b
     "pages/shop/shop",
     "pages/edit_functions/edit_functions",
     "pages/add_des/add_des",
@@ -14,13 +9,9 @@
     "pages/index/index",
     "pages/search/search",
     "pages/logs/logs",
-<<<<<<< HEAD
-    "pages/team2/my/index"
-=======
     "pages/team2/my/index",
     "pages/team2/favorite_expression/index",
     "pages/team2/add_exp/index"
->>>>>>> b6885ffe690be322863b967cd664e3fb3e222d4b
   ],
   "window": {
     "backgroundTextStyle": "light",
