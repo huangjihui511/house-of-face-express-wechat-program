@@ -2,7 +2,25 @@
 <view class="canvasView">
   <canvas
     canvas-id="fliter"
-    style="width={{cWidth}}px; height={{cHeight}}px"
-  ></canvas>
+    style="width: {{cWidth}}px; height: {{cHeight}}px;"
+  />
+</view>
+<view class="canvasView">
+  <canvas
+    canvas-id="fliterOut"
+    style="width: {{cWidth}}px; height: {{cHeight}}px;"
+  />
+</view>
+
+<view class="bottom">
+  <block wx:for="{{fliterArr}}">
+    <view class="list-item" data-type="{{item.type}}" style="background: {{item.background}}" bindtap="tapBtn"></view>
+  </block>
+</view>
+
+<view class='btnView' style='height:60px'>
+  <button class='addTextBtn' type='primary' disabled = '{{canAdd}}'  bindtap='onExport'>
+    保存
+  </button>
 </view>
 

@@ -5,7 +5,24 @@ Page({
    * 页面的初始数据
    */
   data: {
-    fliterArr: ['灰度', '黑白', '反相', '像素'],
+    fliterArr: [
+      {
+        type: '灰度',
+        background: 'url("../../images/hd.png") white no-repeat; background-size: 20px 20px;background-position: 2px 2px;'
+      },
+      {
+        type: '黑白',
+        background: 'url("../../images/hb.png") white no-repeat; background-size: 20px 20px;background-position: 2px 2px;'
+      },
+      {
+        type: '反相',
+        background: 'url("../../images/fx.png") white no-repeat; background-size: 20px 20px;background-position: 2px 2px;'
+      },
+      {
+        type: '像素',
+        background: 'url("../../images/xs.png") white no-repeat; background-size: 20px 20px;background-position: 2px 2px;'
+      }
+    ],
     cWidth: 0,
     cHeight: 0
   },
@@ -24,19 +41,11 @@ Page({
         let width = wx.getSystemInfoSync().windowWidth
         var rate = res.height / res.width
         var height = 600 * width / 750
-        console.log(width)
-        console.log(height)
-        console.log(res.width)
-        console.log(res.height)
         if (res.width / res.height > 750 / 600) {
-          console.log(1)
           height = Math.trunc(width * rate)
         } else {
-          console.log(2)
           width = Math.trunc(height / rate)
         }
-        console.log(width)
-        console.log(height)
         that.setData({
           cWidth: width,
           cHeight: height,
@@ -46,7 +55,6 @@ Page({
         ctx.draw(false, wx.canvasToTempFilePath({
           canvasId: 'fliter',
           success (res) {
-            console.log(1111111)
             console.log(res.tempFilePath)
           }
         }))
@@ -54,17 +62,141 @@ Page({
     })
   },
 
-  slcFilter: function (e) {
-    switch (e.target.dataset) {
+  filter(type) {
+    let that = this
+    wx.canvasGetImageData({
+      canvasId: 'fliter',
+      x: 0,
+      y: 0,
+      width: that.data.cWidth,
+      height: that.data.cHeight,
+      success(result) {
+        let data = result.data;
+        switch (type) {
+          case 'hd':
+            console.log(111222)
+            for (let i = 0; i < result.width * result.height;i++){
+              //********************只有这里有区别****************************
+                let R = data[i * 4 + 0];
+                let G = data[i * 4 + 1];
+                let B = data[i * 4 + 2];
+                let grey = R * 0.3 + G * 0.59 + B * 0.11;
+                data[i * 4 + 0] = grey;
+                data[i * 4 + 1] = grey;
+                data[i * 4 + 2] = grey;
+              //********************只有这里有区别****************************
+              }
+            break
+          case 'hb':
+            for (let i = 0; i < result.width * result.height;i++){
+              //********************只有这里有区别****************************
+                let R = data[i * 4 + 0];
+                let G = data[i * 4 + 1];
+                let B = data[i * 4 + 2];
+                let grey = R * 0.3 + G * 0.59 + B * 0.11;
+                if (grey > 125){
+                  grey=255;
+                } else { 
+                  grey = 0;
+                } 
+                data[i * 4 + 0] = grey;
+                data[i * 4 + 1] = grey;
+                data[i * 4 + 2] = grey;
+              //********************只有这里有区别****************************
+              }
+            break
+          case 'fx':
+            for (let i = 0; i < result.width * result.height;i++){
+              //********************只有这里有区别****************************
+                let R = data[i * 4 + 0];
+                let G = data[i * 4 + 1];
+                let B = data[i * 4 + 2];
+                data[i * 4 + 0] = 255-R;
+                data[i * 4 + 1] = 255-G;
+                data[i * 4 + 2] = 255-B;
+              //********************只有这里有区别****************************
+              }
+            break
+          case 'xs':
+            const size = 10;
+            const totalnum = size*size;
+            for(let i=0;i<result.height;i+=size){
+              for(let j=0;j<result.width;j+=size){
+                var totalR=0,totalG=0,totalB=0;
+                for(let dx=0;dx<size;dx++){
+                  for(let dy=0;dy<size;dy++){
+                    var x = i+dx;
+                    var y = j+dy;
+                    var p = x * result.width + y;
+                    totalR += data[p * 4 + 0];
+                    totalG += data[p * 4 + 1];
+                    totalB += data[p * 4 + 2];
+                  }
+                }
+                var p = i * result.width + j;
+                var resR = totalR / totalnum;
+                var resG = totalG / totalnum;
+                var resB = totalB / totalnum;
+                for (let dx = 0; dx < size; dx++){
+                  for (let dy = 0; dy < size; dy++) {
+                    var x = i + dx;
+                    var y = j + dy;
+                    var p = x * result.width + y;
+                    data[p * 4 + 0] = resR;
+                    data[p * 4 + 1] = resG;
+                    data[p * 4 + 2] = resB;
+                  }
+                }
+              }
+            }
+            break
+        }
+        wx.canvasPutImageData({
+          canvasId: 'fliterOut',
+          x: 0,
+          y: 0,
+          width: that.data.cWidth,
+          height: that.data.cHeight,
+          data: data,
+          success(res) { 
+            console.log(res)
+          }
+        })
+      }
+    })
+  },
+
+  tapBtn: function(e) {
+    let btnType = e.target.dataset.type
+    switch (btnType) {
       case '灰度':
+        this.filter('hd')
         break
       case '黑白':
+        this.filter('hb')
         break
       case '反相':
+        this.filter('fx')
         break
-      case '模糊':
+      case '像素':
+        this.filter('xs')
         break
     }
+  },
+
+  onExport() {
+    wx.canvasToTempFilePath({
+      canvasId: 'fliterOut',
+      success(res) {
+        var pages = getCurrentPages()
+        pages[pages.length-2].setData({
+          curImage: res.tempFilePath
+        })
+        wx.showToast({
+          title: '保存成功',
+        })
+      }
+    })
   },
 
   /**
