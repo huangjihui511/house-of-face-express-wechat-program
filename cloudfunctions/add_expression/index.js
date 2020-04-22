@@ -75,7 +75,8 @@ exports.main = async (event, context) => {
     try {
       return await db.collection('user').add({
         data:{
-          open_id:id
+          open_id:id,
+          exp:0
         }
       })
     } catch(e) {

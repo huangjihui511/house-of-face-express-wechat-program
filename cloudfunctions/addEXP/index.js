@@ -1,9 +1,11 @@
 // 云函数入口文件
 const cloud = require('wx-server-sdk')
 
-cloud.init()
+cloud.init({
+  env:"pyb-database-n2c6s"
+})
 
-const db = wx.cloud.database()
+const db = cloud.database()
 const _ = db.command
 //传入两个参数 id（用户id），incNum（增加数量）
 // 云函数入口函数
