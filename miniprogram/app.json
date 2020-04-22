@@ -1,5 +1,6 @@
 {
   "pages": [
+    
     "pages/login/login",
     "pages/shop/shop",
     "pages/edit_functions/edit_functions",
@@ -14,7 +15,9 @@
     "pages/photoCombine/photoCombine",
     "pages/wordCombine/wordCombine",
     "pages/paint/paint",
+    "pages/feedback/feedback",
     "pages/fliter/fliter"
+    
   ],
   "window": {
     "backgroundTextStyle": "light",
