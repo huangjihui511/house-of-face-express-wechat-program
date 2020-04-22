@@ -33,6 +33,74 @@ data: {
   image_src:"",
   time:"",
 },
+two2one(a) {
+  let _this = this
+  let that = this
+  var imgs = ['',"../../../images/team2/code.jpg"]
+      imgs[0]=a
+      console.log(imgs[0])
+      const ctx = wx.createCanvasContext("myCanvas", _this)
+      var imgH1,imgW1,imgH2,imgW2,imgPath1,imgPath2
+      wx.getImageInfo({
+        src: imgs[0],
+        success: function(res) {
+          imgW1 = res.width
+          imgH1 = res.height
+          imgPath1 = res.path
+          wx.getImageInfo({
+            src: imgs[1],
+            success: function(res) {
+              imgW2 = res.width
+              imgH2 = res.height
+              imgPath2 = res.path
+              that.setData({
+                canvasHeight: imgH1+imgH2/imgW2*imgW1,
+                canvasWidth: imgW1
+              })
+              ctx.drawImage(imgPath1, 0, 0, imgW1, imgH1)
+              ctx.drawImage(imgPath2, 0, imgH1, imgW1, imgH2/imgW2*imgW1)
+              let canvasHeight="canvasHeight"
+              let canvasWidth="canvasWidth"
+              _this.setData({
+                [canvasHeight]:imgH1+imgH2/imgW2*imgW1,
+                [canvasWidth]:imgW1
+              })
+              ctx.draw()
+              console.log(ctx)
+              setTimeout(() => {wx.canvasToTempFilePath({
+                canvasId: 'myCanvas',
+                success: function(res) {
+                  console.log("合成的带有小程序码的图片success》》》", res.tempFilePath)
+                  let image_src="image_src"
+                  _this.setData({
+                    [image_src]:res.tempFilePath
+                  })
+                  wx.cloud.uploadFile({
+                    cloudPath:'test'+Math.round(Math.random()*1000)+'.jpg',
+                    filePath:res.tempFilePath,
+                    config:"pyb-database-n2c6s",
+                    success: res => {
+                      console.log("图片file_id", res.fileID)
+                      const file1 = res.fileID
+                      let file2 = "file_id"
+                      _this.setData({
+                        [file2]:file1,
+                      })
+                      wx.showToast({
+                        title: '上传成功',
+                        icon: 'success',
+                        duration: 1000  
+                      })
+                    },
+                    fail: console.error
+                  })
+                }
+              })},1500)
+          }
+        })
+        }
+      })
+},
 checkboxChange(e){
   console.log('checkboxChange e:',e);
   let string = "label_list["+e.currentTarget.dataset.index+"].selected"
@@ -50,8 +118,7 @@ checkboxChange(e){
         [flags]: detailValue
     })
 },
-
-chooseImage: function chooseImage(e) {
+chooseImage: async function chooseImage(e) {
   let file3 = "before_file_id"
   this.setData({
     [file3]:this.data.file_id,
@@ -65,41 +132,16 @@ chooseImage: function chooseImage(e) {
     success(res) {
       console.log('chooseImage success, temp path is', res.tempFilePaths[0])
       let empty='empty'
-      let src="image_src"
-      _this.setData({
-        [empty]:false,
-        [src]:res.tempFilePaths[0]
-      })
-      var timestamp =new Date();
       let cu_time="time"
       _this.setData({
-        [cu_time]:timestamp
+        [empty]:false,
+        [cu_time]:new Date()
       })
-      console.log("上传时间"+_this.data.time)
-      console.log("图片地址"+_this.data.image_src)
+      _this.two2one(res.tempFilePaths[0])
       wx.showToast({
         title: '请等待',
         icon: 'loading',
-        duration: 1000
-      })
-      wx.cloud.uploadFile({
-        cloudPath:'test'+app.globalData.open_id+Math.round(Math.random()*10000)+'.jpg',
-        filePath:_this.data.image_src,
-        config:"alpha-project-bvqxh",
-        success: res => {
-          console.log("图片file_id", res.fileID)
-          const file1 = res.fileID
-          let file2 = "file_id"
-          _this.setData({
-            [file2]:file1,
-          })
-          wx.showToast({
-            title: '上传成功',
-            icon: 'success',
-            duration: 1000  
-          })
-        },
-        fail: console.error
+        duration: 2000
       })
     },
     fail({errMsg}) {
@@ -124,8 +166,7 @@ submitted: function submitted(e) {
   if(this.data.file_id==this.data.before_file_id){
     return
   }
-  var that = this;
-  if(this.data.image_src==""){
+  if(this.data.file_id==""){
     wx.showToast({
       title: '提交失败',
       icon: 'loading',
@@ -152,7 +193,7 @@ submitted: function submitted(e) {
     for(j=0;j<this.data.labels.length;j++){
       temp.push({name:this.data.labels[j],num:0})
     }
-    console.log(temp)
+    console.log(app.globalData.open_id)
     wx.cloud.callFunction({
       name:"add_expression",
       data:{

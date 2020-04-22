@@ -23,7 +23,10 @@
     <button class="weui-btn" type="primary" bindtap="chooseImage">上传图片</button>
   </view>
    <text>\n</text>
+   <view class="{{empty?'empty':'image'}}" style="width:0px;height:0px;overflow:hidden;">
+    <canvas style="width:{{canvasWidth}}px; height:{{canvasHeight}}px;" canvas-id="myCanvas"></canvas>
+   </view>
    <view class="{{empty?'empty':'image'}}">
-    <image src="{{image_src}}"></image>
-  </view>
+      <image src="{{image_src}}"></image>
+   </view>
 </view>
