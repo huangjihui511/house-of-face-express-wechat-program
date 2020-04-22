@@ -1,0 +1,54 @@
+.failText {
+  margin-top: 200rpx;
+  text-align: center;
+  color: #888;
+}
+
+.bottom {
+  width: 750rpx;
+  height: 100rpx;
+  position: absolute;
+  bottom: 0;
+  display: flex;
+  justify-content: space-around;
+}
+
+.list-item {
+  width: 60rpx;
+  height: 60rpx;
+  margin: 20rpx 0;
+  border-radius: 50%;
+}
+
+.choose-box {
+  width: 750rpx;
+  position: absolute;
+  bottom: 100rpx;
+}
+
+.color-box {
+  width: 375rpx;
+  margin: auto;
+}
+
+.slider {
+  margin: auto;
+}
+
+.choose-box-flex {
+  display: flex;
+  justify-content: space-around;
+  width: 750rpx;
+  position: absolute;
+  bottom: 100rpx;
+  font-size: 32rpx;
+  color: #666;
+  text-align: center;
+}
+.choose-img {
+  width: 60rpx;
+  height: 60rpx;
+  margin: 20rpx;
+  border-radius: 50%;
+  background: white;
+}

@@ -1,8 +1,16 @@
 /* pages/edit_functions/edit_functions.wxss */
 
+.canvasView {
+  width: 750rpx;
+  height: var(--height--);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .bottom {
   width: 750rpx;
-  height: 100rpx;
+  height: 20 px;
   position: absolute;
   bottom: 0;
   display: flex;
@@ -37,8 +45,9 @@
 }
 
 .chooseColorView{
-  margin-top: 8px;
+  margin-top: auto;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;
   width: 100%;
@@ -49,6 +58,10 @@
   width: 30px;
   height: 30px;
   border-radius: 15px;
+}
+
+.avatarView{
+  width: 20%;
 }
 
 .addTextBtn{

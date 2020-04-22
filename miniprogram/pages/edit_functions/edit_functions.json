@@ -1,7 +1,7 @@
 {
   "usingComponents": {
-    "mp-icon": "../../icon/icon",
-    "canvas-drag": "/components/canvas-drag/index",
-    "mp-halfScreenDialog": "../../components/half-screen-dialog/half-screen-dialog"
+    
+    "mp-halfScreenDialog": "../../ui-dist/half-screen-dialog/half-screen-dialog",
+    "i-avatar": "../../ui-dist/avatar/index"
   }
 }

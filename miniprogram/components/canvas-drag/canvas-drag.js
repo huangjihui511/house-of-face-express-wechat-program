@@ -33,6 +33,7 @@ CanvasDrag.changFontColor = (color) => {
     } else {
         return CanvasDrag().changColor(color);
     }
+    console.log(color)
 }
 
 CanvasDrag.changeBgColor = (color) => {

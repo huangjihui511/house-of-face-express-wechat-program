@@ -10,7 +10,11 @@
     "pages/logs/logs",
     "pages/team2/my/index",
     "pages/team2/favorite_expression/index",
-    "pages/team2/add_exp/index"
+    "pages/team2/add_exp/index",
+    "pages/photoCombine/photoCombine",
+    "pages/wordCombine/wordCombine",
+    "pages/paint/paint",
+    "pages/fliter/fliter"
   ],
   "window": {
     "backgroundTextStyle": "light",

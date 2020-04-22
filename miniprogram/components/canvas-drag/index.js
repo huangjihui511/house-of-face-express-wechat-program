@@ -1,33 +1,31 @@
 // components/canvas-drag/index.js
-class dragGraph {
-    constructor({ x, y, w, h, type, text, fontSize = 20, color = 'black', url }, canvas, factor) {
-        if (type === 'text') {
-            canvas.setFontSize(fontSize);
-            const textWidth = canvas.measureText(this.text).width;
-            const textHeight = fontSize + 10;
-            const halfWidth = textWidth / 2;
-            const halfHeight = textHeight / 2;
-            this.x = x + halfWidth;
-            this.y = y + halfHeight;
-        }
-        else {
-            this.x = x;
-            this.y = y;
-        }
-        this.w = w;
-        this.h = h;
-        this.fileUrl = url;
-        this.text = text;
-        this.fontSize = fontSize;
-        this.color = color;
-        this.ctx = canvas;
-        this.rotate = 0;
-        this.type = type;
-        this.selected = true;
-        this.factor = factor;
-        this.MIN_WIDTH = 50;
-        this.MIN_FONTSIZE = 10;
+const dragGraph = function ({ x, y, w, h, type, text, fontSize = 20, color = 'black', url }, canvas, factor) {
+    if (type === 'text') {
+        canvas.setFontSize(fontSize);
+        const textWidth = canvas.measureText(this.text).width;
+        const textHeight = fontSize + 10;
+        const halfWidth = textWidth / 2;
+        const halfHeight = textHeight / 2;
+        this.x = x + halfWidth;
+        this.y = y + halfHeight;
+        this.selected = true
+    } else {
+        this.x = 0;
+        this.y = 0;
     }
+    this.w = w;
+    this.h = h;
+    this.fileUrl = url;
+    this.text = text;
+    this.fontSize = fontSize;
+    this.color = color;
+    this.ctx = canvas;
+    this.rotate = 0;
+    this.type = type;
+    this.selected = true;
+    this.factor = factor;
+    this.MIN_WIDTH = 50;
+    this.MIN_FONTSIZE = 10;
 }
 
 dragGraph.prototype = {
@@ -57,7 +55,7 @@ dragGraph.prototype = {
         if (this.type === 'text') {
             this.ctx.fillText(this.text, this.x, this.y);
         } else if (this.type === 'image') {
-            this.ctx.drawImage(this.fileUrl, this.x, this.y, this.w, this.h);
+            this.ctx.drawImage(this.fileUrl, 0, 0, this.w, this.h);
         }
         // 如果是选中状态，绘制选择虚线框，和缩放图标、删除图标
         if (this.selected) {
@@ -289,8 +287,8 @@ Component({
             this.drawArr.push(new dragGraph(Object.assign({
                 x: 30,
                 y: 30,
-            }, n), this.ctx, this.factor))
-            this.draw()
+            }, n), this.ctx, this.factor));
+            this.draw();
         },
         draw() {
             if (this.data.bgImage !== '') {
@@ -315,7 +313,7 @@ Component({
             const { x, y } = e.touches[0];
             this.tempGraphArr = [];
             this.drawArr && this.drawArr.forEach((item, index) => {
-                item.selected = false
+                item.selected = false;
                 const action = item.isInGraph(x, y);
                 if (action) {
                     if (action === 'del') {
@@ -327,6 +325,7 @@ Component({
                         this.tempGraphArr.push(item);
                         // 保存点击时的坐标
                         this.currentTouch = { x, y };
+
                     }
                 }
             });
@@ -375,6 +374,7 @@ Component({
                 selected[0].color = color;
             }
             this.draw();
+            console.log(222)
         },
         changeBgColor(color) {
             this.data.bgImage = '';

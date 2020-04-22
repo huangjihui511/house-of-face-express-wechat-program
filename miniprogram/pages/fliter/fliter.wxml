@@ -1,0 +1,8 @@
+<!--miniprogram/pages/fliter/fliter.wxml-->
+<view class="canvasView">
+  <canvas
+    canvas-id="fliter"
+    style="width={{cWidth}}px; height={{cHeight}}px"
+  ></canvas>
+</view>
+

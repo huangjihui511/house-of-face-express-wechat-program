@@ -1,8 +1,6 @@
 // pages/edit_functions/edit_functions.js
 const app = getApp()
-
-const SW = 750
-const SH = Math.trunc(SW * wx.getSystemInfoSync().windowHeight / wx.getSystemInfoSync().windowWidth)
+const RATE = wx.getSystemInfoSync().windowWidth / 750
 
 Page({
 
@@ -10,8 +8,11 @@ Page({
    * 页面的初始数据
    */
   data: {
+    CVW: wx.getSystemInfoSync().windowWidth,
+    CVH: Math.trunc(wx.getSystemInfoSync().windowHeight - 89),
     cWidth: 0,
     cHeight: 0, // canvas的完整高度
+    curImage: '',
     textToPrint:'',
     btnInfo: [
       {
@@ -23,8 +24,12 @@ Page({
         background: 'url("../../images/paint.png") white no-repeat; background-size: 20px 20px;background-position: 2px 2px;'
       },
       {
-        type: 'fliter',
+        type: 'filter',
         background: 'url("../../images/fliter.png") white no-repeat; background-size: 20px 20px;background-position: 2px 2px;'
+      },
+      {
+        type: 'joint',
+        background: 'url("../../images/joint.png") white no-repeat; background-size: 20px 20px;background-position: 2px 2px;'
       },
       {
         type: 'save',
@@ -34,6 +39,9 @@ Page({
     text: false,
     maxLen: false,
     paint: false,
+    filter: false,
+    joint: false,
+    save: false,
     r: 33,
     g: 33,
     b: 33,
@@ -41,43 +49,36 @@ Page({
     colorArrF: ['black', 'whitesmoke', 'red', 'orange', 'yellow'],
     colorArrS: ['green', 'blue', 'cyan', 'purple', 'gray'],
     currentColor: 'black',
+    fliterArr: ['模糊', '暗化', '淡化', '阴影', '灰度']
   },
 
   onTabItemTap() {
     let that = this
-    wx.getSystemInfo({
-      success (res) {
-        that.setData({
-          cWidth: res.windowWidth,
-          cHeight: Math.trunc((SH - 100) / SH * res.windowHeight),
-        })
-      }
-    })
     wx.chooseImage({
       count: 1,
       sizeType: ['original'],
       sourceType: ['album', 'camera'],
       success (res) {
-        console.log(res.tempFilePaths[0])
         wx.getImageInfo({
           src: res.tempFilePaths[0],
           success (res) {
-            console.log(res.path)
             let width = 0
             let height = 0
-            let ctx = wx.createCanvasContext('edit')
-            if (res.width > res.height) {
-              width = that.data.cWidth-10
+            if (res.width / (that.data.CVW - 10) > res.height / (that.data.CVH - 10)) {
+              width = that.data.CVW - 10
               height = Math.trunc(res.height/res.width*width)
-              ctx.drawImage(res.path, 5, (that.data.cHeight-height)/2, width, height)
             } else {
-              height = that.data.cHeight-10
+              height = that.data.CVH - 10
               width = Math.trunc(res.width/res.height*height)
-              ctx.drawImage(res.path, (that.data.cWidth-width)/2, 5, width, height)
             }
+            that.setData({
+              cWidth: width,
+              cHeight: height,
+              curImage: res.path
+            })
+            let ctx = wx.createCanvasContext('edit')
+            ctx.drawImage(res.path, 0, 0, width, height)
             ctx.draw()
-            console.log(width)
-            console.log(height)
           },
           fail(err){
             console.log(err)
@@ -87,96 +88,89 @@ Page({
     })
   },
 
-  onAddText() {
-  },
-
-    /**
-   * 选择第一行的颜色
-   */
-  chooseColorF(e) {
-    console.log(e)
-    let indexNum = e.currentTarget.id
-    console.log(indexNum)
-    var that = this
-    that.setData({
-      currentColor: indexNum
-    })
-    console.log(this.data.currentColor)
-  },
-
-  /**
-   * 选择第二行的颜色
-   */
-  chooseColorS(e) {
-    let indexNum = e.currentTarget.id
-    this.setData({
-      currentColor: indexNum
-    })
-    CanvasDrag.changFontColor(indexNum);
-  },
-
-  touchStart: function() {
-    this.setData({
-      text: false,
-      paint: false,
-    })
-  },
-
   tapBtn: function(e) {
     let btnType = e.target.dataset.type
     switch (btnType) {
       case 'text':
         this.setData({
           text: !this.data.text,
-          paint: false
+          paint: false,
+          filter: false,
+          joint: false,
+          save: false
+        })
+        wx.navigateTo({
+          url: '../wordCombine/wordCombine',
         })
         break;
       case 'paint':
         this.setData({
           text: false,
           paint: !this.data.paint,
+          filter: false,
+          joint: false,
+          save: false
         })
+        wx.navigateTo({
+          url: '../paint/paint?image=' + this.data.curImage,
+        })
+        break
+      case 'filter':
+        this.setData({
+          text: false,
+          paint: false,
+          filter: !this.data.filter,
+          joint: false,
+          save:false
+        })
+        wx.navigateTo({
+          url: '../fliter/fliter',
+        })
+        break
+      case 'joint':
+        this.setData({
+          text: false,
+          paint: false,
+          filter: false,
+          joint: !this.data.joint,
+          save: false
+        })
+        this.jointTap()
+        break
+      case 'save':
+        this.setData({
+          text: false,
+          paint: false,
+          filter: false,
+          joint: false,
+          save: !this.data.save
+        })
+        break
     }
   },
 
-  changeColor: function(e) {
-    let temp = {}
-    temp[e.target.dataset.color] = e.detail.value
-    this.setData({
-      ...temp,
+  jointTap() {
+    let that = this
+    wx.chooseImage({
+      count: 8,
+      success: function (res) {
+        let tempFilePaths = res.tempFilePaths
+        tempFilePaths.unshift(that.data.curImage)
+        var imagesArrJson = JSON.stringify(tempFilePaths);
+        wx.navigateTo({
+          url: '/pages/photoCombine/photoCombine?imageUrls=' + imagesArrJson,
+        })
+      },
     })
   },
 
-  changeWidth: function(e) {
+  touchStart: function() {
     this.setData({
-      w: e.detail.value,
-    })
-  },
-
-  textFinish(e) {
-    let text = e.detail.value
-    if(text.length > 0){
-      this.setData({
-        maxLen: true
-      })
-    } else {
-      this.setData({
-        maxLen: false
-      })
-    }
-    this.setData({
-      textToPrint: text
-    })
-  },
-
-  onAddText() {
-  },
-
-  chooseColor(e) {
-    console.log(e)
-    let indexNum = e.currentTarget.id
-    this.setData({
-      currentColor: indexNum
+      text: false,
+      paint: false,
+      filter: false,
+      joint: false,
+      save: false
     })
   },
 
