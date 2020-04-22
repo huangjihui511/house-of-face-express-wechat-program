@@ -70,15 +70,17 @@ Page({
   
   confirm: function() {
     var v = this.data.inputValue
-      this.setData({toSearch:v})
-      let that = this
+    this.setData({toSearch:v})
+    let that = this
 
     var labels=['label2','label3']
     var globalPicIndex = 0
-      wx.cloud.init()
-
+    wx.cloud.init()
+    //索引方式
+    var judge = 1
     for (var i = 0;i < labels.length;i++) {
       var label = labels[i]
+      if (judge == 1) {
       wx.cloud.callFunction({
       name:"add_expression",
       data:{
@@ -87,26 +89,46 @@ Page({
         data2:label
       },
       success:function(res) {
-      /*  console.log("获取表情成功:",res.result.data)
-        var path = res.result.data[0]['file_id']
-        console.log("path:",path)
-        that.data.showPicList[0][0]['file_id'] = path
-        that.data.showPicList[0][1]['file_id'] = path
-        that.data.showPicList[0][2]['file_id'] = path
-        that.setData({
-          showPicList:that.data.showPicList
-        }) 
-        console.log("表情地址:",path) */
-
         console.log("获取表情成功:",res.result.data)
         var datas = res.result.data
         for (var j = 0;j < datas.length;j++) {
           var path = datas[j]['file_id']
           console.log("路径:",path)
           that.data.showPicList[globalPicIndex%2][globalPicIndex%3]['file_id'] = path
+          globalPicIndex++
         }
       }
       }) 
+      }
+      else if (judge == 2) {
+        wx.cloud.callFunction({
+          name:"add_des_tag",
+          data:{
+            request:"search_by_tag",
+            tag_name:label
+          },
+          success:res=>{
+            var datas = res.result.data
+            console.log("获取表情成功2:",datas)
+            for (var j = 0;j < datas.length;j++) {
+              var expression_ids = datas[j]['expression_id']
+             // console.log("路径:",path)
+             for(var key in expression_ids)  {
+               var path
+              db.collection('expression').where({
+               id: key
+              }).get().then(res2=>{
+                console.log(res2)
+                path = res2[0]['file_id']
+                console.log("路径:",path)
+              })
+              that.data.showPicList[globalPicIndex%2][globalPicIndex%3]['file_id'] = path
+              globalPicIndex++
+            }
+            }
+          }
+        })
+      }
     }
     this.setData({
       showPicList:that.data.showPicList
