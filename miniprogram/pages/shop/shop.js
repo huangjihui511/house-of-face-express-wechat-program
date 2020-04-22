@@ -80,7 +80,13 @@ Page({
     var judge = 1
     for (var i = 0;i < labels.length;i++) {
       var label = labels[i]
+      console.log(label)
       if (judge == 1) {
+        db.collection('user').get({
+          success:function(res) {
+            console.log("测试成功：",res)
+          }
+        })
       wx.cloud.callFunction({
       name:"add_expression",
       data:{
