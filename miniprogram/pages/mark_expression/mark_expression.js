@@ -31,7 +31,7 @@ Page({
     //     console.log("error")
     //   }
     // })
-    return 
+    // return 
     wx.cloud.callFunction({
       name:"add_des_tag",
       data:{
