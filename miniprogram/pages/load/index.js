@@ -9,6 +9,8 @@ Page({
    * 页面的初始数据
    */
 data: {
+  canvasWidth:0,
+  canvasHeight:0,
   empty:true,
   title: '上传图片',
   file_id: "",
@@ -29,15 +31,16 @@ data: {
     {title:"label7",selected:false},
   ],
   labels:['未公开'],
-  image_src:"",
   time:"",
+  image_src:""
 },
 two2one(a) {
+  let _this = this
   let that = this
   var imgs = ['',"../../images/code.jpg"]
       imgs[0]=a
       console.log(imgs[0])
-      const ctx = wx.createCanvasContext("myCanvas", that)
+      const ctx = wx.createCanvasContext("myCanvas", _this)
       var imgH1,imgW1,imgH2,imgW2,imgPath1,imgPath2
       wx.getImageInfo({
         src: imgs[0],
@@ -45,31 +48,55 @@ two2one(a) {
           imgW1 = res.width
           imgH1 = res.height
           imgPath1 = res.path
-          console.log(res)
           wx.getImageInfo({
             src: imgs[1],
             success: function(res) {
               imgW2 = res.width
               imgH2 = res.height
               imgPath2 = res.path
-              console.log(res)
+              that.setData({
+                canvasHeight: imgH1+imgH2/imgW2*imgW1,
+                canvasWidth: imgW1
+              })
               ctx.drawImage(imgPath1, 0, 0, imgW1, imgH1)
               ctx.drawImage(imgPath2, 0, imgH1, imgW1, imgH2/imgW2*imgW1)
+              let canvasHeight="canvasHeight"
+              let canvasWidth="canvasWidth"
+              _this.setData({
+                [canvasHeight]:imgH1+imgH2/imgW2*imgW1,
+                [canvasWidth]:imgW1
+              })
               ctx.draw()
               console.log(ctx)
               setTimeout(() => {wx.canvasToTempFilePath({
                 canvasId: 'myCanvas',
                 success: function(res) {
-                  console.log("合成的带有小程序码的图片success》》》", res)
-                  let empty='empty'
-                  let src="image_src"
+                  console.log("合成的带有小程序码的图片success》》》", res.tempFilePath)
+                  let image_src="image_src"
                   _this.setData({
-                    [empty]:false,
-                    [src]:res.tempFilePaths
+                    [image_src]:res.tempFilePath
+                  })
+                  wx.cloud.uploadFile({
+                    cloudPath:'test'+Math.round(Math.random()*1000)+'.jpg',
+                    filePath:res.tempFilePath,
+                    config:"pyb-database-n2c6s",
+                    success: res => {
+                      console.log("图片file_id", res.fileID)
+                      const file1 = res.fileID
+                      let file2 = "file_id"
+                      _this.setData({
+                        [file2]:file1,
+                      })
+                      wx.showToast({
+                        title: '上传成功',
+                        icon: 'success',
+                        duration: 1000  
+                      })
+                    },
+                    fail: console.error
                   })
                 }
               })},1500)
-              console.log("合成的带有小程序码的图片success》》》")
           }
         })
         }
@@ -92,9 +119,7 @@ checkboxChange(e){
         [flags]: detailValue
     })
 },
-
-chooseImage: function chooseImage(e) {
-  let that = this
+chooseImage: async function chooseImage(e) {
   let file3 = "before_file_id"
   this.setData({
     [file3]:this.data.file_id,
@@ -108,42 +133,16 @@ chooseImage: function chooseImage(e) {
     success(res) {
       console.log('chooseImage success, temp path is', res.tempFilePaths[0])
       let empty='empty'
-      let src="image_src"
-      _this.setData({
-        [empty]:false,
-        [src]:res.tempFilePaths[0]
-      })
-      var timestamp =new Date();
       let cu_time="time"
       _this.setData({
-        [cu_time]:timestamp
+        [empty]:false,
+        [cu_time]:new Date()
       })
-      console.log("上传时间"+_this.data.time)
-      console.log("图片地址"+_this.data.image_src)
-      _this.two2one(_this.data.image_src)
+      _this.two2one(res.tempFilePaths[0])
       wx.showToast({
         title: '请等待',
         icon: 'loading',
         duration: 2000
-      })
-      wx.cloud.uploadFile({
-        cloudPath:'test'+Math.round(Math.random()*1000)+'.jpg',
-        filePath:_this.data.image_src,
-        config:"pyb-database-n2c6s",
-        success: res => {
-          console.log("图片file_id", res.fileID)
-          const file1 = res.fileID
-          let file2 = "file_id"
-          _this.setData({
-            [file2]:file1,
-          })
-          wx.showToast({
-            title: '上传成功',
-            icon: 'success',
-            duration: 1000  
-          })
-        },
-        fail: console.error
       })
     },
     fail({errMsg}) {
@@ -168,8 +167,7 @@ submitted: function submitted(e) {
   if(this.data.file_id==this.data.before_file_id){
     return
   }
-  var that = this;
-  if(this.data.image_src==""){
+  if(this.data.file_id==""){
     wx.showToast({
       title: '提交失败',
       icon: 'loading',
@@ -189,33 +187,18 @@ submitted: function submitted(e) {
     console.log(this.data.labels)
     console.log(this.data.time)
     console.log(this.data.file_id)
-    let that = this
+    let _this = this
     wx.cloud.callFunction({
       name:"add_expression",
       data:{
         request:"add_picture",
         data1:"test002",
-        data2:this.data.time,
-        data3:this.data.labels
+        data2:_this.data.time,
+        data3:_this.data.labels
         //data2:["fun", "wdnmd"]
       },
       success:function(res){
-        console.log("获取表情成功",res)
-      },fail:function(res){
-        console.log("获取表情失败",res)
-      }
-    })
-    wx.cloud.callFunction({
-      name:"add_expression",
-      data:{
-        request:"add_expression",
-        data1:"f149f6775e9862590040a95f532f204c",
-        data2:that.data.file_id,
-        data3:this.data.labels
-        //data3:this.data.labels
-        //data2:["fun", "wdnmd"]
-      },
-      success:function(res){
+        console.log(_this.data.file_id)
         console.log("获取表情成功",res)
       },fail:function(res){
         console.log("获取表情失败",res)
