@@ -41,6 +41,7 @@ two2one(a) {
       console.log(imgs[0])
       const ctx = wx.createCanvasContext("myCanvas", _this)
       var imgH1,imgW1,imgH2,imgW2,imgPath1,imgPath2
+      
       wx.getImageInfo({
         src: imgs[0],
         success: function(res) {
