@@ -13,12 +13,18 @@ exports.main = async (event, context) => {
   var request = event.request
   if (request == "get_des") {
     return await db.collection('expression')
+    .where({
+      public:true
+    })
     .orderBy('des_num', 'asc')
     .limit(2)
     .get()
   }
   if (request == "get_tag") {
     return await db.collection('expression')
+    .where({
+      public:true
+    })
     .orderBy('tag_num', 'asc')
     .limit(3)
     .get()
@@ -27,7 +33,7 @@ exports.main = async (event, context) => {
     var id = event.id
     var des = event.des
     await db.collection("expression").where({
-      id:id
+      _id:id
     }).update({
       data: {
         description:_.push(des),
@@ -42,7 +48,7 @@ exports.main = async (event, context) => {
     
     for (tag in tags) {
       await db.collection("expression").where({
-        id:id
+        _id:id
       }).update({
         data: {
           ["tags." + tags[tag]]:_.inc(1)
@@ -86,14 +92,14 @@ exports.main = async (event, context) => {
   if (request == "get_tags") {
     var id = event.id
     return await db.collection("expression").where({
-      id:id
+      _id:id
     })
     .get()
   }
   if (request == "get_url") {
     var id = event.id
     return await db.collection("expression").where({
-      id:id
+      _id:id
     })
     .get()
   }

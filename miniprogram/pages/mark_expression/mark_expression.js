@@ -122,7 +122,7 @@ Page({
     if (this.data.des_time != 0) {
       this.data.des_time -= 1
       wx.navigateTo({
-        url: '../add_des/add_des?id=' + this.data.des_list[this.data.des_time].id + "&times=" + this.data.des_time,
+        url: '../add_des/add_des?id=' + this.data.des_list[this.data.des_time]._id + "&times=" + this.data.des_time,
       })
 
       return
@@ -130,7 +130,7 @@ Page({
     if (this.data.tag_time != 0) {
       this.data.tag_time -= 1
       wx.navigateTo({
-        url: '../add_tag/add_tag?id=' + this.data.tag_list[this.data.tag_time].id + "&times=" + this.data.tag_time,
+        url: '../add_tag/add_tag?id=' + this.data.tag_list[this.data.tag_time]._id + "&times=" + this.data.tag_time,
       })
       return
     }
