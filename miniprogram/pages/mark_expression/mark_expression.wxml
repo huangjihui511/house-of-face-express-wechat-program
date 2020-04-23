@@ -1,18 +1,2 @@
 <!--miniprogram/pages/test/test.wxml-->
-<view class="page__hd">
-      <view class="page__title">帮助我们标记图片</view>
-      <view class="page__desc">我们将使用您提供的数据完成搜索分类等部分的优化</view>
-</view>
-<view class="page__hd">
-      <view class="page__title">奖励</view>
-      <view class="page__desc">为了感谢您等帮助，我们会在您完成任务后给予经验奖励</view>
-</view>
-<view class="page__hd">
-      <view class="page__title">添加描述</view>
-      <view class="page__desc">您只需要用简短等几句话描述表情</view>
-</view>
-<view class="page__hd">
-      <view class="page__title">添加标签</view>
-      <view class="page__desc">您只需要在我们提取好的标签中选择更符合等标签</view>
-</view>
-<button class="weui-btn" type="primary" bindtap="begin">开始</button>
+<text>帮助我们使用人工辅助标记完成识别</text>

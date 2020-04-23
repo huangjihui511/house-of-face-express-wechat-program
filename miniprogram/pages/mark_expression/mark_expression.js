@@ -1,6 +1,4 @@
 // miniprogram/pages/test/test.js
-const app = getApp()
-
 Page({
 
   /**
@@ -10,20 +8,12 @@ Page({
     des_list: null,
     tag_list: null,
     des_time: null,
-    tag_time: null,
-    state: "wait"
+    tag_time: null
   },
-
 
   /**
    * 生命周期函数--监听页面加载
    */
-  begin: function () {
-    this.setData({
-      state:"begin"
-    })
-    this.onShow()
-  },
   onLoad: function (options) {
     var that = this
     // console.log("search")
@@ -102,55 +92,27 @@ Page({
    */
   onShow: function () {
     console.log("onshow")
-    console.log(this.data.state)
-    if (this.data.state == "wait") {
-      return
-    }
-    if (this.data.state == "fail") {
-      wx.showModal({
-        title: '任务失败',
-        content: '未完成识别任务，无法增加经验',
-        showCancel: false,
-        confirmText: '确定'
-      })
-      
-      return
-    }
+    console.log(this.data.des_time)
     while(this.data.des_time == null || this.data.tag_time == null){
       return
     }
     if (this.data.des_time != 0) {
       this.data.des_time -= 1
       wx.navigateTo({
-        url: '../add_des/add_des?id=' + this.data.des_list[this.data.des_time].id + "&times=" + this.data.des_time,
+        url: '../add_des/add_des?id=' + this.data.des_list[this.data.des_time].id,
       })
-
       return
     }
     if (this.data.tag_time != 0) {
       this.data.tag_time -= 1
       wx.navigateTo({
-        url: '../add_tag/add_tag?id=' + this.data.tag_list[this.data.tag_time].id + "&times=" + this.data.tag_time,
+        url: '../add_tag/add_tag?id=' + this.data.tag_list[this.data.tag_time].id,
       })
       return
     }
-    if (this.data.tag_time == 0 && this.data.des_time == 0) {
-      wx.cloud.callFunction({
-        name: "add_exp",
-        data:{
-          id:app.globalData.open_id,
-          incNum:10
-        }
-      })
-      wx.showModal({
-        title: '任务成功',
-        content: '你已经得到10点经验',
-        showCancel: false,
-        confirmText: '确定'
-      })
-      
-      return
-    }
+    wx.navigateBack({
+      complete: (res) => {},
+    })
   },
 
   /**

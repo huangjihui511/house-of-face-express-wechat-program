@@ -30,25 +30,18 @@ Page({
     //wx.navigateTo({url: '../index/index'})
   },
   login: function(e) {
-    if (e.detail.userInfo) {
-      console.log("valid")
-    
-      app.globalData.userInfo = e.detail.userInfo
-      console.log("e.detail.userInfo")
-      console.log(e.detail.userInfo)
-        this.setData({
-        userInfo: e.detail.userInfo,
-        hasUserInfo: true
-      })
-      console.log(e)
-      this.navigateToMainPage()
-    }
-    return
+    app.globalData.userInfo = e.detail.userInfo
+      this.setData({
+      userInfo: e.detail.userInfo,
+      hasUserInfo: true
+    })
+    console.log(e)
+    this.navigateToMainPage()
   },
 
   nolog: function() {
     wx.showModal({
-      content: '不登陆无法使用',
+      content: '不登陆状态只保留浏览功能',
       confirmText: '确定',
       cancelText: '取消',
       success: res => {

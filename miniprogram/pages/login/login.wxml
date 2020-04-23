@@ -13,5 +13,6 @@
     </view>
     <view class="button-sp-area">
         <button class="weui-btn" type="primary" open-type="getUserInfo" bindgetuserinfo="login">登陆</button>
+        <button class="weui-btn" type="warn" bindtap="nolog">不登陆</button>
     </view>
 </view>

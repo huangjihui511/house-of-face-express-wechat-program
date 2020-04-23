@@ -1,13 +1,25 @@
 /* miniprogram/pages/userpage/userpage.wxss */
 
 .content-item{
-  width: 45%;
-  height: 300rpx;
-  background-color: white;
+  width: 33%;
+  height: 180rpx;
+  background-color: rgb(233, 8, 87, 0);
   align-items: center;
   justify-content: center;
   /* 绝对定位的父级必须要定位 */
-  position: relative;
+}
+
+.content{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.image_button
+{ 
+  height: 100%;
+  background-color: rgb(16, 75, 163, 0);
+  align-items: center;
+  justify-content: center;
 }
 
 .image_search{
@@ -15,9 +27,4 @@
   height: 100%;
   border: tomato;
   border-radius: 10%;
-}
-
-.content{
-  display: flex;
-  flex-wrap: wrap;
 }

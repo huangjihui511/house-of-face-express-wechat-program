@@ -5,8 +5,8 @@
   <view class='content'>
     <view class='content-item' wx:for="{{collection}}" wx:for-item="item">
       <!-- 图片 -->
-      <button class='content-item' data-fileid='{{item.file_id}}' bindtap="shop_image_pagejump" >
-        <image class="image_search" src="{{item.file_id}}" mode='scaleToFill'></image>
+      <button class='image_button' data-fileid='{{item.file_id}}' bindtap="shop_image_pagejump" style="width:110%">
+        <image class="image_search" src="{{item.file_id}}" ></image>
       </button>
     </view>
   </view>

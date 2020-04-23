@@ -282,7 +282,7 @@ submitted: function submitted(e) {
       })
       setTimeout(function () {
         wx.redirectTo({
-          url: '../../mark_expression/mark_expression',
+          url: '../add_exp/index',
         })
       }, 1000) 
     }

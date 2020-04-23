@@ -66,7 +66,7 @@ Page({
       file_id: this.data.imagePath
     }).get().then(res=>{
       this.setData({
-        uploaduser: res.data[0].openid
+        uploaduser: res.data[0].open_id
       })
       console.log(this.data.uploaduser)
     })
@@ -116,9 +116,26 @@ Page({
     var temp_image = {
       file_id: e.currentTarget.dataset.fileid
     }
-    console.log(imageUrl)
-    var userid = "d77a8c995e98146b00290cf74a98c9cb"
-    db.collection('user').doc('d77a8c995e98146b00290cf74a98c9cb').update({
+    var user_openid = app.globalData.open_id
+    console.log(user_openid)
+    wx.cloud.callFunction({
+      name: 'add_expression',
+      data:{
+        request: 'add_expression',
+        data1: app.globalData.open_id,
+        data2: e.currentTarget.dataset.fileid
+      },
+    }).then(res=> {
+      wx.showToast({                
+        title: '收藏成功',                
+        icon: 'success',                
+        duration: 1500,                
+        mask: false,             
+      })
+    })
+    /*db.collection('user').where({
+      open_id: user_openid
+    }).update({
       data:{
         expression_set: _.push(temp_image)
       }
@@ -130,7 +147,7 @@ Page({
         duration: 1500,                
         mask: false,             
       })
-   	})
+   	})*/
   },
   jump2userpage:function(e) {
     var app = getApp()

@@ -11,7 +11,7 @@
     <image class="image_show"  src="{{imagePath}}"></image>
   </view>
   
-  <text>上传者openid:oCOIC5fjYENaI3jCb8T8JNrt-flk</text>
+  <text>上传者openid:{{uploaduser}}</text>
   <button class='goodbutton'  hover-class="hover" bindtap="storeImage" data-fileid="{{imagePath}}">收藏</button>
   <button class='goodbutton'  hover-class="hover" bindtap="download" data-fileid="{{imagePath}}">下载</button>
   <button class='goodbutton'  hover-class="hover" bindtap="jump2userpage" data-fileid="{{imagePath}}">了解作者的收藏</button>

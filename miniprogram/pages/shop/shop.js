@@ -32,18 +32,18 @@ Page({
     testButton: '',
     showPicList: [
       [
-      {file_id : "cloud://alpha-project-bvqxh.616c-alpha-project-bvqxh-1301841365/test959.jpg"},
-      {file_id : "cloud://alpha-project-bvqxh.616c-alpha-project-bvqxh-1301841365/test959.jpg" },
-      {file_id : "cloud://alpha-project-bvqxh.616c-alpha-project-bvqxh-1301841365/test959.jpg"}
+      {file_id : "cloud://pyb-database-n2c6s.7079-pyb-database-n2c6s-1301841365/test512.jpg"},
+      {file_id : "cloud://pyb-database-n2c6s.7079-pyb-database-n2c6s-1301841365/test285.jpg" },
+      {file_id : "cloud://pyb-database-n2c6s.7079-pyb-database-n2c6s-1301841365/test121.jpg"}
     ],
       [
-      {file_id : "cloud://alpha-project-bvqxh.616c-alpha-project-bvqxh-1301841365/test959.jpg"},
-      {file_id :  "cloud://alpha-project-bvqxh.616c-alpha-project-bvqxh-1301841365/test519.jpg"},
-      {file_id : "cloud://alpha-project-bvqxh.616c-alpha-project-bvqxh-1301841365/test7.jpg"}
+      {file_id : "cloud://pyb-database-n2c6s.7079-pyb-database-n2c6s-1301841365/test515.jpg"},
+      {file_id : "cloud://pyb-database-n2c6s.7079-pyb-database-n2c6s-1301841365/test147.jpg"},
+      {file_id : "cloud://pyb-database-n2c6s.7079-pyb-database-n2c6s-1301841365/test147.jpg"}
     ]
     ],
     user_rank:5,
-    user_exp:20,
+    user_exp:0,
     user_openid: '123',
     rankExp:[0,5,15,30,50,100,200,500,1000,2000,3000,6000,10000,18000,30000,60000,
       100000,300000],
@@ -80,13 +80,7 @@ Page({
     var judge = 1
     for (var i = 0;i < labels.length;i++) {
       var label = labels[i]
-      console.log(label)
       if (judge == 1) {
-        db.collection('user').get({
-          success:function(res) {
-            console.log("测试成功：",res)
-          }
-        })
       wx.cloud.callFunction({
       name:"add_expression",
       data:{
@@ -215,20 +209,18 @@ Page({
         this.setData({
           user_openid: res.result.openid
         })
-        tempid = res.result.openid
-        console.log(tempid)
+        tempid = this.data.user_openid
         db.collection('user').where({
-          openid: tempid
-        }).get().then(res=>{          
-          console.log(res);         
+          open_id: tempid
+        }).get().then(res=>{   
           this.setData({          
             user_exp: res.data[0].exp     
           })   
+          this.calUserRank(this.data.user_exp)
         })    
       },
       fail :console.error
     })
-    this.calUserRank(this.data.user_exp)
   },
   getUserInfo: function(e) {
     console.log(e)
