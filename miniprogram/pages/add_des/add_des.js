@@ -9,8 +9,25 @@ Page({
   data: {
     imgurl: null,
     imgid: null,
-    desc: null
+    desc: null,
+    times: null
   },
+  exit: function() {
+    let pages = getCurrentPages()
+    let prevPage = pages[ pages.length - 2 ]
+    // prevPage.setData({
+    //   state:"fail"
+    // })
+    
+    prevPage.data.state = "fail"
+
+    console.log("fail")
+
+    wx.navigateBack({
+      complete: (res) => {},
+    })
+  },
+
   submit: function () {
     console.log(this.data.desc)
     wx.cloud.callFunction({
@@ -37,6 +54,9 @@ Page({
    */
   onLoad: function (options) {
     var temp_id = options.id
+    this.setData({
+      times:options.times
+    })
     wx.cloud.callFunction({
       name: "add_des_tag",
       data: {

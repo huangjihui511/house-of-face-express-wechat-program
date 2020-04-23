@@ -16,6 +16,7 @@
     "pages/wordCombine/wordCombine",
     "pages/paint/paint",
     "pages/feedback/feedback",
+    "pages/mark_expression/mark_expression",
     "pages/fliter/fliter"
     
   ],

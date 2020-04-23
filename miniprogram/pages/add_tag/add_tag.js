@@ -9,10 +9,25 @@ Page({
   data: {
     imgurl: null,
     imgid: null,
+    times: null,
     tags: [],
     printTags: []
   },
+  exit: function() {
+    let pages = getCurrentPages()
+    let prevPage = pages[ pages.length - 2 ]
+    // prevPage.setData({
+    //   state:"fail"
+    // })
+    
+    prevPage.data.state = "fail"
 
+    console.log("fail")
+    
+    wx.navigateBack({
+      complete: (res) => {},
+    })
+  },
   add_tag:function (e) {
     
     var name = e.currentTarget.dataset.index
@@ -75,6 +90,9 @@ Page({
    */
   onLoad: function (options) {
     var temp_id = options.id
+    this.setData({
+      times:options.times
+    })
     wx.cloud.callFunction({
       name: "add_des_tag",
       data: {
