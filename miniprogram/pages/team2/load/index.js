@@ -279,7 +279,14 @@ submitted: function submitted(e) {
       cur_size=res.result.data[0].expression_set.length
       console.log(res.result.data[0].expression_set.length)
     }
-    if(cur_size>=app.globalData.max_exp){
+    var res = await wx.cloud.callFunction({
+      name: "get_exp",
+      data:{
+        id:app.globalData.open_id
+      }
+    })
+    console.log("exp",res.result.data[0].exp)
+    if(cur_size>=res.result.data[0].exp){
       wx.showToast({
         title: '经验不足',
         icon: 'loading',
