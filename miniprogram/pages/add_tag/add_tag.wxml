@@ -1,5 +1,8 @@
 <!--pages/add_tag/add_tag.wxml-->
 <!-- <text>pages/add_tag/add_tag.wxml</text> -->
+<view class="page__hd">
+      <view class="page__title">添加标记还剩余{{times}}张</view>
+</view>
 <view class="page-section-ctn">
   <image class="image" src="{{imgurl}}" mode="aspectFill"/>
 </view>
@@ -13,3 +16,4 @@
   
 </view>
 <button class="weui-btn" type="primary" bindtap="submit">提交</button>
+<button class="weui-btn" type="warn" bindtap="exit">退出</button>

@@ -30,7 +30,7 @@ exports.main = async (event, context) => {
       id:id
     }).update({
       data: {
-        des:_.push(des),
+        description:_.push(des),
         des_num:_.inc(1)
       }
     })

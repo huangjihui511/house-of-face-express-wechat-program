@@ -6,7 +6,6 @@
 	"setting": {
 		"urlCheck": true,
 		"es6": true,
-		"enhance": true,
 		"postcss": true,
 		"preloadBackgroundData": false,
 		"minified": true,
@@ -25,12 +24,10 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.8.1",
-	"appid": "wx4d76698e10db0775",
-	"projectname": "house-of-face-express-wechat-program",
-	"miniprogramRoot": "miniprogram/",
-	"cloudfunctionRoot": "cloudfunctions/",
-	"cloudfunctionTemplateRoot": "cloudfunctionTemplate",
+	"libVersion": "2.10.4",
+	"appid": "wxc2eb4f2922285087",
+	"projectname": "login_project",
+	"cloudfunctionTemplateRoot": "",
 	"watchOptions": {
 		"ignore": []
 	},
@@ -62,14 +59,7 @@
 		},
 		"miniprogram": {
 			"current": -1,
-			"list": [
-				{
-					"id": -1,
-					"name": "db guide",
-					"pathName": "pages/databaseGuide/databaseGuide",
-					"query": ""
-				}
-			]
+			"list": []
 		}
 	}
 }

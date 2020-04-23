@@ -1,0 +1,44 @@
+<!--pages/edit_functions/edit_functions.wxml-->
+<view class="page__hd">
+  <view wx:if = "{{imgPath==null}}">
+    <view class="icon-box">
+      <view class="icon-box__title">选择图片</view>
+      <view class="weui-grids">
+          <block wx:for="{{addIconList}}" wx:key="*this">
+              <navigator url="" class="weui-grid"  bindtap="handle"  data-index='{{item.name}}'>
+                  <mp-icon icon="{{item.icon}}" color="{{item.color}}" size="{{item.size}}" ></mp-icon>
+                  <view class="weui-grid__label">{{item.name}}</view>
+              </navigator>
+          </block>
+      </view>
+    </view>
+  </view>
+  <view wx:else>
+    <view class="page-section-ctn">
+      <image class="image" src="{{imgPath}}" mode="aspectFill"/>
+    </view>
+    <view class="icon-box">
+      <view class="icon-box__title">保存图片</view>
+      <view class="weui-grids">
+          <block wx:for="{{existIconList}}" wx:key="*this">
+              <navigator url="../edit_function1/edit_function1" class="weui-grid" bindtap="handle"  data-index='{{item.name}}'>
+                  <mp-icon icon="{{item.icon}}" color="{{item.color}}" size="{{item.size}}"></mp-icon>
+                  <view class="weui-grid__label">{{item.name}}</view>
+              </navigator>
+          </block>
+      </view>
+    </view>
+  </view>
+  
+  <view class="icon-box">
+    <view class="icon-box__title">编辑操作</view>
+    <view class="weui-grids">
+        <block wx:for="{{iconList}}" wx:key="*this">
+            <navigator url="" class="weui-grid">
+                <!-- <mp-icon icon="{{item.icon}}" color="{{item.color}}" size="{{item.size}}"></mp-icon> -->
+                <view class="weui-grid__label">{{item.icon}}</view>
+            </navigator>
+        </block>
+    </view>
+  </view>
+</view>
