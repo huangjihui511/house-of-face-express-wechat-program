@@ -167,12 +167,32 @@ Page({
       console.log(this.data.delete_selected[e.currentTarget.dataset.index])
     }
     else{
+      //setTimeout(function () {},1000)
+      
+      wx.showToast({
+        title: '长按图片可转发',
+        icon: 'loading',
+        duration: 1000
+      })
       console.log(e.currentTarget.dataset.srcs)
       wx.previewImage({
         current: e.currentTarget.dataset.src, // 当前显示图片的https链接
-        urls: e.currentTarget.dataset.srcs // 需要预览的图片https链接列表
+        urls: e.currentTarget.dataset.srcs, // 需要预览的图片https链接列表
       })
+      
     }
+  },
+  forward(a,b){
+    wx.showToast({
+      title: '长按图片可转发',
+      icon: 'loading',
+      duration: 1000
+    })
+    
+    wx.previewImage({
+      current: a, // 当前显示图片的https链接
+      urls:b // 需要预览的图片https链接列表
+    })
   },
   label_select(label){
     var src=this.data.images_srcs
@@ -241,15 +261,21 @@ Page({
     }
   },
  more_information(e){
+   let _this=this
    console.log(e)
     wx.showActionSheet({
-      itemList: ['编辑','详情'],//显示的列表项
+      itemList: ['编辑','转发'],//显示的列表项
          success: function (res) {//res.tapIndex点击的列表项
             console.log("点击了列表项：" + res.tapIndex)
             if(res.tapIndex==0){
+              console.log("000000000000")
               wx.redirectTo({
                 url: '../team2_load_for_team1/index?src='+e.currentTarget.dataset.src,
               })
+            }
+            else if(res.tapIndex==1){
+              console.log("111111111")
+              _this.forward(e.currentTarget.dataset.src,e.currentTarget.dataset.srcs)
             }
          },
          fail: function (res) { },

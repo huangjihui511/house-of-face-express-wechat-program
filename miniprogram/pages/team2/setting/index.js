@@ -8,5 +8,12 @@ Page({
     {url:"../my/index",name:"性别"},
     {url:"../my/index",name:"签名"},
     ]
+  },
+  onShow:function () {
+    wx.showToast({
+      title: '待开发',
+      icon: 'loading',
+      duration: 3000
+    })
   }
 })

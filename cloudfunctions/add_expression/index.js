@@ -46,23 +46,31 @@ exports.main = async (event, context) => {
     console.log(e)
   }
   }  else if (request == "add_picture") {
-    var id = event.data1
+    var time =event.data1
+    var open_id=event.data2
+    var id =event.data3
+    var file_id=event.data4
+    var public=event.data5
+
+
+ /*   var id = event.data1
     var time = event.data2
     var tags = event.data3
     var openid = event.data4
-    var path = event.data5
+    var path = event.data5*/
 
     try {
       return await db.collection('expression').add({
         data:{
-          id:id,
-          description:[],
           time:time,
-          tags:tags,
-          open_id:openid,
-          file_id:path,
+          tags:{},
+          open_id:open_id,
+          id:id,
+          file_id:file_id,
           des_num:0,
-          tag_num:0
+          tag_num:0,
+          description:[],
+          public:public
         }
       })
     } catch(e) {
