@@ -17,9 +17,9 @@ exports.main = async (event, context) => {
       //var tags = db.collection('expression')
       return await db.collection('expression').where({
        // _id:id,
-       /* tags:{
-          name:label
-        }*/
+        tags:{
+          label
+        }
       }).get({
         success:function(res) {
           console.log(res.data)
