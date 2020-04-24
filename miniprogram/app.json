@@ -2,6 +2,7 @@
   "pages": [
     
     "pages/login/login",
+    "pages/notify/notify",
     "pages/shop/shop",
     "pages/edit_functions/edit_functions",
     "pages/add_des/add_des",

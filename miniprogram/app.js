@@ -11,6 +11,7 @@ App({
     user_id:"123",
     max_exp:5,
     recordPoints: [],
+    notification_num:0
   },
   
   //app 全局属性监听
