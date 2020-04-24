@@ -1,8 +1,8 @@
 {
   "pages": [
-    
-    "pages/login/login",
     "pages/shop/shop",
+    "pages/login/login",
+    
     "pages/edit_functions/edit_functions",
     "pages/add_des/add_des",
     "pages/main/main",

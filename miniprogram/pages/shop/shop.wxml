@@ -51,7 +51,7 @@
   </view>
   <view class="line"></view>
   <view class="search">
-    <view class="showWhatToSearch">查找你想要的表情：</view>
+    <view class="showWhatToSearch">查找你想要的表情：{{toSearch}}</view>
     <view class="searchInputConfirm">
       <input class="input" auto-focus bindconfirm="bindConfirmClick" data-input="input"
          laceholder="请输入搜索关键字">
