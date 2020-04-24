@@ -41,6 +41,7 @@ two2one(a) {
       console.log(imgs[0])
       const ctx = wx.createCanvasContext("myCanvas", _this)
       var imgH1,imgW1,imgH2,imgW2,imgPath1,imgPath2
+      
       wx.getImageInfo({
         src: imgs[0],
         success: function(res) {
@@ -184,6 +185,7 @@ submitted: function submitted(e) {
     //传回参数
     console.log(this.data.image_src)
     console.log(this.data.labels)
+    var public1=false
     console.log(this.data.time)
     console.log(this.data.file_id)
     let that = this
@@ -192,17 +194,20 @@ submitted: function submitted(e) {
     console.log(temp)
     for(j=0;j<this.data.labels.length;j++){
       temp.push({name:this.data.labels[j],num:0})
+      if(this.data.labels[j]=="公开"){
+        public1=true
+      }
     }
     console.log(app.globalData.open_id)
     wx.cloud.callFunction({
       name:"add_expression",
       data:{
         request:"add_picture",
-        data1:"test002",
-        data2:this.data.time,
-        data3:temp,
-        data4:app.globalData.open_id,
-        data5:this.data.file_id
+        data1:this.data.time,
+        data2:app.globalData.open_id,
+        data3:"test002",
+        data4:this.data.file_id,
+        data5:public1
         //data2:["fun", "wdnmd"]
       },
       success:function(res){
@@ -274,7 +279,14 @@ submitted: function submitted(e) {
       cur_size=res.result.data[0].expression_set.length
       console.log(res.result.data[0].expression_set.length)
     }
-    if(cur_size>=app.globalData.max_exp){
+    var res = await wx.cloud.callFunction({
+      name: "get_exp",
+      data:{
+        id:app.globalData.open_id
+      }
+    })
+    console.log("exp",res.result.data[0].exp)
+    if(cur_size>=res.result.data[0].exp){
       wx.showToast({
         title: '经验不足',
         icon: 'loading',
@@ -282,7 +294,7 @@ submitted: function submitted(e) {
       })
       setTimeout(function () {
         wx.redirectTo({
-          url: '../add_exp/index',
+          url: '../../mark_expression/mark_expression',
         })
       }, 1000) 
     }

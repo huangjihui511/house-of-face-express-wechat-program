@@ -28,19 +28,11 @@
   flex-direction: column;
   align-items:center;
 }
-.icon{
-  width: 10px;
-  height: 10px;
-  border-top: 2px solid #999;
-  border-right: 2px solid #999;
-  position: absolute;
-  transform: rotate(135deg);
-}
 .submit{
   right: 0; 
   position: absolute;
-  min-width:4em;
-  height:1.3em;
+  min-width:7em;
+  height:2em;
   color:#fff;
   line-height: 1.7em;
   border-radius: 1em;
@@ -48,5 +40,9 @@
   display:flex; 
   justify-content:center; 
   align-items:baseline;
+}
+.submit_text{
+  size: 100px;
+  color: #3d6312;
 }
 

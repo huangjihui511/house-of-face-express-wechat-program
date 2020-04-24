@@ -75,21 +75,25 @@ submitted: function submitted(e) {
     console.log(this.data.time)
     let that = this
     var j
+    var public1=false
     var temp=new Array()
     console.log(temp)
     for(j=0;j<this.data.labels.length;j++){
       temp.push({name:this.data.labels[j],num:0})
+      if(this.data.labels[j]=="公开"){
+        public1=true
+      }
     }
     console.log(temp)
     wx.cloud.callFunction({
       name:"add_expression",
       data:{
         request:"add_picture",
-        data1:"test002",
-        data2:this.data.time,
-        data3:temp,
-        data4:app.globalData.open_id,
-        data5:this.data.file_id
+        data1:this.data.time,
+        data2:app.globalData.open_id,
+        data3:"test002",
+        data4:this.data.file_id,
+        data5:public1
         //data2:["fun", "wdnmd"]
       },
       success:function(res){

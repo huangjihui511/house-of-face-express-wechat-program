@@ -17,6 +17,7 @@ Page({
     db.collection('user').where({
       openid: options.uploader
     }).get().then(res=>{
+      console.log(res)
       this.setData({
         uploader: res.data,
         collection: res.data[0].expression_set

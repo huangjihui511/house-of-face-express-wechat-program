@@ -32,6 +32,7 @@ Page({
     testButton: '',
     showPicList: [
       [
+<<<<<<< HEAD
         {file_id:''},
         {file_id:''},
         {file_id:''}
@@ -45,10 +46,20 @@ Page({
       {file_id:''},
       {file_id:''},
       {file_id:''}
+=======
+      {file_id : "cloud://pyb-database-n2c6s.7079-pyb-database-n2c6s-1301841365/test512.jpg"},
+      {file_id : "cloud://pyb-database-n2c6s.7079-pyb-database-n2c6s-1301841365/test285.jpg" },
+      {file_id : "cloud://pyb-database-n2c6s.7079-pyb-database-n2c6s-1301841365/test121.jpg"}
+    ],
+      [
+      {file_id : "cloud://pyb-database-n2c6s.7079-pyb-database-n2c6s-1301841365/test515.jpg"},
+      {file_id : "cloud://pyb-database-n2c6s.7079-pyb-database-n2c6s-1301841365/test147.jpg"},
+      {file_id : "cloud://pyb-database-n2c6s.7079-pyb-database-n2c6s-1301841365/test147.jpg"}
+>>>>>>> 2e1974aeb08e8365ca9e050c03326292f40b865a
     ]
     ],
     user_rank:5,
-    user_exp:20,
+    user_exp:0,
     user_openid: '123',
     rankExp:[0,5,15,30,50,100,200,500,1000,2000,3000,6000,10000,18000,30000,60000,
       100000,300000],
@@ -88,8 +99,8 @@ Page({
       //var label = labels[i]
     for (var i = 0;i < 1;i++) {  
       var label = labels[i]
-      console.log(label)
       if (judge == 1) {
+<<<<<<< HEAD
         db.collection('expression').where({
           tags:{
             [label]:0
@@ -117,6 +128,9 @@ Page({
          }
         })
    /*   wx.cloud.callFunction({
+=======
+      wx.cloud.callFunction({
+>>>>>>> 2e1974aeb08e8365ca9e050c03326292f40b865a
       name:"add_expression",
       data:{
         request:"searchByLabel",
@@ -272,20 +286,18 @@ Page({
         this.setData({
           user_openid: res.result.openid
         })
-        tempid = res.result.openid
-        console.log(tempid)
+        tempid = this.data.user_openid
         db.collection('user').where({
-          openid: tempid
-        }).get().then(res=>{          
-          console.log(res);         
+          open_id: tempid
+        }).get().then(res=>{   
           this.setData({          
             user_exp: res.data[0].exp     
           })   
+          this.calUserRank(this.data.user_exp)
         })    
       },
       fail :console.error
     })
-    this.calUserRank(this.data.user_exp)
   },
   getUserInfo: function(e) {
     console.log(e)

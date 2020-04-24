@@ -3,7 +3,7 @@
 
 <view class="page">
   <view class="submit" bindtap="submitted" >
-    <view class="icon"></view>
+    <text class='submit_text'>提交</text>
   </view>
   <view class="page__hd">
     <view class="page__title">上传图片、添加标签</view>
@@ -23,8 +23,8 @@
     <button class="weui-btn" type="primary" bindtap="chooseImage">上传图片</button>
   </view>
    <text>\n</text>
-   <view class="{{empty?'empty':'image'}}" style="width:0px;height:0px;overflow:hidden;">
-    <canvas style="width:{{canvasWidth}}px; height:{{canvasHeight}}px;" canvas-id="myCanvas"></canvas>
+   <view class="{{empty?'empty':'canvas'}}">
+    <canvas style="width:{{canvasWidth}}px; height:{{canvasHeight}}px;position:fixed;left:9000px;" canvas-id="myCanvas"></canvas>
    </view>
    <view class="{{empty?'empty':'image'}}">
       <image src="{{image_src}}"></image>
