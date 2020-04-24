@@ -32,7 +32,6 @@ Page({
     testButton: '',
     showPicList: [
       [
-<<<<<<< HEAD
         {file_id:''},
         {file_id:''},
         {file_id:''}
@@ -46,16 +45,6 @@ Page({
       {file_id:''},
       {file_id:''},
       {file_id:''}
-=======
-      {file_id : "cloud://pyb-database-n2c6s.7079-pyb-database-n2c6s-1301841365/test512.jpg"},
-      {file_id : "cloud://pyb-database-n2c6s.7079-pyb-database-n2c6s-1301841365/test285.jpg" },
-      {file_id : "cloud://pyb-database-n2c6s.7079-pyb-database-n2c6s-1301841365/test121.jpg"}
-    ],
-      [
-      {file_id : "cloud://pyb-database-n2c6s.7079-pyb-database-n2c6s-1301841365/test515.jpg"},
-      {file_id : "cloud://pyb-database-n2c6s.7079-pyb-database-n2c6s-1301841365/test147.jpg"},
-      {file_id : "cloud://pyb-database-n2c6s.7079-pyb-database-n2c6s-1301841365/test147.jpg"}
->>>>>>> 2e1974aeb08e8365ca9e050c03326292f40b865a
     ]
     ],
     user_rank:5,
@@ -100,7 +89,6 @@ Page({
     for (var i = 0;i < 1;i++) {  
       var label = labels[i]
       if (judge == 1) {
-<<<<<<< HEAD
         db.collection('expression').where({
           tags:{
             [label]:0
@@ -127,35 +115,6 @@ Page({
         }
          }
         })
-   /*   wx.cloud.callFunction({
-=======
-      wx.cloud.callFunction({
->>>>>>> 2e1974aeb08e8365ca9e050c03326292f40b865a
-      name:"add_expression",
-      data:{
-        request:"searchByLabel",
-        data1:"0d9cdb685e981a3d002f9f6a46bf8d0b",
-        data2:label
-      },
-      success:function(res) {
-        console.log("获取表情成功:",res.result.data)
-        var datas = res.result.data
-        for (var j = 0;j < datas.length;j++) {
-          var path = datas[j]['file_id']
-          console.log("路径:",path)
-          //that.data.showPicList[(globalPicIndex%9)/3][(globalPicIndex%9)%3]['file_id'] = path
-          if (path=='') {
-            path = that.data.showPicList[(globalPicIndex)%2][(globalPicIndex)%3]['file_id']
-          }
-          that.data.showPicList[(globalPicIndex)%2][(globalPicIndex)%3]['file_id'] = path
-          that.setData({
-            showPicList:that.data.showPicList
-            //showPicList[globalPicIndex%2][globalPicIndex%3]['file_id'] : path
-          })
-          globalPicIndex++
-        }
-      }
-      }) */
       }
       else if (judge == 2) {
         wx.cloud.callFunction({
@@ -207,10 +166,10 @@ Page({
       url: '../logs/logs'
     })
   },
-  calUserRank: function(exp) {
+  calUserRank: function() {
 
     //根据用户的经验计算等级
-   // var exp = this.data.user_exp
+    var exp = this.data.user_exp
     var expList = this.data.rankExp
     var upbound
     var i = 0
@@ -278,26 +237,31 @@ Page({
         }
       })
     }
+    var that = this
     var tempid = '123'
     wx.cloud.callFunction({
       name:'login',
       success: res => {
         console.log('success:', res)
-        this.setData({
+        that.setData({
           user_openid: res.result.openid
         })
-        tempid = this.data.user_openid
+        tempid = that.data.user_openid
+        console.log(tempid)
         db.collection('user').where({
           open_id: tempid
         }).get().then(res=>{   
-          this.setData({          
+          console.log(res.data[0].exp)
+          that.setData({          
             user_exp: res.data[0].exp     
           })   
-          this.calUserRank(this.data.user_exp)
+          that.calUserRank()
         })    
       },
       fail :console.error
     })
+   // this.calUserRank()
+    console.log("用户经验：",this.data.user_exp)
   },
   getUserInfo: function(e) {
     console.log(e)
