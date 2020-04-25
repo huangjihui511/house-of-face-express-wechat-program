@@ -10,6 +10,26 @@ const _ = db.command
 exports.main = async (event, context) => {
   var request = event.request
 
+  if (request == 'user_exp') {
+    var exp = event.data1
+    var expList = [0,5,15,30,50,100,200,500,1000,2000,3000,6000,10000,18000,30000,60000,
+      100000,300000]
+    //根据用户的经验计算等级
+    var upbound
+    var i = 0
+    for (;i < 17;i++) {
+      if ((exp >= expList[i]) && (exp < expList[i+1])) {
+        upbound = expList[i+1]
+        break
+      }
+      if (exp >= 300000) {
+        i = 17
+        break
+      }
+    }
+    console.log("rank:"+(i+1))
+    return (i+1)
+  }
   if (request == "searchByLabel") {
     var id = event.data1
     var label = event.data2

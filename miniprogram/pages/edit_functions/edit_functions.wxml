@@ -11,7 +11,13 @@
 
 <view class="bottom">
   <block wx:for="{{btnInfo}}" wx:key="index">
+    <!--真机调试图标渲染失败，应该是样式问题-->
+    <!--以下是修改前的-->
     <view class="list-item" data-type="{{item.type}}" style="background: {{item.background}}" bindtap="tapBtn"></view>
+    <!--修改后的-->
+    <!--view class="list-item" data-type="{{item.type}}" style="background: {{item.background}}" bindtap="tapBtn">
+      <image style="width: 60rpx;height: 60rpx" src="{{item.icon_path}}"></image>
+    </view-->
   </block>
 </view>
 

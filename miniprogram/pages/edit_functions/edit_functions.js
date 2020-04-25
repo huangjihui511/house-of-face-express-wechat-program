@@ -18,22 +18,37 @@ Page({
       {
         type: 'text',
         background: 'url("../../images/text.png") white no-repeat; background-size: 20px 20px;background-position: 2px 2px;'
+        //修改图标
+        //background: 'background-size: 20px 20px;background-position: 2px 2px;',
+        //icon_path:"../../images/pen.png"
       },
       {
         type: 'paint',
         background: 'url("../../images/paint.png") white no-repeat; background-size: 20px 20px;background-position: 2px 2px;'
+        //修改图标
+        //background: 'background-size: 20px 20px;background-position: 2px 2px;',
+        //icon_path:"../../images/filter.png"
       },
       {
         type: 'filter',
         background: 'url("../../images/fliter.png") white no-repeat; background-size: 20px 20px;background-position: 2px 2px;'
+        //修改图标
+        //background: 'background-size: 20px 20px;background-position: 2px 2px;',
+        //icon_path:"../../images/search.png"
       },
       {
         type: 'joint',
         background: 'url("../../images/joint.png") white no-repeat; background-size: 20px 20px;background-position: 2px 2px;'
+        //修改图标
+        //background: 'background-size: 20px 20px;background-position: 2px 2px;',
+        //icon_path:"../../images/cut.png"
       },
       {
         type: 'save',
         background: 'url("../../images/save.png") white no-repeat; background-size: 20px 20px;background-position: 2px 2px;'
+        //修改图标
+        //background: 'background-size: 20px 20px;background-position: 2px 2px;',
+        //icon_path:"../../images/pic.png"
       },
     ],
     text: false,

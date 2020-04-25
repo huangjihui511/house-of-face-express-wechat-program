@@ -49,7 +49,6 @@
       </view>
     </block>
   </view>
-  <view class="line"></view>
   <view class="search">
     <view class="showWhatToSearch">查找你想要的表情：{{toSearch}}</view>
     <view class="searchInputConfirm">

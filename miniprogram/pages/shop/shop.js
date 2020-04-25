@@ -148,6 +148,7 @@ Page({
                 console.log("match")
                 var ids = datas[j]['expression_id']
                 console.log(ids)
+                var max = 0
                 for (var key in ids) {
                   var path
                   console.log(key)
@@ -209,9 +210,17 @@ Page({
     })
   },
   calUserRank: function() {
-
     //根据用户的经验计算等级
     var exp = this.data.user_exp
+    wx.cloud.callFunction({
+      name:'add_expression',
+      data:{
+        request:'user_exp',
+        data1:exp
+      }
+    }).then(res=>{
+      console.log("testfunctionExp:",res.result)
+    })
     var expList = this.data.rankExp
     var upbound
     var i = 0
