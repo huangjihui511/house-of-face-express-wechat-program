@@ -17,38 +17,23 @@ Page({
     btnInfo: [
       {
         type: 'text',
-        background: 'url("../../images/text.png") white no-repeat; background-size: 20px 20px;background-position: 2px 2px;'
-        //修改图标
-        //background: 'background-size: 20px 20px;background-position: 2px 2px;',
-        //icon_path:"../../images/pen.png"
+        background: 'url("https://i.niupic.com/images/2020/04/25/7vwo.png") white no-repeat; background-size: 20px 20px;background-position-x: center;background-position-y: center;'
       },
       {
         type: 'paint',
-        background: 'url("../../images/paint.png") white no-repeat; background-size: 20px 20px;background-position: 2px 2px;'
-        //修改图标
-        //background: 'background-size: 20px 20px;background-position: 2px 2px;',
-        //icon_path:"../../images/filter.png"
+        background: 'url("https://i.niupic.com/images/2020/04/25/7vwl.png") white no-repeat; background-size: 20px 20px;background-position-x: center;background-position-y: center;'
       },
       {
         type: 'filter',
-        background: 'url("../../images/fliter.png") white no-repeat; background-size: 20px 20px;background-position: 2px 2px;'
-        //修改图标
-        //background: 'background-size: 20px 20px;background-position: 2px 2px;',
-        //icon_path:"../../images/search.png"
+        background: 'url("https://i.niupic.com/images/2020/04/25/7vwk.png") white no-repeat; background-size: 20px 20px;background-position-x: center;background-position-y: center;'
       },
       {
         type: 'joint',
-        background: 'url("../../images/joint.png") white no-repeat; background-size: 20px 20px;background-position: 2px 2px;'
-        //修改图标
-        //background: 'background-size: 20px 20px;background-position: 2px 2px;',
-        //icon_path:"../../images/cut.png"
+        background: 'url("https://i.niupic.com/images/2020/04/25/7vwn.png") white no-repeat; background-size: 20px 20px;background-position-x: center;background-position-y: center;'
       },
       {
         type: 'save',
-        background: 'url("../../images/save.png") white no-repeat; background-size: 20px 20px;background-position: 2px 2px;'
-        //修改图标
-        //background: 'background-size: 20px 20px;background-position: 2px 2px;',
-        //icon_path:"../../images/pic.png"
+        background: 'url("https://i.niupic.com/images/2020/04/25/7vwm.png") white no-repeat; background-size: 20px 20px;background-position-x: center;background-position-y: center;'
       },
     ],
     text: false,
@@ -67,6 +52,33 @@ Page({
     fliterArr: ['模糊', '暗化', '淡化', '阴影', '灰度']
   },
 
+  adjustScale(path) {
+    let that = this
+    wx.getImageInfo({
+      src: path,
+      success (res) {
+        let width = 0
+        let height = 0
+        console.log(res.path)
+        console.log(res.width)
+        console.log(res.height)
+        if (res.width / (that.data.CVW - 10) > res.height / (that.data.CVH - 10)) {
+          width = that.data.CVW - 10
+          height = Math.trunc(res.height/res.width*width)
+        } else {
+          height = that.data.CVH - 10
+          width = Math.trunc(res.width/res.height*height)
+        }
+        console.log(width)
+        console.log(height)
+        that.setData({
+          cWidth: width,
+          cHeight: height,
+        })
+      }
+    })
+  },
+
   onTabItemTap() {
     let that = this
     wx.chooseImage({
@@ -77,23 +89,13 @@ Page({
         wx.getImageInfo({
           src: res.tempFilePaths[0],
           success (res) {
-            let width = 0
-            let height = 0
-            if (res.width / (that.data.CVW - 10) > res.height / (that.data.CVH - 10)) {
-              width = that.data.CVW - 10
-              height = Math.trunc(res.height/res.width*width)
-            } else {
-              height = that.data.CVH - 10
-              width = Math.trunc(res.width/res.height*height)
-            }
+            that.adjustScale(res.path)
+            let ctx = wx.createCanvasContext('edit')
+            ctx.drawImage(res.path, 0, 0, that.data.cWidth, that.data.cHeight)
+            ctx.draw()
             that.setData({
-              cWidth: width,
-              cHeight: height,
               curImage: res.path
             })
-            let ctx = wx.createCanvasContext('edit')
-            ctx.drawImage(res.path, 0, 0, width, height)
-            ctx.draw()
           },
           fail(err){
             console.log(err)
@@ -187,6 +189,33 @@ Page({
       joint: false,
       save: false
     })
+  },
+
+  saveLocal() {
+    let path = this.data.curImage
+    wx.saveImageToPhotosAlbum({
+      filePath: path,
+      success (res) {
+        wx.showToast({
+          title: '保存成功',
+        })
+      }
+    })
+  },
+
+  upLoad() {
+    let path = this.data.curImage
+    wx.navigateTo({
+      url: '../team2/team2_load_for_team1/index?' + path,
+    })
+    // wx.cloud.uploadFile({
+    //   cloudPath: 'test.jpg',
+    //   filePath: path,
+    //   success (res) {
+    //     wx.showToast({
+    //       title: '上传成功',
+    //     })
+    //   }
   },
 
   /**

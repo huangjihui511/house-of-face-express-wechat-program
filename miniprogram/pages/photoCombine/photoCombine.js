@@ -107,19 +107,12 @@ Page({
     var that = this
     var obj = that.data
     wx.canvasToTempFilePath({
-      x: 0,
-      y: 0,
-      width: sw,
-      height: obj.heightForCanvas,
-      destWidth: sw * 2,
-      destHeight: obj.heightForCanvas * 2,
       canvasId: 'photoCombine',
       success(res) {
-        that.setData({
-          shareImagePath: res.tempFilePath
-        })
-        wx.saveImageToPhotosAlbum({
-          filePath: res.tempFilePath,
+        var pages = getCurrentPages()
+        pages[pages.length-2].adjustScale(res.tempFilePath)
+        pages[pages.length-2].setData({
+          curImage: res.tempFilePath
         })
         wx.showToast({
           title: '保存成功',
@@ -127,28 +120,6 @@ Page({
         })
       }
     })
-  },
-
-  /**
-   * 分享图片到图片墙
-   */
-  toSharePic(){
-    let sw = wx.getSystemInfoSync().windowWidth
-    var that = this
-    var obj = that.data
-    wx.canvasToTempFilePath({
-      x: 0,
-      y: 0,
-      width: sw,
-      height: obj.heightForCanvas,
-      destWidth: sw * 2,
-      destHeight: obj.heightForCanvas * 2,
-      canvasId: 'photoCombine',
-      success(res) {
-        console.log(res.tempFilePath)
-      }
-    })
-    
   }
 
 })

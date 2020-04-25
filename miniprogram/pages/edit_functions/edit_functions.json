@@ -1,7 +1,6 @@
 {
   "usingComponents": {
     
-    "mp-halfScreenDialog": "../../ui-dist/half-screen-dialog/half-screen-dialog",
-    "i-avatar": "../../ui-dist/avatar/index"
+    "mp-halfScreenDialog": "../../ui-dist/half-screen-dialog/half-screen-dialog"
   }
 }

@@ -8,19 +8,19 @@ Page({
     fliterArr: [
       {
         type: '灰度',
-        background: 'url("../../images/hd.png") white no-repeat; background-size: 20px 20px;background-position: 2px 2px;'
+        background: 'url("https://i.niupic.com/images/2020/04/25/7vvW.png") white no-repeat; background-size: 20px 20px;background-position-x: center;background-position-y: center;'
       },
       {
         type: '黑白',
-        background: 'url("../../images/hb.png") white no-repeat; background-size: 20px 20px;background-position: 2px 2px;'
+        background: 'url("https://i.niupic.com/images/2020/04/25/7vvV.png") white no-repeat; background-size: 20px 20px;background-position-x: center;background-position-y: center;'
       },
       {
         type: '反相',
-        background: 'url("../../images/fx.png") white no-repeat; background-size: 20px 20px;background-position: 2px 2px;'
+        background: 'url("https://i.niupic.com/images/2020/04/25/7vvU.png") white no-repeat; background-size: 20px 20px;background-position-x: center;background-position-y: center;'
       },
       {
         type: '像素',
-        background: 'url("../../images/xs.png") white no-repeat; background-size: 20px 20px;background-position: 2px 2px;'
+        background: 'url("https://i.niupic.com/images/2020/04/25/7vvT.png") white no-repeat; background-size: 20px 20px;background-position-x: center;background-position-y: center;'
       }
     ],
     cWidth: 0,

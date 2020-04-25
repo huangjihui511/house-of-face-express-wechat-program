@@ -74,11 +74,12 @@ dragGraph.prototype = {
                 this.ctx.strokeRect(textX, textY, textWidth, textHeight);
                 this.ctx.drawImage('./icon/close.png', textX - 15, textY - 15, 30, 30);
                 this.ctx.drawImage('./icon/scale.png', textX + textWidth - 15, textY + textHeight - 15, 30, 30);
-            } else {
-                this.ctx.strokeRect(this.x, this.y, this.w, this.h);
-                this.ctx.drawImage('./icon/close.png', this.x - 15, this.y - 15, 30, 30);
-                this.ctx.drawImage('./icon/scale.png', this.x + this.w - 15, this.y + this.h - 15, 30, 30);
-            }
+            } 
+            // else {
+            //     this.ctx.strokeRect(this.x, this.y, this.w, this.h);
+            //     this.ctx.drawImage('./icon/close.png', this.x - 15, this.y - 15, 30, 30);
+            //     this.ctx.drawImage('./icon/scale.png', this.x + this.w - 15, this.y + this.h - 15, 30, 30);
+            // }
         }
 
         this.ctx.restore();
