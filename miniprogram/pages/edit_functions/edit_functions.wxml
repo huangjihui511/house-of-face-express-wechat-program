@@ -5,9 +5,12 @@
   />
 </view>
 
-<view class="failText" wx:if="{{!choosed}}" bindtap="addImg">点击选择图片\n</view>
+<view class="failText" wx:if="{{!choosed}}" bindtap="addImg">
+  点击选择图片
+  长按图片进行重新选择
+</view>
 
-<view class="canvasView" wx:if="{{choosed}}" style="--height--: {{CVH}}px">
+<view class="canvasView" bindlongtap="addImg" wx:if="{{choosed}}" style="--height--: {{CVH}}px">
   <image src='{{curImage}}' style='width: {{cWidth}}px; height: {{cHeight}}px'></image>
 </view>
 

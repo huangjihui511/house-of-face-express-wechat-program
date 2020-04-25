@@ -12,6 +12,7 @@
 .failText {
   margin-top: 200rpx;
   text-align: center;
+  word-wrap: break-word;
   color: #888;
 }
 
