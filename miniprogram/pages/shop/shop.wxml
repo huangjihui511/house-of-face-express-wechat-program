@@ -76,10 +76,10 @@
 
   <view class="line"></view>
 
-  <button class="uploadimage" bindtap="uploadimage">
+  <!--button class="uploadimage" bindtap="uploadimage">
     <text class="上传"></text>
-  </button>
-  <view class="page-section">
+  </button-->
+  <!--view class="page-section">
 
-  </view>
+  </view-->
 </view>

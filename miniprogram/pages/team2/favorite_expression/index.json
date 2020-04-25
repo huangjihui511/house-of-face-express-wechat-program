@@ -1,5 +1,8 @@
 {
   "usingComponents": {},
+  "navigationBarTitleText": "主页",
+  "navigationBarBackgroundColor": "#0387FE",
+  "navigationBarTextStyle": "white",
   "pages": [
     "pages/favorite_expression/index"
   ]

@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {},
+  "navigationBarTitleText": "本地",
+  "navigationBarBackgroundColor": "#0387FE",
+  "navigationBarTextStyle": "white"
 }
