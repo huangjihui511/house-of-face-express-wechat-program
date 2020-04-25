@@ -11,6 +11,7 @@
 7. [`Alpha阶段 第七次Scrum Meeting`](https://www.cnblogs.com/GOOD-CODEING-BUAA-SE/p/12743560.html) 
 8. [`Alpha阶段 第八次Scrum Meeting`](https://www.cnblogs.com/GOOD-CODEING-BUAA-SE/p/12750293.html) 
 9. [`Alpha阶段 第九次Scrum Meeting`](https://www.cnblogs.com/GOOD-CODEING-BUAA-SE/p/12758585.html) 
+10. [`Alpha阶段 第十次Scrum Meeting`](https://www.cnblogs.com/GOOD-CODEING-BUAA-SE/p/12772613.html) 
 
 ## 二、Beta阶段 
 
