@@ -72,6 +72,16 @@ Page({
       }
     );
   },
+
+  matchingInput:function(input,label) {
+    console.log("是否匹配:",input.indexOf(label))
+    if (input.indexOf(label) >= 0) {
+      return 1
+    }
+    else {
+      return 0
+    }
+  },
   
   confirm: function() {
     var v = this.data.inputValue
@@ -83,7 +93,7 @@ Page({
     var globalPicIndex = 0
     wx.cloud.init()
     //索引方式
-    var judge = 1
+    var judge = 2
     //for (var i = 0;i < labels.length;i++) {
       //var label = labels[i]
     for (var i = 0;i < 1;i++) {  
@@ -117,19 +127,52 @@ Page({
         })
       }
       else if (judge == 2) {
-        wx.cloud.callFunction({
-          name:"add_des_tag",
-          data:{
-            request:"search_by_tag",
-            tag_name:label
-          },
-          success:res=>{
-            var datas = res.result.data
-            console.log("获取表情成功2:",datas)
+        //tags读取权限问题
+        db.collection("tags").limit(100).get({
+          success:function(res){
+            var datas = res.data
+            console.log("获取表情成功2:",res.data)
+            console.log("tags长度：",datas.length)
             for (var j = 0;j < datas.length;j++) {
-              var expression_ids = datas[j]['expression_id']
+              var tag = datas[j]['name']
+             // console.log("fuck")
+             // console.log(label,tag,matchingInput(label,tag))
+              var judge = 0 
+              var inputString = String(label)
+              var labelString = String(tag)
+              console.log(inputString,"---",labelString,"是否匹配:",inputString.indexOf(labelString))
+              if (inputString.indexOf(labelString) >= 0) {
+                judge = 1
+              }
+              if (judge == 1) {
+                console.log("match")
+                var ids = datas[j]['expression_id']
+                console.log(ids)
+                for (var key in ids) {
+                  var path
+                  console.log(key)
+                  db.collection('expression').where({
+                    id:key
+                  }).get({
+                    success:function(res) {
+                      console.log("查找成功！",res)
+                      var reflex1 = globalPicIndex%9
+                      var reflex2 =  parseInt(reflex1/3)
+                      var reflex3 = reflex1%3
+                      console.log(res.data)
+                      path = res.data[0]['file_id']
+                      console.log("path:",path)
+                      that.data.showPicList[reflex2][reflex3]['file_id'] = path
+                      that.setData({
+                        showPicList:that.data.showPicList
+                      })
+                      globalPicIndex++
+                    }
+                  })
+                }
+              }
              // console.log("路径:",path)
-             for(var key in expression_ids)  {
+           /*  for(var key in expression_ids)  {
                var path
               db.collection('expression').where({
                id: key
@@ -137,15 +180,14 @@ Page({
                 console.log(res2)
                 path = res2[0]['file_id']
                 console.log("路径:",path)
-              })
-              that.data.showPicList[(globalPicIndex%9)/3][(globalPicIndex%9)%3]['file_id'] = path
-              globalPicIndex++
+              })*/
+              
             }
             }
-          }
-        })
+          })
+        }
       }
-    }
+    
    /* wx.cloud.callFunction({    
       name: 'login'  
     }).then(res=>{        
