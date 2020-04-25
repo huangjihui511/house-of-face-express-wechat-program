@@ -51,7 +51,8 @@ exports.main = async (event, context) => {
         _id:id
       }).update({
         data: {
-          ["tags." + tags[tag]]:_.inc(1)
+          ["tags." + tags[tag]]:_.inc(1),
+          tag_num:_.inc(1)
         }
       })
       
