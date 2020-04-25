@@ -26,7 +26,10 @@ Page({
   },
   navigateToMainPage() {
     console.log("next page")
-    wx.reLaunch({url: '../team2/favorite_expression/index'})
+    wx.navigateTo({
+      url: '../notify/notify',
+    })
+    // wx.reLaunch({url: '../team2/favorite_expression/index'})
     //wx.navigateTo({url: '../index/index'})
   },
   login: function(e) {

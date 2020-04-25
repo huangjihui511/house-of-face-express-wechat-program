@@ -1,0 +1,17 @@
+<!--miniprogram/pages/notify/notify.wxml-->
+<!-- <text>miniprogram/pages/notify/notify.wxml</text> -->
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title">通知信息</view>
+        <!-- <view class="page__desc">{{appDes}}</view> -->
+    </view>
+    <view wx:for="{{infos}}">
+        <view class="page__hd">
+            <view class="page__title">{{item.content}}</view>
+            <view class="page__desc">{{item.date}}</view>
+        </view>
+    </view>
+    <view class="button-sp-area">
+        <button class="weui-btn" type="primary" open-type="getUserInfo" bindgetuserinfo="confirm">确定</button>
+    </view>
+</view>
