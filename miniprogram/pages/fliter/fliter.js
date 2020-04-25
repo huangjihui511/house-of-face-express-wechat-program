@@ -74,7 +74,6 @@ Page({
         let data = result.data;
         switch (type) {
           case 'hd':
-            console.log(111222)
             for (let i = 0; i < result.width * result.height;i++){
               //********************只有这里有区别****************************
                 let R = data[i * 4 + 0];

@@ -14,28 +14,7 @@ Page({
     cHeight: 0, // canvas的完整高度
     curImage: '',
     textToPrint:'',
-    btnInfo: [
-      {
-        type: 'text',
-        background: 'url("https://i.niupic.com/images/2020/04/25/7vwo.png") white no-repeat; background-size: 20px 20px;background-position-x: center;background-position-y: center;'
-      },
-      {
-        type: 'paint',
-        background: 'url("https://i.niupic.com/images/2020/04/25/7vwl.png") white no-repeat; background-size: 20px 20px;background-position-x: center;background-position-y: center;'
-      },
-      {
-        type: 'filter',
-        background: 'url("https://i.niupic.com/images/2020/04/25/7vwk.png") white no-repeat; background-size: 20px 20px;background-position-x: center;background-position-y: center;'
-      },
-      {
-        type: 'joint',
-        background: 'url("https://i.niupic.com/images/2020/04/25/7vwn.png") white no-repeat; background-size: 20px 20px;background-position-x: center;background-position-y: center;'
-      },
-      {
-        type: 'save',
-        background: 'url("https://i.niupic.com/images/2020/04/25/7vwm.png") white no-repeat; background-size: 20px 20px;background-position-x: center;background-position-y: center;'
-      },
-    ],
+    choosed: false,
     text: false,
     maxLen: false,
     paint: false,
@@ -50,6 +29,95 @@ Page({
     colorArrS: ['green', 'blue', 'cyan', 'purple', 'gray'],
     currentColor: 'black',
     fliterArr: ['模糊', '暗化', '淡化', '阴影', '灰度']
+  },
+
+  addImg() {
+    let that = this
+    wx.chooseImage({
+      count: 1,
+      sizeType: ['original'],
+      sourceType: ['album', 'camera'],
+      success (res) {
+        that.setData({
+          choosed: true
+        })
+        wx.getImageInfo({
+          src: res.tempFilePaths[0],
+          success (res) {
+            that.adjustScale(res.path)
+            let ctx = wx.createCanvasContext('edit')
+            ctx.drawImage(res.path, 0, 0, that.data.cWidth, that.data.cHeight)
+            ctx.draw()
+            that.setData({
+              curImage: res.path
+            })
+          },
+          fail(err){
+            console.log(err)
+          }
+        })
+      }
+    })
+  },
+
+  addText() {
+    this.setData({
+      text: !this.data.text,
+      paint: false,
+      filter: false,
+      joint: false,
+      save: false
+    })
+    wx.navigateTo({
+      url: '../wordCombine/wordCombine',
+    })
+  },
+
+  addLine() {
+    this.setData({
+      text: false,
+      paint: !this.data.paint,
+      filter: false,
+      joint: false,
+      save: false
+    })
+    wx.navigateTo({
+      url: '../paint/paint?image=' + this.data.curImage,
+    })
+  },
+
+  addFilter() {
+    this.setData({
+      text: false,
+      paint: false,
+      filter: !this.data.filter,
+      joint: false,
+      save:false
+    })
+    wx.navigateTo({
+      url: '../fliter/fliter',
+    })
+  },
+
+  addPhoto() {
+    this.setData({
+      text: false,
+      paint: false,
+      filter: false,
+      joint: !this.data.joint,
+      save: false
+    })
+    this.jointTap()
+  },
+
+  savePhoto() {
+    this.setData({
+      text: false,
+      paint: false,
+      filter: false,
+      joint: false,
+      save: !this.data.save
+    })
   },
 
   adjustScale(path) {
@@ -80,90 +148,7 @@ Page({
   },
 
   onTabItemTap() {
-    let that = this
-    wx.chooseImage({
-      count: 1,
-      sizeType: ['original'],
-      sourceType: ['album', 'camera'],
-      success (res) {
-        wx.getImageInfo({
-          src: res.tempFilePaths[0],
-          success (res) {
-            that.adjustScale(res.path)
-            let ctx = wx.createCanvasContext('edit')
-            ctx.drawImage(res.path, 0, 0, that.data.cWidth, that.data.cHeight)
-            ctx.draw()
-            that.setData({
-              curImage: res.path
-            })
-          },
-          fail(err){
-            console.log(err)
-          }
-        })
-      }
-    })
-  },
-
-  tapBtn: function(e) {
-    let btnType = e.target.dataset.type
-    switch (btnType) {
-      case 'text':
-        this.setData({
-          text: !this.data.text,
-          paint: false,
-          filter: false,
-          joint: false,
-          save: false
-        })
-        wx.navigateTo({
-          url: '../wordCombine/wordCombine',
-        })
-        break;
-      case 'paint':
-        this.setData({
-          text: false,
-          paint: !this.data.paint,
-          filter: false,
-          joint: false,
-          save: false
-        })
-        wx.navigateTo({
-          url: '../paint/paint?image=' + this.data.curImage,
-        })
-        break
-      case 'filter':
-        this.setData({
-          text: false,
-          paint: false,
-          filter: !this.data.filter,
-          joint: false,
-          save:false
-        })
-        wx.navigateTo({
-          url: '../fliter/fliter',
-        })
-        break
-      case 'joint':
-        this.setData({
-          text: false,
-          paint: false,
-          filter: false,
-          joint: !this.data.joint,
-          save: false
-        })
-        this.jointTap()
-        break
-      case 'save':
-        this.setData({
-          text: false,
-          paint: false,
-          filter: false,
-          joint: false,
-          save: !this.data.save
-        })
-        break
-    }
+    
   },
 
   jointTap() {

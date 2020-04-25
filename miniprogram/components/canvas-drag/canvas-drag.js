@@ -28,12 +28,13 @@ CanvasDrag.export = () => {
 
 CanvasDrag.changFontColor = (color) => {
     const canvasDrag  = CanvasDrag();
+    console.log(111)
+    console.log(color)
     if (!canvasDrag) {
         console.error('请设置组件的id="canvas-drag"!!!');
     } else {
         return CanvasDrag().changColor(color);
     }
-    console.log(color)
 }
 
 CanvasDrag.changeBgColor = (color) => {

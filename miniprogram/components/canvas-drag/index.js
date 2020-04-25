@@ -1,5 +1,5 @@
 // components/canvas-drag/index.js
-const dragGraph = function ({ x, y, w, h, type, text, fontSize = 20, color = 'black', url }, canvas, factor) {
+const dragGraph = function ({ x, y, w, h, type, text, fontSize = 20, color, url }, canvas, factor) {
     if (type === 'text') {
         canvas.setFontSize(fontSize);
         const textWidth = canvas.measureText(this.text).width;
@@ -326,7 +326,6 @@ Component({
                         this.tempGraphArr.push(item);
                         // 保存点击时的坐标
                         this.currentTouch = { x, y };
-
                     }
                 }
             });

@@ -5,14 +5,39 @@
   />
 </view>
 
-<view class="canvasView" style="--height--: {{CVH}}px">
+<view class="failText" wx:if="{{!choosed}}" bindtap="addImg">点击选择图片\n</view>
+
+<view class="canvasView" wx:if="{{choosed}}" style="--height--: {{CVH}}px">
   <image src='{{curImage}}' style='width: {{cWidth}}px; height: {{cHeight}}px'></image>
 </view>
 
-<view class="bottom">
+<!-- <view class="bottom">
   <block wx:for="{{btnInfo}}" wx:key="index">
     <view class="list-item" data-type="{{item.type}}" style="background: {{item.background}}" bindtap="tapBtn"></view>
   </block>
+</view> -->
+
+<view class="bottom">
+  <view class="iconView" bindtap="addText">
+    <image src="../../images/text.png"></image>
+    <text>添加文字</text>
+  </view>
+  <view class="iconView" bindtap="addLine">
+    <image src="../../images/paint.png"></image>
+    <text>图片涂鸦</text>
+  </view>
+  <view class="iconView" bindtap="addFilter">
+    <image src="../../images/fliter.png"></image>
+    <text>添加滤镜</text>
+  </view>
+  <view class="iconView" bindtap="addPhoto">
+    <image src="../../images/joint.png"></image>
+    <text>图片拼接</text>
+  </view>
+  <view class="iconView" bindtap="savePhoto">
+    <image src="../../images/save.png"></image>
+    <text>保存图片</text>
+  </view>
 </view>
 
 <view class="{{save ? 'weui-show' :'weui-hidden'}}">
