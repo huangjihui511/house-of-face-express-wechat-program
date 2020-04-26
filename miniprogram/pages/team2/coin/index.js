@@ -4,6 +4,7 @@ const app = getApp()
 Page({
   data: {
     
+    
   },
   onShow:function () {
     wx.showToast({
