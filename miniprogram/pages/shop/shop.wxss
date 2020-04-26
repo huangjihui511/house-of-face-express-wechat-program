@@ -110,12 +110,14 @@
   font-size: small;
   margin-left: 10rpx;
   margin-right: 10rpx;
-  margin-top: 5rpx;
+  margin-top: 7rpx;
 }
 
 .exp_bar {
   display:flex;
   flex-direction: row;
+  margin-top: 10rpx;
+  margin-left: 30rpx;
 }
 
 .expBar {
