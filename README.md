@@ -9,5 +9,3 @@
 ## 参考文档
 
 - [云开发文档](https://developers.weixin.qq.com/miniprogram/dev/wxcloud/basis/getting-started.html)
-
-team2界面均需自己创建云环境，然后部署云函数，改变所有env，修改数据库里面集合

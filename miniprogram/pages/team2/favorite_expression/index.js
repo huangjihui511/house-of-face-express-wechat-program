@@ -209,7 +209,7 @@ Page({
     }
     for(var i=0; i<labels.length; i++){
       for(k=0;k<labels[i].length;k++){
-        if(labels[i][k]==label){
+        if(labels[i][k].name==label){
           temp_src[j]=src[i];
           j++;
           break;
@@ -306,7 +306,7 @@ Page({
       success(data) {
         setTimeout(function () {
           wx.redirectTo({
-            url: 'index',
+            url: '../../notify/notify',
           })
         }, 1000) //延迟时间
       }

@@ -1,7 +1,7 @@
 // pages/contect/contect.js
 //只需传给页面地址
 wx.cloud.init({
-  env:"pyb-database-n2c6s"
+  env:"project-database-v58ji"
 })
 var app = getApp();
 const db = wx.cloud.database()
@@ -153,7 +153,7 @@ submitted: function submitted(e) {
   onShow: function () {
     var _this=this
     console.log(this.options.src)
-    wx.cloud.callFunction({
+    /*wx.cloud.callFunction({
       name:"add_expression",
       data:{
         request:"sub_expression",
@@ -164,39 +164,39 @@ submitted: function submitted(e) {
     wx.cloud.downloadFile({
       fileID: this.options.src,
       success(result) {
-        console.log(result.tempFilePath)
-        let temp_src="image_src"
-        var src=result.tempFilePath
-        console.log(src)
-        _this.setData({
-          [temp_src]:src
-        })
-        console.log("src"+_this.data.image_src)
-        var timestamp =new Date();
-        let cu_time="time"
-        _this.setData({
-          [cu_time]:timestamp
-        })
-        wx.cloud.uploadFile({
-          cloudPath:'test'+Math.round(Math.random()*1000)+'.jpg',
-          filePath:src,
-          config:"pyb-database-n2c6s",
-          success: res => {
-            console.log("图片file_id", res.fileID)
-            const file1 = res.fileID
-            let file2 = "file_id"
-            _this.setData({
-              [file2]:file1,
-            })
-            wx.showToast({
-              title: '上传成功',
-              icon: 'success',
-              duration: 1000  
-            })
-          },
-          fail: console.error
-        })
       }
+    })*/
+    
+    let temp_src="image_src"
+    var src=this.options.src
+    console.log(src)
+    _this.setData({
+      [temp_src]:src
+    })
+    console.log("src"+_this.data.image_src)
+    var timestamp =new Date();
+    let cu_time="time"
+    _this.setData({
+      [cu_time]:timestamp
+    })
+    wx.cloud.uploadFile({
+      cloudPath:'test'+Math.round(Math.random()*1000)+'.jpg',
+      filePath:src,
+      config:"pyb-database-n2c6s",
+      success: res => {
+        console.log("图片file_id", res.fileID)
+        const file1 = res.fileID
+        let file2 = "file_id"
+        _this.setData({
+          [file2]:file1,
+        })
+        wx.showToast({
+          title: '上传成功',
+          icon: 'success',
+          duration: 1000  
+        })
+      },
+      fail: console.error
     })
   },
 

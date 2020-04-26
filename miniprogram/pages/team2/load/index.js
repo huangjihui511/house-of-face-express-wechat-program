@@ -1,7 +1,7 @@
 // pages/contect/contect.js
 var app=getApp()
 wx.cloud.init({
-  env:"pyb-database-n2c6s",traceUser:true
+  env:"project-database-v58ji",traceUser:true
 })
 const db = wx.cloud.database()
 var app = getApp();
