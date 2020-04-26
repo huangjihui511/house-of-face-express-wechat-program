@@ -59,7 +59,7 @@ Page({
     })
     console.log(res)
     var num 
-    if(res.result.data[0].expression_set==undefined){
+    if((res.result.data[0]==undefined)||(res.result.data[0].expression_set==undefined)){
       num=0
     }
     else{
