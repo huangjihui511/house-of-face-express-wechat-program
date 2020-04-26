@@ -31,23 +31,26 @@ exports.main = async (event, context) => {
     return (i+1)
   }
   if (request == "searchByLabel") {
-    var id = event.data1
-    var label = event.data2
-    try {
-      //var tags = db.collection('expression')
-      return await db.collection('expression').where({
-       // _id:id,
-        tags:{
-          label
-        }
-      }).get({
-        success:function(res) {
-          console.log(res.data)
-        }
-      })
-    } catch (e) {
-      console.log(e)
+    var label = event.data1
+    const countResult = await db.collection('tags').count()
+    const MAX_LIMIT = 100
+  const total = countResult.total
+  // 计算需分几次取
+  //const batchTimes = Math.ceil(total / 100)
+  const batchTimes = 10
+  // 承载所有读操作的 promise 的数组
+  const tasks = []
+  for (let i = 0; i < batchTimes; i++) {
+    const promise = db.collection('tags').skip(i * MAX_LIMIT).limit(MAX_LIMIT).get()
+    tasks.push(promise)
+  }
+  // 等待所有
+  return (await Promise.all(tasks)).reduce((acc, cur) => {
+    return {
+      data: acc.data.concat(cur.data),
+      errMsg: acc.errMsg,
     }
+  })
   }
 
   if (request == "add_expression") {

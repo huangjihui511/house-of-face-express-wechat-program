@@ -88,12 +88,15 @@ Page({
     this.setData({toSearch:v})
     let that = this
 
+    //暂存所有查找的图片路径
+    var tempPaths = []
+    
     var labels=['label7']
     labels[0] = v
     var globalPicIndex = 0
     wx.cloud.init()
     //索引方式
-    var judge = 2
+    var judge = 3
     //for (var i = 0;i < labels.length;i++) {
       //var label = labels[i]
     for (var i = 0;i < 1;i++) {  
@@ -128,7 +131,15 @@ Page({
       }
       else if (judge == 2) {
         //tags读取权限问题
-        db.collection("tags").limit(100).get({
+     // const countResult = db.collection('todos').count()
+    //  const total = countResult.total
+      // 计算需分几次取
+   //   const batchTimes = Math.ceil(total / 20)
+   const batchTimes = 1
+  // 承载所有读操作的 promise 的数组
+      var tempPaths = []
+      for (let a = 0;a < batchTimes;a++) {
+        db.collection("tags").limit(20).get({
           success:function(res){
             var datas = res.data
             console.log("获取表情成功2:",res.data)
@@ -167,26 +178,102 @@ Page({
                       that.setData({
                         showPicList:that.data.showPicList
                       })
+                      //tempPaths.push(path)
                       globalPicIndex++
                     }
                   })
                 }
-              }
-             // console.log("路径:",path)
-           /*  for(var key in expression_ids)  {
-               var path
-              db.collection('expression').where({
-               id: key
-              }).get().then(res2=>{
-                console.log(res2)
-                path = res2[0]['file_id']
-                console.log("路径:",path)
-              })*/
-              
+              } 
             }
             }
           })
         }
+        }
+        else if (judge == 3) {
+          db.collection("tag_names").get({
+            success:function(res) {
+              var all_tags = res.data[0].name
+              for (var runover = 0;runover < all_tags.length;runover++) {
+                var judge = 0 
+                var inputString = String(label)
+                var tag = all_tags[runover]
+                var labelString = String(tag)
+                //console.log(inputString,"---",labelString,"是否匹配:",inputString.indexOf(labelString))
+                if (inputString.indexOf(labelString) >= 0) {
+                  judge = 1
+                }
+                if (judge == 1 && (globalPicIndex < 9)) {
+                  //console.log("匹配成功")
+                  var path
+                  db.collection("tags").where({
+                    name:tag
+                  }).get({
+                    success:function(res) {
+                      //console.log("查找成功1111111111")
+                      /*path = res.data[0]['file_id']
+                      console.log(path)
+                      tempPaths[globalPicIndex%9] = path
+                      globalPicIndex++*/
+                      var datas = res.data
+                      for (var f = 0;f < datas.length;f++) {
+                        var ids = datas[f]['expression_id']
+                        //console.log("ids:",ids)
+                        for (var key in ids) {
+                        /*  var reflex1 = globalPicIndex%9
+                          var reflex2 =  parseInt(reflex1/3)
+                          var reflex3 = reflex1%3
+                          path = res.data[0]['file_id']
+                          console.log("path:",path)
+                          that.data.showPicList[reflex2][reflex3]['file_id'] = path
+                          that.setData({
+                            showPicList:that.data.showPicList
+                          })
+                          globalPicIndex++ */
+                          //var path
+                          //console.log(key)
+                          var reflex1 = globalPicIndex%9
+                            var reflex2 =  parseInt(reflex1/3)
+                            var reflex3 = reflex1%3
+                            that.data.showPicList[reflex2][reflex3]['file_id'] = key
+                            that.setData({
+                              showPicList:that.data.showPicList
+                            })
+                            globalPicIndex++
+                          /*db.collection('expression').where({
+                            id:key
+                          }).get({
+                            success:function(res) {
+                            console.log("查找成功！",res)
+                            var reflex1 = globalPicIndex%9
+                            var reflex2 =  parseInt(reflex1/3)
+                            var reflex3 = reflex1%3
+                            console.log(res.data)
+                            path = res.data[0]['file_id']
+                            console.log("path:",path)
+                            that.data.showPicList[reflex2][reflex3]['file_id'] = path
+                            that.setData({
+                              showPicList:that.data.showPicList
+                            })
+                      //tempPaths.push(path)
+                            globalPicIndex++
+                            }
+                         })*/
+                         if (globalPicIndex >= 9) {
+                           break
+                         }
+                      }
+                    }
+                    }
+                  })
+                }
+                if (globalPicIndex >= 9) {
+                  break
+                }
+              } 
+            }
+          })
+        }
+
       }
     
    /* wx.cloud.callFunction({    

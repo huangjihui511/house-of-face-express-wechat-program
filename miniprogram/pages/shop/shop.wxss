@@ -10,7 +10,8 @@
 .button_confirm{
   /*size:default;*/
   /**background-color: rgb(164, 164, 236);**/
-  background-color: burlywood;
+ /* background-color: burlywood;*/
+  background-color: #0387FE;
   display: flex;
   justify-content: center;
   position: relative;
@@ -26,8 +27,8 @@
 
 .confirmText {
   position: absolute;
-  /*justify-self: center;*/
-  left: 45rpx;
+  justify-self: center;
+  /*left: 45rpx;*/
 }
 
 .showWhatToSearch{
