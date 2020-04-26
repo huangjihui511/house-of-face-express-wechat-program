@@ -5,11 +5,6 @@ page {
   flex-direction: column;
   justify-content: flex-start;
 }
-.user_info{
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-}
 .user_logo{
   width: 185rpx;
   height:185rpx;
@@ -38,4 +33,4 @@ page {
   right: 20rpx;
   transform: rotate(45deg);
   margin-top:10rpx;
-}  
+} 

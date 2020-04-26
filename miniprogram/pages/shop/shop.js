@@ -442,7 +442,7 @@ Page({
         db.collection('user').where({
           open_id: tempid
         }).get().then(res=>{   
-          console.log(res.data[0].exp)
+          //console.log(res.data[0].exp)
           that.setData({          
             user_exp: res.data[0].exp     
           })   

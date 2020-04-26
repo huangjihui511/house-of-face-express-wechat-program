@@ -33,6 +33,35 @@ Page({
   addImg2() {
     wx.reLaunch({url: '../team2/favorite_expression/index'})
   },
+  addImag3(a){
+    
+    var that=this
+    
+    that.setData({
+      choosed:true
+    })
+    wx.cloud.downloadFile({
+      fileID: a,
+      success(res) {
+        console.log(res.tempFilePath)
+        wx.getImageInfo({
+          src: res.tempFilePath,
+          success (res) {
+            that.adjustScale(res.path)
+            let ctx = wx.createCanvasContext('edit')
+            ctx.drawImage(res.path, 0, 0, that.data.cWidth, that.data.cHeight)
+            ctx.draw()
+            that.setData({
+              curImage: res.path
+            })
+          },
+          fail(err){
+            console.log(err)
+          }
+        })
+      }
+    })
+  },
   addImg() {
     let that = this
     wx.chooseImage({
@@ -210,6 +239,12 @@ Page({
    */
   onLoad: function (options) {
 
+    var _this=this
+    
+    console.log(this.options.src)
+    if(this.options.src!=undefined){
+      this.addImag3(this.options.src)
+    }
   },
 
   /**
@@ -223,7 +258,16 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
+    /*wx.cloud.callFunction({
+      name:"add_expression",
+      data:{
+        request:"sub_expression",
+        data1:app.globalData.open_id,
+        data2:this.options.src
+      }
+    })
+    */
   },
 
   /**

@@ -182,6 +182,14 @@ submitted: function submitted(e) {
     })
   }
   else{
+    wx.cloud.callFunction({
+      name: "add_exp",
+      data:{
+        id:app.globalData.open_id,
+        incNum:10
+      }
+    })
+    
     //传回参数
     console.log(this.data.image_src)
     console.log(this.data.labels)
