@@ -6,6 +6,12 @@ page {
   flex-direction: column;
   justify-content: flex-start;
 }
+.user_info{
+  display: flex;
+  flex-direction: row;
+  width: 750rpx;
+  height: 50rpx;
+}
 .empty{
   display: none;
 }
