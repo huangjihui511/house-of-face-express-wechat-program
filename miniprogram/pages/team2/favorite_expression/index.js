@@ -269,8 +269,8 @@ Page({
             console.log("点击了列表项：" + res.tapIndex)
             if(res.tapIndex==0){
               console.log("000000000000")
-              wx.redirectTo({
-                url: '../team2_load_for_team1/index?src='+e.currentTarget.dataset.src,
+              wx.reLaunch({
+                url: '../../edit_functions/edit_functions?src='+e.currentTarget.dataset.src,
               })
             }
             else if(res.tapIndex==1){
@@ -305,9 +305,7 @@ Page({
       duration: 1000,
       success(data) {
         setTimeout(function () {
-          wx.redirectTo({
-            url: '../../notify/notify',
-          })
+          wx.reLaunch({url: './index'})
         }, 1000) //延迟时间
       }
     })

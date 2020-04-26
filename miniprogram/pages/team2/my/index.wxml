@@ -1,8 +1,7 @@
 <!--index.wxml-->
+<!--index.wxml-->
 <view class="user_info">
   <view class="user_logo"><open-data type="userAvatarUrl" id="userinfo"></open-data></view>
-  <text decode="{{true}}">&ensp;&ensp;</text>
-  <view class="user_name"><open-data type="userNickName" lang="zh_CN"></open-data></view>
 </view>
 <view class='list' wx:for="{{list}}" wx:key="index">
   <navigator url="{{item.url}}">
