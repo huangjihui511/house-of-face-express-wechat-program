@@ -28,7 +28,7 @@ Page({
         console.log(app.globalData.notification_num)
         console.log(res.result.data.length)
         if (wx.getStorageSync("notification_num")== res.result.data.length) {
-          this.confirm()
+          // this.confirm()
         }
         wx.setStorageSync('notification_num',res.result.data.length )
         // app.globalData.notification_num = res.result.data.length

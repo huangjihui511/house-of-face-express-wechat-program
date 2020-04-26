@@ -10,7 +10,7 @@
 </view>
 <view wx:if="{{!choosed}}">
   <view class="page__hd">
-          <view class="page__title">编辑图片</view>
+          <view class="page__title">编辑表情</view>
           <view class="page__desc">目前支持添加文字，图片涂鸦，添加滤镜，图片拼接</view>
           <view class="page__desc">你可以从本地选择图片，也可以从我的收藏中选择</view>
   </view>
