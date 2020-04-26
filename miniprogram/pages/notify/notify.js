@@ -14,7 +14,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   confirm: function () {
-    wx.reLaunch({url: '../team2/favorite_expression/index'})
+    wx.navigateBack({
+      complete: (res) => {},
+    })
+    // wx.reLaunch({url: '../team2/favorite_expression/index'})
   },
   onLoad: function (options) {
     wx.cloud.callFunction({

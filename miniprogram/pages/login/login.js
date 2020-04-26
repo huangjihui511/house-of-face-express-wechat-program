@@ -26,10 +26,10 @@ Page({
   },
   navigateToMainPage() {
     console.log("next page")
-    wx.navigateTo({
-      url: '../notify/notify',
-    })
-    // wx.reLaunch({url: '../team2/favorite_expression/index'})
+    // wx.navigateTo({
+    //   url: '../notify/notify',
+    // })
+    wx.reLaunch({url: '../team2/favorite_expression/index'})
     //wx.navigateTo({url: '../index/index'})
   },
   login: function(e) {
@@ -111,7 +111,7 @@ Page({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
-      this.navigateToMainPage()
+      // this.navigateToMainPage()
     } else if (this.data.canIUse){
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
@@ -120,9 +120,8 @@ Page({
           userInfo: res.userInfo,
           hasUserInfo: true
         })
-        this.navigateToMainPage()
+        //this.navigateToMainPage()
       }
-      //this.navigateToMainPage()
     } else {
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
@@ -132,7 +131,7 @@ Page({
             userInfo: res.userInfo,
             hasUserInfo: true
           })
-          this.navigateToMainPage()
+          //this.navigateToMainPage()
         }
       })
     }
@@ -148,6 +147,27 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    wx.cloud.callFunction({
+      name:"get_notificatoin",
+      success : res => {
+        console.log(res)
+        var list = res.result.data
+        
+        console.log(wx.getStorageSync("notification_num"))
+        console.log(res.result.data.length)
+        if (wx.getStorageSync("notification_num") != res.result.data.length) {
+          console.log("go to notify")
+          wx.navigateTo({
+            url: '../notify/notify',
+          })
+          wx.setStorageSync('notification_num',res.result.data.length )
+          return
+        }
+      },
+      fail: err => {
+        console.log(err)
+      }
+    })
   },
 
   /**
