@@ -30,7 +30,9 @@ Page({
     currentColor: 'black',
     fliterArr: ['模糊', '暗化', '淡化', '阴影', '灰度']
   },
-
+  addImg2() {
+    wx.reLaunch({url: '../team2/favorite_expression/index'})
+  },
   addImg() {
     let that = this
     wx.chooseImage({
