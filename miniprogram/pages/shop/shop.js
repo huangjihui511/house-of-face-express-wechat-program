@@ -55,6 +55,12 @@ Page({
     user_exp_Upbound:25
   },
   
+  jumpToExp:function(e) {
+    wx.navigateTo({
+      url: '/pages/aboutExp/aboutExp',
+    })
+  },
+
   shop_image_pagejump:function(e) {
     var app = getApp()
     console.log(e)
@@ -191,9 +197,29 @@ Page({
         }
         else if (judge == 3) {
           db.collection("tag_names").get({
+            
             success:function(res) {
+              wx.showLoading({
+                title: '加载中',
+               })
+               setTimeout(function () {
+                wx.hideLoading()
+                if (globalPicIndex == 0){
+                  wx.showToast({
+                  title: '抱歉，未找到您想要的表情，换个关键词试试^_^?', // 标题
+                  icon: 'none',  // 图标类型，none
+                  duration: 2500  // 提示窗停留时间，默认1500ms
+                })
+                }
+                }, 20000)
+               // 数据加载中... // 数据加载中...
+               
               var all_tags = res.data[0].name
               for (var runover = 0;runover < all_tags.length;runover++) {
+                //console.log(runover)
+                /*if (runover%100 == 0) {
+                  console.log("100")
+                }*/
                 var judge = 0 
                 var inputString = String(label)
                 var tag = all_tags[runover]
@@ -235,10 +261,11 @@ Page({
                             var reflex2 =  parseInt(reflex1/3)
                             var reflex3 = reflex1%3
                             that.data.showPicList[reflex2][reflex3]['file_id'] = key
+                            globalPicIndex++
+                            console.log("wtfglobalPicIndex",globalPicIndex)
                             that.setData({
                               showPicList:that.data.showPicList
-                            })
-                            globalPicIndex++
+                            }) 
                           /*db.collection('expression').where({
                             id:key
                           }).get({
@@ -259,14 +286,40 @@ Page({
                             }
                          })*/
                          if (globalPicIndex >= 9) {
+                           // 数据加载完成，隐藏弹窗
+                           wx.hideLoading()
                            break
                          }
                       }
                     }
                     }
                   })
+                  // 数据加载完成，隐藏弹窗
+                  wx.hideLoading()
+                  break;
+                }
+                if (runover == all_tags.length) {
+                  // 数据加载完成，隐藏弹窗
+                  wx.hideLoading()
+                  console.log("结束")
+                }
+                if ((runover == all_tags.length) && (globalPicIndex == 0)) {
+                  // 数据加载完成，隐藏弹窗
+                  wx.hideLoading()
+                  //console.log("777")
+                  /*wx.showToast({
+                    title: '抱歉，未找到您想要的表情，换个关键词试试^_^?', // 标题
+                    icon: 'none',  // 图标类型，none
+                    duration: 1500  // 提示窗停留时间，默认1500ms
+                  })*/
+                }
+                if ((runover == all_tags.length) && (globalPicIndex > 0)) {
+                  // 数据加载完成，隐藏弹窗
+                  wx.hideLoading()
                 }
                 if (globalPicIndex >= 9) {
+                  // 数据加载完成，隐藏弹窗
+                  wx.hideLoading()
                   break
                 }
               } 

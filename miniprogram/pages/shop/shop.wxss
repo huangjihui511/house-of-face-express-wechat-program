@@ -89,23 +89,26 @@
 
 .userName {
   margin-left: 20rpx;
-  margin-right: 20rpx;
+  margin-right: 10rpx;
 }
 
 .Coin {
   display: flex;
   flex-direction: row;
+  /*margin-top: 10rpx;*/
   /**padding: 20rpx;**/
 }
 
 .nameExp {
+  margin-left: 20rpx;
   display: flex;
   flex-direction: row;
 }
 
 .userRank {
+  color:rgb(164, 164, 236);
   font-size: small;
-  margin-left: 20rpx;
+  margin-left: 10rpx;
   margin-right: 10rpx;
   margin-top: 5rpx;
 }
@@ -255,6 +258,7 @@
 .expFont {
   font-size: small;
   color: rgb(164, 164, 236) ;
-  margin-top: 5rpx;
+  margin-left: 10rpx;
+  margin-top: 8rpx;
 }
 

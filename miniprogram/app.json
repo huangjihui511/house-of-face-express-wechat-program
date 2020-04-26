@@ -1,10 +1,8 @@
 {
   "pages": [
-    
     "pages/login/login",
     "pages/notify/notify",
     "pages/shop/shop",
-    
     "pages/edit_functions/edit_functions",
     "pages/add_des/add_des",
     "pages/main/main",
@@ -19,8 +17,8 @@
     "pages/paint/paint",
     "pages/feedback/feedback",
     "pages/mark_expression/mark_expression",
-    "pages/fliter/fliter"
-    
+    "pages/fliter/fliter",
+    "pages/aboutExp/aboutExp"
   ],
   "window": {
     "backgroundTextStyle": "light",
