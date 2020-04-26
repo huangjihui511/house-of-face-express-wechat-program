@@ -189,6 +189,7 @@ submitted: function submitted(e) {
         incNum:10
       }
     })
+    
     //传回参数
     console.log(this.data.image_src)
     console.log(this.data.labels)
