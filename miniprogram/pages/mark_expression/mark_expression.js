@@ -111,7 +111,12 @@ Page({
         title: '任务失败',
         content: '未完成识别任务，无法增加经验',
         showCancel: false,
-        confirmText: '确定'
+        confirmText: '确定',
+        success: res=> {
+          wx.navigateBack({
+            complete: (res) => {},
+          })
+        }
       })
       
       return

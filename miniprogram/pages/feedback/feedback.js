@@ -57,13 +57,27 @@ Page({
       },
       success: res=> {
         console.log("succ")
+        wx.showModal({
+          title: '反馈成功',
+          confirmText: '确定',
+          success: res=> {
+            wx.navigateBack({
+              complete: (res) => {},
+            })
+          }
+        })
       },
       fail: err => {
-        console.log("error")
+        wx.showModal({
+          title: '反馈失败',
+          confirmText: '确定',
+          success: res=> {
+            wx.navigateBack({
+              complete: (res) => {},
+            })
+          }
+        })
       }
-    })
-    wx.navigateBack({
-      complete: (res) => {},
     })
   },
 
