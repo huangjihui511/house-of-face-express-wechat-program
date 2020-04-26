@@ -12,6 +12,6 @@
         </view>
     </view>
     <view class="button-sp-area">
-        <button class="weui-btn" type="primary" open-type="getUserInfo" bindgetuserinfo="confirm">确定</button>
+        <button type="primary"  bindtap="confirm">确定</button>
     </view>
 </view>

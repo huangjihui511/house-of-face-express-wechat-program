@@ -14,7 +14,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   confirm: function () {
-    wx.reLaunch({url: '../team2/favorite_expression/index'})
+    wx.navigateBack({
+      complete: (res) => {},
+    })
+    // wx.reLaunch({url: '../team2/favorite_expression/index'})
   },
   onLoad: function (options) {
     wx.cloud.callFunction({
@@ -28,7 +31,7 @@ Page({
         console.log(app.globalData.notification_num)
         console.log(res.result.data.length)
         if (wx.getStorageSync("notification_num")== res.result.data.length) {
-          this.confirm()
+          // this.confirm()
         }
         wx.setStorageSync('notification_num',res.result.data.length )
         // app.globalData.notification_num = res.result.data.length
