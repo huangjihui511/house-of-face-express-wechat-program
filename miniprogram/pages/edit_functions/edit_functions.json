@@ -1,10 +1,6 @@
 {
   "usingComponents": {
     
-    "mp-halfScreenDialog": "../../ui-dist/half-screen-dialog/half-screen-dialog",
-    "i-avatar": "../../ui-dist/avatar/index"
-  },
-  "navigationBarTitleText": "编辑",
-  "navigationBarBackgroundColor": "#0387FE",
-  "navigationBarTextStyle": "white"
+    "mp-halfScreenDialog": "../../ui-dist/half-screen-dialog/half-screen-dialog"
+  }
 }

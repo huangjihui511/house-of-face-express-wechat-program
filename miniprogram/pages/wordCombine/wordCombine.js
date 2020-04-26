@@ -135,6 +135,7 @@ Page({
       graph: {
         type: 'text',
         text: obj.textToPrint,
+        color: that.data.currentColor
       }
     });
   },

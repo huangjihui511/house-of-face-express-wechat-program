@@ -33,7 +33,7 @@
 
 <view class='btnView' style='height:60px'>
   <button class='addTextBtn' type='primary' disabled = '{{canAdd}}'  bindtap='onExport'>
-    保存
+    保存编辑
   </button>
 </view>
 
