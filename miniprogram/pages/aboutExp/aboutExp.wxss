@@ -1,0 +1,30 @@
+/* miniprogram/pages/aboutExp/aboutExp.wxss */
+
+.head {
+  display: flex;
+  align-items: center;
+  justify-content: center;  
+  margin-top: 20rpx;
+  width: 100%;
+}
+
+.title {
+  font-size: larger;
+}
+
+.body {
+  display: flex;
+  flex-direction: column;
+}
+
+.introHead {
+  font-size: large;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 30rpx;
+}
+
+.introItem {
+  margin-left: 20rpx;
+}

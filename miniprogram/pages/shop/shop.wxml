@@ -8,14 +8,20 @@
         <view class="nameAndCoin">
           <view class="nameExp">
             <text class="userName">{{userInfo.nickName}}</text>
+            <text class="userRank">等级：{{user_rank}}</text>
           </view>
           <view class="Coin">
-            <text class="userRank">等级：{{user_rank}}</text>
-            <view class="exp_bar" style="width:200rpx;height:30rpx">
+            
+            <!--view class="exp_bar" style="width:200rpx;height:30rpx">
               <view class="expBar" style="width:{{(user_exp/user_exp_Upbound)*200}}rpx;height:30rpx"></view>
               <view class="expBar_bg" style="width:{{(1-user_exp/user_exp_Upbound)*200}}rpx;height:30rpx"></view>
               <text class="expFont">{{user_exp}}/{{user_exp_Upbound}}</text>
-            </view>
+            </view-->
+            <button class="exp_bar" style="width:400rpx;height:30rpx" bindtap="jumpToExp">
+              <view class="expBar" style="width:{{(user_exp/user_exp_Upbound)*200}}rpx;height:30rpx"></view>
+              <view class="expBar_bg" style="width:{{(1-user_exp/user_exp_Upbound)*200}}rpx;height:30rpx"></view>
+              <text class="expFont">{{user_exp}}/{{user_exp_Upbound}}</text>
+            </button>
           </view>
           <!--view class="Coin"> 
             <text class="coinAmount">金币余额：{{user_coin}}</text>

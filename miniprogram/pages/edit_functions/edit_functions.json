@@ -2,5 +2,9 @@
   "usingComponents": {
     
     "mp-halfScreenDialog": "../../ui-dist/half-screen-dialog/half-screen-dialog"
-  }
+  },
+
+  "navigationBarBackgroundColor": "#0387FE",
+   "navigationBarTitleText": "编辑",
+  "navigationBarTextStyle":"white"
 }
