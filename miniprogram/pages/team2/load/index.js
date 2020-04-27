@@ -77,11 +77,10 @@ two2one(a) {
                     [image_src]:res.tempFilePath
                   })
                   wx.cloud.uploadFile({
-                    cloudPath:'test'+Math.round(Math.random()*1000)+'.jpg',
+                    cloudPath:'test'+app.globalData.open_id+Math.round(Math.random()*100000)+'.jpg',
                     filePath:res.tempFilePath,
-                    config:"pyb-database-n2c6s",
                     success: res => {
-                      console.log("图片file_id", res.fileID)
+                      console.log("图片file_id", res)
                       const file1 = res.fileID
                       let file2 = "file_id"
                       _this.setData({
@@ -132,6 +131,30 @@ chooseImage: async function chooseImage(e) {
     sourceType: ['album', 'camera'],
     success(res) {
       console.log('chooseImage success, temp path is', res.tempFilePaths[0])
+      let buffer = wx.getFileSystemManager().readFileSync(res.tempFilePaths[0])
+      wx.cloud.callFunction({
+        name: 'img',
+        data: {
+          value:buffer
+        },
+        success(res){
+          console.log("检测结果", res);
+          if (res.result.errCode == 0) {
+              wx.showToast({
+               icon: 'none',
+               title: '图片正常',
+           })
+          } else {
+           wx.showToast({
+             icon: 'none',
+             title: '图片含有违法信息，请换张说明图',
+           })
+          }
+        },
+        fail(res){
+          console.log("错误"+res)
+        }
+      })
       let empty='empty'
       let cu_time="time"
       _this.setData({
