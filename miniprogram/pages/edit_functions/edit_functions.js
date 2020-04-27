@@ -40,27 +40,47 @@ Page({
     that.setData({
       choosed:true
     })
-    wx.cloud.downloadFile({
-      fileID: a,
-      success(res) {
-        console.log(res.tempFilePath)
-        wx.getImageInfo({
-          src: res.tempFilePath,
-          success (res) {
-            that.adjustScale(res.path)
-            let ctx = wx.createCanvasContext('edit')
-            ctx.drawImage(res.path, 0, 0, that.data.cWidth, that.data.cHeight)
-            ctx.draw()
-            that.setData({
-              curImage: res.path
-            })
-          },
-          fail(err){
-            console.log(err)
-          }
-        })
-      }
-    })
+    if(a.indexOf("cloud://")>=0){
+      wx.cloud.downloadFile({
+        fileID: a,
+        success(res) {
+          console.log(res.tempFilePath)
+          wx.getImageInfo({
+            src: res.tempFilePath,
+            success (res) {
+              that.adjustScale(res.path)
+              let ctx = wx.createCanvasContext('edit')
+              ctx.drawImage(res.path, 0, 0, that.data.cWidth, that.data.cHeight)
+              ctx.draw()
+              that.setData({
+                curImage: res.path
+              })
+            },
+            fail(err){
+              console.log(err)
+            }
+          })
+        }
+      })
+    }
+    else{
+      wx.getImageInfo({
+        src: a,
+        success (res) {
+          that.adjustScale(res.path)
+          let ctx = wx.createCanvasContext('edit')
+          ctx.drawImage(res.path, 0, 0, that.data.cWidth, that.data.cHeight)
+          ctx.draw()
+          that.setData({
+            curImage: res.path
+          })
+        },
+        fail(err){
+          console.log(err)
+        }
+      })
+    }
+    
   },
   addImg() {
     let that = this
