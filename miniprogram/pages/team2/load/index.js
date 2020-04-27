@@ -86,11 +86,6 @@ two2one(a) {
                       _this.setData({
                         [file2]:file1,
                       })
-                      wx.showToast({
-                        title: '上传成功',
-                        icon: 'success',
-                        duration: 1000  
-                      })
                     },
                     fail: console.error
                   })
@@ -133,22 +128,23 @@ chooseImage: async function chooseImage(e) {
       console.log('chooseImage success, temp path is', res.tempFilePaths[0])
       let buffer = wx.getFileSystemManager().readFileSync(res.tempFilePaths[0])
       wx.cloud.callFunction({
-        name: 'img',
+        name: 'imgCheck',
         data: {
           value:buffer
         },
         success(res){
           console.log("检测结果", res);
-          if (res.result.errCode == 0) {
-              wx.showToast({
-               icon: 'none',
-               title: '图片正常',
-           })
-          } else {
+          if (res.result.errCode != 0) {
            wx.showToast({
              icon: 'none',
-             title: '图片含有违法信息，请换张说明图',
+             title: '图片含有违法信息，请换张图片',
+             duration: 1000,
            })
+           setTimeout(function () {
+            wx.redirectTo({
+              url: 'index',
+            })
+          }, 1000)
           }
         },
         fail(res){
@@ -165,7 +161,7 @@ chooseImage: async function chooseImage(e) {
       wx.showToast({
         title: '请等待',
         icon: 'loading',
-        duration: 2000
+        duration: 3000
       })
     },
     fail({errMsg}) {
@@ -303,7 +299,7 @@ submitted: function submitted(e) {
     console.log(res)
     console.log(app.globalData.max_exp)
     var cur_size
-    if(res.result.data[0].expression_set==undefined){
+    if((res.result.data[0]==undefined)||(res.result.data[0].expression_set==undefined)){
       cur_size=0
     }
     else{

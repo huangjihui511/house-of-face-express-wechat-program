@@ -191,9 +191,9 @@ submitted: function submitted(e) {
           [file2]:file1,
         })
         wx.showToast({
-          title: '上传成功',
-          icon: 'success',
-          duration: 1000  
+          title: '请等待',
+          icon: 'loading',
+          duration: 2000  
         })
       },
       fail: console.error
