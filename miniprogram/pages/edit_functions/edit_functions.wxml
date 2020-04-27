@@ -12,7 +12,7 @@
   <view class="page__hd">
           <view class="page__title">编辑表情</view>
           <view class="page__desc">目前支持添加文字，图片涂鸦，添加滤镜，图片拼接</view>
-          <view class="page__desc">你可以从本地选择图片，也可以从我的收藏中选择</view>
+          <view class="page__desc">长按已选，重新选择照片</view>
   </view>
   <button class="weui-btn" type="primary" bindtap="addImg">从本地选择</button>
   
