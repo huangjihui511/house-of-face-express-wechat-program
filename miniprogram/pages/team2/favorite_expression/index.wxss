@@ -6,12 +6,6 @@ page {
   flex-direction: column;
   justify-content: flex-start;
 }
-.user_info{
-  display: flex;
-  flex-direction: row;
-  width: 750rpx;
-  height: 50rpx;
-}
 .empty{
   display: none;
 }
@@ -21,7 +15,7 @@ page {
 }
 .delete{
   position: fixed;
-  bottom: 0rpx;
+  bottom: 50rpx;
   height: 70rpx;
   width: 100%;
   background-color: rgb(252, 251, 251);
@@ -50,51 +44,8 @@ page {
   justify-content:space-around;
   margin: 30rpx;
 }
-.image_title{
-  text-align:center;
-  font-weight:700;
-}
-.button_list{
-  display: flex;
-  flex-wrap:wrap;
-  align-items:baseline;
-}
-.time{
-  color: black;
-  font-size: 30rpx;
-}
-.time:hover {
-  background-color:orange;
-  color: white;
-}
-.freq{
-  font-size: 30rpx;
-  text-align: center;
-}
-.picker{
-  font-size: 30rpx;
-}
-.fix{
-  background-color:rgb(252, 251, 251);
-  position: fixed;
-  top: 60rpx;
-}
-.divLine{
-  display: flex;
-  flex-direction: row;
-}
-.divLine_freq{
-  width: 50%;
-  height: 3rpx;
- }
-.divLine_kind{
-  width: 50%;
-  height: 3rpx;
- }
- .classify{
-   text-align: center;
- }
  .select{
+  background-color: rgb(252, 251, 251);
    display: flex;
    flex-direction:row;
    align-items: baseline;
@@ -103,7 +54,7 @@ page {
   background-color: rgb(252, 251, 251);
   color: rgb(76, 196, 126);
   position: fixed;
-  top: 0rpx;
+  bottom: 0rpx;
   left: 0rpx;
   font-size: 30rpx;
   text-align: center;
@@ -113,7 +64,7 @@ page {
  .select_number{
   background-color: rgb(252, 251, 251);
   position: fixed;
-  top: 0rpx;
+  bottom: 0rpx;
   left: 100rpx;
   font-size: 40rpx;
   height: 60rpx;
@@ -125,10 +76,33 @@ page {
    color: rgb(76, 196, 126);
    background-color: rgb(252, 251, 251);
   position: fixed;
-  top: 0rpx;
+  bottom: 0rpx;
   right: 0rpx;
   font-size: 30rpx;
   text-align: center;
   height: 60rpx;
   width: 100rpx;
  }
+
+.nav {
+  height: 80rpx;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
+  line-height: 80rpx;
+  background: rgb(252, 251, 251);
+  font-size: 16px;
+  white-space: nowrap;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 99;
+}
+.nav-item {
+  width: 20%;
+  display: inline-block;
+  text-align: center;
+}
+.nav-item.active{
+  color: rgb(76, 196, 126);
+}
