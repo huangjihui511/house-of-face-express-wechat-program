@@ -40,7 +40,6 @@ page {
   display: flex;
   flex-wrap:wrap;
   justify-content:space-around;
-
 }
 .image_struct{
   flex-direction: column;
@@ -109,4 +108,17 @@ page {
 }
 .nav-item.active{
   color: rgb(76, 196, 126);
+}
+.page__title {
+  width: 750rpx;
+  text-align: center;
+  font-size: 20px;
+  font-weight: 400;
+}
+
+.page__desc {
+  margin-top: 5px;
+  color: #888888;
+  text-align: left;
+  font-size: 14px;
 }
