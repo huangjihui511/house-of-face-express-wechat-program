@@ -2,7 +2,7 @@
 
 <scroll-view scroll-x="true" class="nav" scroll-left="{{navScrollLeft}}" scroll-with-animation="{{true}}">
   <block wx:for="{{navData}}" wx:for-index="idx" wx:for-item="navItem" wx:key="idx">
-    <view class="nav-item {{currentTab == idx ?'active':''}}"  style="color:{{color}}" data-current="{{idx}}" bindtap="switchNav">{{navItem.text}}</view>
+    <view class="nav-item {{currentTab == idx ?'active':''}}"  style="color:{{navItem.show?clickcolor:color}}" data-current="{{idx}}" bindtap="switchNav">{{navItem.text}}</view>
   </block>        
 </scroll-view>
 <text>\n\n</text>
@@ -13,13 +13,17 @@
       <image class="image {{delete_selected[index]?'image_selected':''}}" data-index="{{index}}" data-src="{{item}}" data-srcs="{{images_view_srcs}}" src="{{item}}" bindtap="delete_or_previewImage" bindlongtap="more_information"></image>
     </view>
   </view>
-  <view class="{{button_select?'delete':'empty'}}" bindtap="delete">
+  <view class="{{button_select?'empty':'temp'}}">
+    <navigator url="../load/index">
+      <image class='load_image_login' src="../../../images/team2/load_image_login.jpg"></image>
+    </navigator>
+  </view>
+<image src="../../../images/team2/empty.jpg" style="width:750rpx"></image>
+<view class="{{button_select?'delete':'empty'}}" bindtap="delete">
     <image class="delete_logo" src="../../../images/team2/delete_logo.jpg"></image>
     删除
   </view>
-</view>
-
-<view class='select' >
+</view><view class='select' >
   <view class="all_select" bindtap="all_select">{{all_select}}</view>
   <view class='select_number'>{{select_number}}</view>
   <view class="select_text" bindtap="selected">{{select_text}}</view>

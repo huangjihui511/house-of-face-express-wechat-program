@@ -24,44 +24,72 @@ Page({
     classes:['全部','公开','未公开','label2','label3','label4','label5','label6','label7'],
     navData:[
       {
-          text: '全部'
+          text: '全部',
+          show:true,
       },
       {
-          text: '使用频率'
+          text: '使用频率',
+          show:false,
       },
       {
-          text: '公开'
+          text: '公开',
+          show:false,
       },
       {
-          text: '未公开'
+          text: '未公开',
+          show:false,
       },
       {
-        text: 'label2'
+        text: 'label2',
+        show:false,
       },
       {
-          text: 'label3'
+          text: 'label3',
+          show:false,
       },
       {
-          text: 'label4'
+          text: 'label4',
+          show:false,
       },
       {
-          text: 'label5'
+          text: 'label5',
+          show:false,
       },
       {
-          text: 'label6'
+          text: 'label6',
+          show:false,
       },
       {
-          text: 'label7'
+          text: 'label7',
+          show:false,
       }
     ],
     currentTab: 0,
-    navScrollLeft: 0
+    navScrollLeft: 0,
+    clickcolor:"red"
   },
   switchNav(event){
     if(this.data.button_select==true){
       return
     }
-    var cur = event.currentTarget.dataset.current; 
+    var _this=this
+    var k
+    var cur = event.currentTarget.dataset.current;
+    console.log(cur)
+    for(k=0;k<this.data.navData.length;k++){
+      let navdata="navData["+k+"].show"
+      if(k!=cur){
+        _this.setData({
+          [navdata]:false
+        })
+      }
+      else{
+        _this.setData({
+          [navdata]:true
+        })
+      }
+    }
+    console.log(this.data.navData) 
     var singleNavWidth = this.data.windowWidth / 5;
     this.setData({
         navScrollLeft: (cur - 2) * singleNavWidth
@@ -252,6 +280,7 @@ Page({
         delete_selected_temp[i]=false
       }
       this.setData({
+        clickcolor:"rgb(218, 214, 214)",
         color: "rgb(218, 214, 214)",
         [temp_all_select]:"全选",
         [temp_select_number]:"已选择0张图片",
@@ -268,6 +297,7 @@ Page({
         delete_selected_temp[i]=false
       }
       this.setData({
+        clickcolor:"red",
         color: "black",
         [temp_all_select]:"",
         [temp_select_number]:"",
