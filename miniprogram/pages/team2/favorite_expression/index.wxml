@@ -6,11 +6,13 @@
   </block>        
 </scroll-view>
 <text>\n\n</text>
-
+<view class="page__hd">
+        <view class="page__title">收藏的表情</view>
+        <view class="page__desc">您可以在本页面浏览已上传或者收藏的表情，也可点击上传按钮上传本地图片</view>
+</view>
 <view class="struct">
-
-  <view class="page__title">收藏的表情</view>
   
+
   <view wx:for="{{images_view_srcs}}" wx:key="index">
     <view class="image_struct">
       <image class="image {{delete_selected[index]?'image_selected':''}}" data-index="{{index}}" data-src="{{item}}" data-srcs="{{images_view_srcs}}" src="{{item}}" bindtap="delete_or_previewImage" bindlongtap="more_information"></image>
@@ -18,14 +20,16 @@
   </view>
   <view class="{{button_select?'empty':'temp'}}">
     <navigator url="../load/index">
-      <image class='load_image_login' src="../../../images/team2/load_image_login.jpg"></image>
+          <image class='load_image_login' src="../../../images/timg.jpg"></image>
+
+      <!-- <image class='load_image_login' src="../../../images/team2/load_image_login.jpg"></image> -->
     </navigator>
   </view>
-  <text>\n\n</text>
-  <view class="page__desc">您可以在本页面浏览已上传或者收藏的表情，也可点击上传按钮上传本地图片</view>
+
   
-  <image src="../../../images/team2/empty.jpg" style="width:750rpx"></image>
   <view class="{{button_select?'delete':'empty'}}" bindtap="delete">
+      <!-- <image class="delete_logo" src="../../../images/team2/timg.jpeg"></image> -->
+
     <image class="delete_logo" src="../../../images/team2/delete_logo.jpg"></image>
     删除
   </view>
