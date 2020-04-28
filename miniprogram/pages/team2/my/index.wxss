@@ -28,6 +28,9 @@ page {
   right: 20rpx;
   transform: rotate(45deg);
   margin-top:10rpx;
+  margin-right: 10px;
+  /* padding: 40px; */
+
 }
 .no_login{
   display: flex;
@@ -51,6 +54,7 @@ page {
   display:flex;
   flex-direction:row;
   flex: none;
+  padding: 40px 0;
 }
 
 .userHead {
@@ -87,6 +91,8 @@ page {
 .userName {
   margin-left: 20rpx;
   margin-right: 10rpx;
+  font-size: 60rpx;
+
 }
 
 .Coin {
@@ -104,7 +110,7 @@ page {
 
 .userRank {
   color:rgb(164, 164, 236);
-  font-size: small;
+  font-size: 50rpx;
   margin-left: 10rpx;
   margin-right: 10rpx;
   margin-top: 7rpx;
@@ -157,3 +163,13 @@ page {
   margin-top: 8rpx;
 }
 
+.page__hd {
+  padding: 0 30rpx 40rpx;
+}
+
+.kind-list-item {
+  margin: 10rpx 0;
+  background-color: #FFFFFF;
+  border-radius: 4rpx;
+  overflow: hidden;
+}

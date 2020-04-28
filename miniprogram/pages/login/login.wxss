@@ -90,3 +90,6 @@ page{
   color: #1aad19;
   font-size: 0;
 }
+.page__hd {
+  padding: 40px;
+}
