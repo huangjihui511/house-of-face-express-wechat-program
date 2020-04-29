@@ -28,6 +28,10 @@ Page({
           show:true,
       },
       {
+          text: '商店',
+          show:false,
+      },
+      {
           text: '使用频率',
           show:false,
       },
@@ -90,7 +94,7 @@ Page({
       }
     }
     console.log(this.data.navData) 
-    var singleNavWidth = this.data.windowWidth / 5;
+    var singleNavWidth = this.data.windolengthwWidth / 5;
     this.setData({
         navScrollLeft: (cur - 2) * singleNavWidth
     })      
@@ -100,11 +104,28 @@ Page({
         this.setData({
             currentTab: cur
         })
-        if(cur==1){this.freq_order();}
+        if(cur==1){this.from_shop()}
+        else if(cur==2){this.freq_order();}
         else{
           this.label_select(this.data.navData[cur].text)
         }
     }
+  },
+  from_shop(){
+    var src=this.data.images_srcs
+    var labels=this.data.labels
+    var temp_src=[]
+    var j=0;
+    let temp_view_src = "images_view_srcs"
+    for(var i=0; i<labels.length; i++){
+      if(labels[i]==undefined) {
+        temp_src[j]=src[i];
+        j++;
+      }
+    }
+    this.setData({
+      [temp_view_src]: temp_src
+    })
   },
   onShow: async function () {
     var freq1=[];
@@ -251,7 +272,10 @@ Page({
       })
       return;
     }
+    console.log(labels)
+    console.log(labels.length)
     for(var i=0; i<labels.length; i++){
+      if(labels[i]==undefined) continue;
       for(k=0;k<labels[i].length;k++){
         if(labels[i][k].name==label){
           temp_src[j]=src[i];
@@ -260,6 +284,7 @@ Page({
         }
       }
     }
+    console.log("111",labels.length)
     this.setData({
       [temp_view_src]: temp_src
     })
@@ -312,7 +337,7 @@ Page({
    let _this=this
    console.log(e)
     wx.showActionSheet({
-      itemList: ['编辑','转发'],//显示的列表项
+      itemList: ['编辑','转发','保存图片','收藏到微信'],//显示的列表项
          success: function (res) {//res.tapIndex点击的列表项
             console.log("点击了列表项：" + res.tapIndex)
             if(res.tapIndex==0){

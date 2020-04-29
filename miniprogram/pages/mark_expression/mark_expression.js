@@ -14,6 +14,13 @@ Page({
     state: "wait"
   },
 
+  changeParentExp: function(){
+    var pages =getCurrentPages();//当前页面栈
+    if (pages.length >1) {
+      var beforePage = pages[pages.length- 2];//获取上一个页面实例对象
+      beforePage.changeExp();
+    }
+  },
 
   /**
    * 生命周期函数--监听页面加载
@@ -145,6 +152,11 @@ Page({
         data:{
           id:app.globalData.open_id,
           incNum:10
+        },
+        success:res=>{
+          console.log(res)
+          console.log(app.globalData.open_id)
+          this.changeParentExp()
         }
       })
       wx.showModal({
