@@ -6,9 +6,6 @@ page {
   flex-direction: column;
   justify-content: flex-start;
 }
-.empty{
-  display: none;
-}
 .delete_logo{
   width: 50rpx;
   height: 50rpx;
@@ -32,7 +29,13 @@ page {
 .load_image_login{
   height: 160rpx;
   width: 160rpx;
-  margin: 30rpx;
+  margin: 30rpx 30rpx 400rpx 30rpx;
+}
+.temp{
+  margin: 30rpx 30rpx 400rpx 30rpx;
+}
+.empty{
+  display: none;
 }
 .image_selected{
   border: 3px double rgb(76, 196, 126);

@@ -18,14 +18,18 @@
       <image class="image {{delete_selected[index]?'image_selected':''}}" data-index="{{index}}" data-src="{{item}}" data-srcs="{{images_view_srcs}}" src="{{item}}" bindtap="delete_or_previewImage" bindlongtap="more_information"></image>
     </view>
   </view>
-  <view class="{{button_select?'empty':'temp'}}">
+  
+  <block wx:if="{{button_select}}">
+    <view class="temp"></view>
+  </block>
+  <block wx:else>
     <navigator url="../load/index">
           <image class='load_image_login' src="../../../images/timg.jpg"></image>
 
       <!-- <image class='load_image_login' src="../../../images/team2/load_image_login.jpg"></image> -->
     </navigator>
-  </view>
-  <image src="../../../images/team2/empty.jpg" style="width:750rpx"></image>
+  </block>
+    
   
   <view class="{{button_select?'delete':'empty'}}" bindtap="delete">
       <!-- <image class="delete_logo" src="../../../images/team2/timg.jpeg"></image> -->
