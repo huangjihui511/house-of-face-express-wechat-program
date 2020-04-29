@@ -3,7 +3,7 @@
 
 <view class="page">
   <view class="submit" bindtap="submitted" >
-    <text class='submit_text'>提交</text>
+    <text class='submit_text'>确定</text>
   </view>
   <view class="page__hd">
     <view class="page__title">上传图片、添加标签</view>
@@ -20,7 +20,7 @@
   </view>
   <text>\n</text>
   <view class="button-sp-area">
-    <button class="weui-btn" type="primary" bindtap="chooseImage">上传图片</button>
+    <button class="weui-btn" type="primary" bindtap="chooseImage">选择图片</button>
   </view>
    <text>\n</text>
    <view class="{{empty?'empty':'canvas'}}">

@@ -44,5 +44,6 @@
 .submit_text{
   size: 100px;
   color: #3d6312;
+  text-align: center;
 }
 
