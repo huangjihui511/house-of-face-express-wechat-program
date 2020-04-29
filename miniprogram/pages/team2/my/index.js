@@ -69,6 +69,18 @@ Page({
     })
   },
 
+  changeExp:function(){
+    db.collection('user').where({
+      open_id: app.globalData.open_id
+    }).get().then(res=>{   
+      //console.log(res.data[0].exp)
+      this.setData({          
+        user_exp: res.data[0].exp     
+      })   
+      this.calUserRank()
+    })
+  },
+
   shop_image_pagejump:function(e) {
     var app = getApp()
     console.log(e)
