@@ -20,6 +20,7 @@ Page({
       {file_id :  "/images/test3.jpg"},
       {file_id : "/images/test2.jpg"}
     ],
+    test_cloud_setdata:0,
     user_coin:0,
     motto: 'Hello World',
     userInfo: {},
@@ -102,7 +103,7 @@ Page({
     var globalPicIndex = 0
     wx.cloud.init()
     //索引方式
-    var judge = 3
+    var judge = 4
     //for (var i = 0;i < labels.length;i++) {
       //var label = labels[i]
     for (var i = 0;i < 1;i++) {  
@@ -197,7 +198,6 @@ Page({
         }
         else if (judge == 3) {
           db.collection("tag_names").get({
-            
             success:function(res) {
               wx.showLoading({
                 title: '加载中',
@@ -326,7 +326,41 @@ Page({
             }
           })
         }
-
+        else if (judge == 4) {
+          console.log("test+++")
+        /*  wx.cloud.callFunction({
+            name:'add_expression',
+            data:{
+              request:'search_upgrade',
+              data1:
+            }
+          }).then(res=>{
+            console.log("888")
+            console.log(res)
+          })*/
+          var tempRes = []
+          console.log("label:",label)
+          wx.cloud.callFunction({
+            name:'add_expression',
+            data:{
+              request:'search_upgrade',
+              data1:label
+            },
+            success:function(res) {
+              console.log("res:",res)
+            }
+          }
+          )
+         /* wx.cloud.callFunction({
+            name:'add_expression',
+            data:{
+              request:'user_exp',
+              data1:exp
+            }
+          }).then(res=>{
+            console.log("testfunctionExp:",res.result)
+          })*/
+        }
       }
     
    /* wx.cloud.callFunction({    

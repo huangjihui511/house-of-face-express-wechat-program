@@ -8,7 +8,7 @@
         <view class="nameAndCoin">
           <view class="nameExp">
             <text class="userName">{{userInfo.nickName}}</text>
-            <text class="userRank">等级：{{user_rank}}</text>
+            <text class="userRank">{{test_cloud_setdata}}等级：{{user_rank}}</text>
           </view>
           <view class="Coin">
             <!--对view使用bindtap-->
