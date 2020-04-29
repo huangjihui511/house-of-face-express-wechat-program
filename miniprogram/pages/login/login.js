@@ -51,7 +51,7 @@ Page({
 
   nolog: function() {
     wx.showModal({
-      content: '不登陆无法使用',
+      content: '不登部分功能无法使用',
       confirmText: '确定',
       cancelText: '取消',
       success: res => {

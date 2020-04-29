@@ -29,6 +29,13 @@ Page({
   },
 
   submit: function () {
+    let pages = getCurrentPages()
+    let prevPage = pages[ pages.length - 2 ]
+    // prevPage.setData({
+    //   state:"fail"
+    // })
+    
+    prevPage.data.state = "begin"
     console.log(this.data.desc)
     wx.cloud.callFunction({
       name: "add_des_tag",
@@ -53,6 +60,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let pages = getCurrentPages()
+    let prevPage = pages[ pages.length - 2 ]
+    // prevPage.setData({
+    //   state:"fail"
+    // })
+    
+    prevPage.data.state = "fail"
     var temp_id = options.id
     this.setData({
       times:options.times

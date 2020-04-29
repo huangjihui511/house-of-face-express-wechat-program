@@ -1,64 +1,9 @@
 <!--index.wxml-->
 <view class="container">
-  <view class="userinfo">
-    <button class="userHead" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-    <block wx:else>
-      <image class="userHead" bindtap="bindViewTap" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-      <view class="userNameDetail">
-        <view class="nameAndCoin">
-          <view class="nameExp">
-            <text class="userName">{{userInfo.nickName}}</text>
-            <text class="userRank">{{test_cloud_setdata}}等级：{{user_rank}}</text>
-          </view>
-          <view class="Coin">
-            <!--对view使用bindtap-->
-            <view class="exp_bar" style="width:200rpx;height:30rpx" bindtap="jumpToExp">
-              <view class="expBar" style="width:{{(user_exp/user_exp_Upbound)*200}}rpx;height:30rpx"></view>
-              <view class="expBar_bg" style="width:{{(1-user_exp/user_exp_Upbound)*200}}rpx;height:30rpx"></view>
-              <text class="expFont">{{user_exp}}/{{user_exp_Upbound}}</text>
-            </view>
-            <!--button class="exp_bar" style="width:400rpx;height:30rpx" bindtap="jumpToExp">
-              <view class="expBar" style="width:{{(user_exp/user_exp_Upbound)*200}}rpx;height:30rpx"></view>
-              <view class="expBar_bg" style="width:{{(1-user_exp/user_exp_Upbound)*200}}rpx;height:30rpx"></view>
-              <text class="expFont">{{user_exp}}/{{user_exp_Upbound}}</text>
-            </button-->
-          </view>
-          <!--view class="Coin"> 
-            <text class="coinAmount">金币余额：{{user_coin}}</text>
-            <view class="coinButtonClass">
-              <button class="coinButton" style="width:30rpx" bindtap="bindCoinClick">
-                <image class="image_coin" src="/images/coin.jpg" ></image>
-              </button>
-            </view>
-            
-          </view-->
-        </view>
-        <!--view class="userDetail">
-          <view class="cline"></view>
-          <view class="userDetailCell">
-            <text class="userDetailText">我的创作</text>
-          </view>
-          <view class="cline"></view>
-          <view class="userDetailCell">
-            <text class="userDetailText">我的购买</text>
-          </view>
-          <view class="cline"></view>
-          <view class="userDetailCell">
-            <text class="userDetailText">我的收藏</text>
-          </view>
-          <view class="cline"></view>
-          <view class="userDetailCell">
-            <text class="userDetailText">最近使用</text>
-          </view>
-          <view class="cline"></view>
-        </view-->
-      </view>
-    </block>
-  </view>
   <view class="search">
     <view class="showWhatToSearch">查找你想要的表情：{{toSearch}}</view>
     <view class="searchInputConfirm">
-      <input class="input" auto-focus bindconfirm="bindConfirmClick" data-input="input"
+      <input class="input" bindconfirm="bindConfirmClick" data-input="input"
          laceholder="请输入搜索关键字">
       </input>
       <button class="button_confirm" style="width:150rpx" bindtap="confirm" >

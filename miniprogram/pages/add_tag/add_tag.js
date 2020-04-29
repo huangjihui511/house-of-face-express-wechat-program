@@ -42,6 +42,13 @@ Page({
     console.log(this.data)
   },
   submit: function () {
+    let pages = getCurrentPages()
+    let prevPage = pages[ pages.length - 2 ]
+    // prevPage.setData({
+    //   state:"fail"
+    // })
+    
+    prevPage.data.state = "begin"
     var markedTags = []
     for ( var i = 0; i <this.data.tags.length; i++){
       if (this.data.printTags[i].type != "default") {
@@ -89,6 +96,13 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    let pages = getCurrentPages()
+    let prevPage = pages[ pages.length - 2 ]
+    // prevPage.setData({
+    //   state:"fail"
+    // })
+    
+    prevPage.data.state = "fail"
     var temp_id = options.id
     this.setData({
       times:options.times

@@ -40,27 +40,47 @@ Page({
     that.setData({
       choosed:true
     })
-    wx.cloud.downloadFile({
-      fileID: a,
-      success(res) {
-        console.log(res.tempFilePath)
-        wx.getImageInfo({
-          src: res.tempFilePath,
-          success (res) {
-            that.adjustScale(res.path)
-            let ctx = wx.createCanvasContext('edit')
-            ctx.drawImage(res.path, 0, 0, that.data.cWidth, that.data.cHeight)
-            ctx.draw()
-            that.setData({
-              curImage: res.path
-            })
-          },
-          fail(err){
-            console.log(err)
-          }
-        })
-      }
-    })
+    if(a.indexOf("cloud://")>=0){
+      wx.cloud.downloadFile({
+        fileID: a,
+        success(res) {
+          console.log(res.tempFilePath)
+          wx.getImageInfo({
+            src: res.tempFilePath,
+            success (res) {
+              that.adjustScale(res.path)
+              let ctx = wx.createCanvasContext('edit')
+              ctx.drawImage(res.path, 0, 0, that.data.cWidth, that.data.cHeight)
+              ctx.draw()
+              that.setData({
+                curImage: res.path
+              })
+            },
+            fail(err){
+              console.log(err)
+            }
+          })
+        }
+      })
+    }
+    else{
+      wx.getImageInfo({
+        src: a,
+        success (res) {
+          that.adjustScale(res.path)
+          let ctx = wx.createCanvasContext('edit')
+          ctx.drawImage(res.path, 0, 0, that.data.cWidth, that.data.cHeight)
+          ctx.draw()
+          that.setData({
+            curImage: res.path
+          })
+        },
+        fail(err){
+          console.log(err)
+        }
+      })
+    }
+    
   },
   addImg() {
     let that = this
@@ -81,6 +101,39 @@ Page({
             ctx.draw()
             that.setData({
               curImage: res.path
+            })
+            wx.showLoading({
+              title: '检测图片中',
+              duration: 5000
+            })
+            wx.getFileSystemManager().readFile({
+              filePath: res.path,
+              success: res => {
+                wx.cloud.callFunction({
+                  name: 'imgCheck',
+                  data: {
+                    value: res.data
+                  },
+                  success: res => {
+                    wx.hideLoading()
+                    if (res.result.errCode != 0) {
+                      wx.showToast({
+                        title: '图片异常',
+                      })
+                      that.setData({
+                        choosed: false
+                      })
+                    }
+                  },
+                  fail: err => {
+                    console.log(err)
+                    wx.hideLoading()
+                    wx.showToast({
+                      title: '图片检查失败！',
+                    })
+                  }
+                })
+              }
             })
           },
           fail(err){

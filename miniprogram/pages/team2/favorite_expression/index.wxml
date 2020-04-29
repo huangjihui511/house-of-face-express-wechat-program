@@ -1,34 +1,45 @@
 <!--index.wxml-->
 
+<scroll-view scroll-x="true" class="nav" scroll-left="{{navScrollLeft}}" scroll-with-animation="{{true}}">
+  <block wx:for="{{navData}}" wx:for-index="idx" wx:for-item="navItem" wx:key="idx">
+    <view class="nav-item {{currentTab == idx ?'active':''}}"  style="color:{{navItem.show?clickcolor:color}}" data-current="{{idx}}" bindtap="switchNav">{{navItem.text}}</view>
+  </block>        
+</scroll-view>
+<text>\n\n</text>
+<view class="page__hd">
+        <view class="page__title">收藏的表情</view>
+        <view class="page__desc">您可以在本页面浏览已上传或者收藏的表情，也可点击上传按钮上传本地图片</view>
+</view>
+<view class="struct">
+  
+
+  <view wx:for="{{images_view_srcs}}" wx:key="index">
+    <view class="image_struct">
+      <image class="image {{delete_selected[index]?'image_selected':''}}" mode="aspectFill" data-index="{{index}}" data-src="{{item}}" data-srcs="{{images_view_srcs}}" src="{{item}}" bindtap="delete_or_previewImage" bindlongtap="more_information"></image>
+    </view>
+  </view>
+  
+  <block wx:if="{{button_select}}">
+    <view class="temp"></view>
+  </block>
+  <block wx:else>
+    <navigator url="../load/index">
+          <image class='load_image_login' src="../../../images/timg.jpg"></image>
+
+      <!-- <image class='load_image_login' src="../../../images/team2/load_image_login.jpg"></image> -->
+    </navigator>
+  </block>
+    
+  
+  <view class="{{button_select?'delete':'empty'}}" bindtap="delete">
+      <!-- <image class="delete_logo" src="../../../images/team2/timg.jpeg"></image> -->
+
+    <image class="delete_logo" src="../../../images/team2/delete_logo.jpg"></image>
+    删除
+  </view>
+</view>
 <view class='select' >
   <view class="all_select" bindtap="all_select">{{all_select}}</view>
   <view class='select_number'>{{select_number}}</view>
   <view class="select_text" bindtap="selected">{{select_text}}</view>
-</view>
-<view class='fix'>
-  <view class="button_list">
-    <view class='freq' style="width: 375rpx;color:{{freq_color}}" bindtap="freq_order">使用频率</view>
-    <picker style="width:375rpx;color:{{kind_color}}" disabled="{{button_select}}" data-index="{{index}}" class='classify' bindchange="bindPickerChange" value="{{index}}" range="{{classes}}">
-      <view class="picker">          
-        选择类别：{{kind}}      
-      </view>      
-    </picker>
-  </view>
-  <view class="divLine">
-    <view class="divLine_freq" style="background:{{divline_freq_color}}"></view>
-    <view class="divLine_kind" style="background:{{divline_kind_color}}"></view>
-  </view>
-</view>
-<text>\n\n</text>
-<view class="struct">
-  <view wx:for="{{images_view_srcs}}" wx:key="index">
-    <view class="image_struct">
-      <image class="image {{delete_selected[index]?'image_selected':''}}" data-index="{{index}}" data-src="{{item}}" data-srcs="{{images_view_srcs}}" src="{{item}}" bindtap="delete_or_previewImage" bindlongtap="more_information"></image>
-      <!--<view class="image_title">{{item.image_name}}</view>-->
-    </view>
-  </view>
-  <view class="{{button_select?'delete':'empty'}}" bindtap="delete">
-    <image class="delete_logo" src="../../../images/team2/delete_logo.jpg"></image>
-    删除
-  </view>
 </view>
