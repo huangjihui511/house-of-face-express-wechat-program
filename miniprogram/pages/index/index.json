@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {},
+  "navigationBarBackgroundColor": "#0387FE",
+   "navigationBarTitleText": "了解表情",
+  "navigationBarTextStyle":"white"
 }

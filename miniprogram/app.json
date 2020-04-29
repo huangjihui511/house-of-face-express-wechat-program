@@ -18,12 +18,13 @@
     "pages/feedback/feedback",
     "pages/mark_expression/mark_expression",
     "pages/fliter/fliter",
-    "pages/aboutExp/aboutExp"
+    "pages/aboutExp/aboutExp",
+    "pages/userpage/userpage"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F8F8F8",
-    "navigationBarTitleText": "input",
+    "navigationBarTitleText": "title",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {
