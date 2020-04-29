@@ -337,7 +337,7 @@ Page({
    let _this=this
    console.log(e)
     wx.showActionSheet({
-      itemList: ['编辑','转发'],//显示的列表项
+      itemList: ['编辑','转发','保存图片','收藏到微信'],//显示的列表项
          success: function (res) {//res.tapIndex点击的列表项
             console.log("点击了列表项：" + res.tapIndex)
             if(res.tapIndex==0){

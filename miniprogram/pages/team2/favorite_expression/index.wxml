@@ -9,6 +9,7 @@
 <view class="page__hd">
         <view class="page__title">收藏的表情</view>
         <view class="page__desc">您可以在本页面浏览已上传或者收藏的表情，也可点击上传按钮上传本地图片</view>
+        <view class="page__desc">点击预览，长按更多功能待你挖掘</view>
 </view>
 <view class="struct">
   
