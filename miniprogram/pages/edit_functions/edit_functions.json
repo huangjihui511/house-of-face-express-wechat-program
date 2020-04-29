@@ -4,7 +4,7 @@
     "mp-halfScreenDialog": "../../ui-dist/half-screen-dialog/half-screen-dialog"
   },
 
-  "navigationBarBackgroundColor": "#0387FE",
+  "navigationBarBackgroundColor": "#F08080",
    "navigationBarTitleText": "编辑",
   "navigationBarTextStyle":"white"
 }

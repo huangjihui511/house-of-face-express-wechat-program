@@ -3,7 +3,7 @@
   "pages": [
     "pages/favorite_expression/index"
   ],
-  "navigationBarBackgroundColor": "#0387FE",
+  "navigationBarBackgroundColor": "#20B2AA",
    "navigationBarTitleText": "主页",
   "navigationBarTextStyle":"white"
 }
