@@ -17,6 +17,9 @@
         wx:for="{{label_list}}" 
         wx:key="index" 
         class="button {{item.selected ? 'button-selected' : ''}}"><view class='text'>{{item.title}}</view></button>
+    <view wx:for="{{add_label_list}}" wx:key="index">
+  <input id='{{index}}' class="add_label" bindblur="getinput"></input></view>
+  <image class="add_label_logo" src='../../../images/team2/add_label_logo.jpg' bindtap="add_label"></image>
   </view>
    <text>\n</text>
   <view class="{{empty?'empty':'image'}}">

@@ -8,6 +8,18 @@
   justify-content:center; 
   align-items:center;
 }
+.add_label_logo{
+  height: 100rpx;
+  width: 100rpx;
+  margin: 15rpx;
+}
+.add_label{
+  background-color: white;
+  height: 100rpx;
+  width: 160rpx;
+  margin: 15rpx;
+  text-align: center;
+}
 .text{
   color: rgb(161, 155, 155);
 }
