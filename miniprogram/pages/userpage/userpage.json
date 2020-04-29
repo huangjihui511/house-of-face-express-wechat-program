@@ -1,3 +1,6 @@
 {
-  "usingComponents": {}
+  "usingComponents": {},
+  "navigationBarBackgroundColor": "#0387FE",
+   "navigationBarTitleText": "作者收藏",
+  "navigationBarTextStyle":"white"
 }
