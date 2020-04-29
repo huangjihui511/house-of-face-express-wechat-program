@@ -9,6 +9,53 @@ const _ = db.command
 // 云函数入口函数
 exports.main = async (event, context) => {
   var request = event.request
+  console.log("entrance")
+  var globalPicIndex = 0
+  if (request == 'search_upgrade') {
+    console.log("search_label")
+    var label = event.data1
+    var retList = []
+    await db.collection("tag_names").get({
+      success:function(res) {
+        var all_tags = res.data[0].name
+        console.log("label:",label)
+        console.log(all_tags)
+        for (var runover = 0;runover < all_tags.length;runover++) {
+          //console.log(runover)
+          if (runover%100 == 0) {
+            console.log("100")
+          }
+          var judge = 0 
+          var inputString = String(label)
+          var tag = all_tags[runover]
+          var labelString = String(tag)
+          //console.log(inputString,"---",labelString,"是否匹配:",inputString.indexOf(labelString))
+          if (inputString.indexOf(labelString) >= 0) {
+            judge = 1
+          }
+          if (judge == 1 && (globalPicIndex < 9)) {
+            console.log("匹配成功")
+            var path
+            db.collection("tags").where({
+              name:tag
+            }).get({
+              success:function(res) {
+                var datas = res.data
+                for (var f = 0;f < datas.length;f++) {
+                  var ids = datas[f]['expression_id']
+                  for (var key in ids) {
+                    console.log("path:",key)
+                    retList[globalPicIndex] = key
+                    globalPicIndex++
+                }
+              }
+              }
+            })
+          }
+        } 
+      }
+    })
+  }
 
   if (request == 'user_exp') {
     var exp = event.data1
