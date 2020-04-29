@@ -1,40 +1,18 @@
-// miniprogram/pages/userpage/userpage.js
-const app = getApp()
-const db = wx.cloud.database()
+// pagas/userpage/userpage.js
 Page({
+
   /**
    * 页面的初始数据
    */
   data: {
-    uploader:[],
-    collection: []
+
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
-    db.collection('user').where({
-      openid: options.uploader
-    }).get().then(res=>{
-      console.log(res)
-      this.setData({
-        uploader: res.data,
-        collection: res.data[0].expression_set
-      })
-      console.log(this.data.uploader)
-      console.log(this.data.collection)
-    })
-  },
 
-  shop_image_pagejump:function(e) {
-    var app = getApp()
-    console.log(e)
-    // app.globalData.data = {'imagepath':imagepath}
-    wx.navigateTo({
-      url: '/pages/index/index?url='+ e.currentTarget.dataset.fileid
-    })
   },
 
   /**
