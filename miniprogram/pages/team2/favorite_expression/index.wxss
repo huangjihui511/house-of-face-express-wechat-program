@@ -30,8 +30,9 @@ page {
   width: 160rpx;
 }
 .load_image_login{
-  height: 200rpx;
+  height: 160rpx;
   width: 160rpx;
+  margin: 30rpx;
 }
 .image_selected{
   border: 3px double rgb(76, 196, 126);

@@ -25,7 +25,7 @@
       <!-- <image class='load_image_login' src="../../../images/team2/load_image_login.jpg"></image> -->
     </navigator>
   </view>
-
+  <image src="../../../images/team2/empty.jpg" style="width:750rpx"></image>
   
   <view class="{{button_select?'delete':'empty'}}" bindtap="delete">
       <!-- <image class="delete_logo" src="../../../images/team2/timg.jpeg"></image> -->
