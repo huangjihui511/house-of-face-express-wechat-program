@@ -54,7 +54,7 @@ page {
   display:flex;
   flex-direction:row;
   flex: none;
-  padding: 40px 0;
+  padding: 40px 0 0;
 }
 
 .userHead {
@@ -91,7 +91,7 @@ page {
 .userName {
   margin-left: 20rpx;
   margin-right: 10rpx;
-  font-size: 60rpx;
+  font-size: 40rpx;
 
 }
 
@@ -110,7 +110,7 @@ page {
 
 .userRank {
   color:rgb(164, 164, 236);
-  font-size: 50rpx;
+  font-size: 40rpx;
   margin-left: 10rpx;
   margin-right: 10rpx;
   margin-top: 7rpx;
@@ -168,7 +168,7 @@ page {
 }
 
 .kind-list-item {
-  margin: 10rpx 0;
+  margin: 5rpx 0;
   background-color: #FFFFFF;
   border-radius: 4rpx;
   overflow: hidden;
