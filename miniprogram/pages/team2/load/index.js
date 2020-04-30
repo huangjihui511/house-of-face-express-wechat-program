@@ -32,6 +32,26 @@ data: {
   labels:['未公开'],
   image_src:"",
   time:"",
+  add_label_list:[],
+  add_label_text:[],
+  have_add_labels:[]
+},
+getinput(e){
+  var _this=this
+  let add_label_text="add_label_text["+e.currentTarget.id+"]"
+  _this.setData({
+    [add_label_text]:e.detail.value
+  })
+  console.log(this.data.add_label_text)
+},
+add_label(){
+  var _this=this
+  let add_label="add_label_list["+this.data.add_label_list.length+"]"
+  let add_label_text="add_label_text["+this.data.add_label_list.length+"]"
+  _this.setData({
+    [add_label]:true,
+    [add_label_text]:""
+  })
 },
 two2one(a) {
   let _this = this
@@ -201,6 +221,59 @@ submitted: function submitted(e) {
     })
   }
   else{
+    var temp_add_label_text=[]
+    var add_label_text_temp=[]
+    var temp1=[]
+    var ii
+    var kk=0
+    var jj
+    for(ii=0;ii<(this.data.add_label_text.length);ii++){
+      if(this.data.add_label_text[ii]!=""){
+        temp1[kk]=this.data.add_label_text[ii]
+        kk++
+      }
+    } 
+    console.log("去空"+temp1)
+    kk=0
+    for(ii=0;ii<(temp1.length-1);ii++){
+      for(jj=ii+1;jj<temp1.length;jj++){
+        if(temp1[ii]==temp1[jj]){
+          break;
+        }
+      }
+      if(jj==temp1.length){
+        add_label_text_temp[kk]=temp1[ii]
+        kk++
+      }
+    }
+    if(temp1.length!=0){
+      add_label_text_temp[kk]=temp1[ii]
+    }
+    console.log("去重"+add_label_text_temp)
+    kk=0
+    for(ii=0;ii<add_label_text_temp.length;ii++){
+      if(add_label_text_temp[ii]!=""){
+        console.log(ii+add_label_text_temp[ii])
+        for(jj=0;jj<this.data.have_add_labels.length;jj++){
+          if(add_label_text_temp[ii]==this.data.have_add_labels[jj]){
+            break;
+          }
+        }
+        if(jj!=this.data.have_add_labels.length){
+          continue
+        }
+        temp_add_label_text[kk]=add_label_text_temp[ii]
+        kk++
+      }
+    }
+    console.log("去已经有的"+temp_add_label_text)
+    wx.cloud.callFunction({
+      name: "add_label",
+      data:{
+        id:app.globalData.open_id,
+        label:temp_add_label_text
+      }
+    })
     wx.cloud.callFunction({
       name: "add_exp",
       data:{
@@ -218,6 +291,9 @@ submitted: function submitted(e) {
     let that = this
     var j
     var temp=new Array()
+    for(ii=0;ii<add_label_text_temp.length;ii++){
+      temp.push({name:add_label_text_temp[ii],num:0})
+    }
     console.log(temp)
     for(j=0;j<this.data.labels.length;j++){
       temp.push({name:this.data.labels[j],num:0})
@@ -287,6 +363,20 @@ submitted: function submitted(e) {
    * 生命周期函数--监听页面显示
    */
   onShow:async function () {
+    var _this=this
+    var res =await wx.cloud.callFunction({
+      name:"get_label",
+      data:{
+        id:app.globalData.open_id,
+      }
+    })
+    console.log(res)
+    if(res.result.data[0].labels!=undefined){
+      _this.setData({
+        have_add_labels:res.result.data[0].labels
+      })
+    }
+    console.log(this.data.have_add_labels)
     console.log(app)
     console.log(app.globalData.open_id)
     var res = await wx.cloud.callFunction({

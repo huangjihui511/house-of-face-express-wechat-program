@@ -94,7 +94,7 @@ Page({
       }
     }
     console.log(this.data.navData) 
-    var singleNavWidth = this.data.windolengthwWidth / 5;
+    var singleNavWidth = 64;
     this.setData({
         navScrollLeft: (cur - 2) * singleNavWidth
     })      
@@ -128,6 +128,31 @@ Page({
     })
   },
   onShow: async function () {
+    var _this=this
+    var res =await wx.cloud.callFunction({
+      name:"get_label",
+      data:{
+        id:app.globalData.open_id,
+      }
+    })
+    if(res.result.data[0].labels!=undefined){
+      var i
+      var j
+      for(i=0;i<res.result.data[0].labels.length;i++){
+        for(j=0;j<this.data.navData.length;j++){
+          if(this.data.navData[j].text==res.result.data[0].labels[i]){
+            break;
+          }
+        }
+        if(j!=this.data.navData.length){
+          continue
+        }
+        let navdata="navData["+this.data.navData.length+"]"
+        _this.setData({
+          [navdata]:({ text: res.result.data[0].labels[i],show:false})
+        })
+      }
+    }
     var freq1=[];
     var label1=[];
     var images_src1=[];
