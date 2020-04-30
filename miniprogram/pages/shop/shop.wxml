@@ -3,7 +3,7 @@
   <view class="search">
     <view class="showWhatToSearch">查找你想要的表情：{{toSearch}}</view>
     <view class="searchInputConfirm">
-      <input class="input" bindconfirm="bindConfirmClick" data-input="input"
+      <input class="input" bindinput="bindConfirmClick" data-input="input"
          laceholder="请输入搜索关键字">
       </input>
       <button class="button_confirm" style="width:150rpx" bindtap="confirm" >
@@ -12,15 +12,24 @@
       </button>
     </view>
   </view>
-  <view class="showWhatToSearch">猜你想要：</view>
+  <view class="wordsAbovePics">
+    <view class="showWhatToSearch">猜你想要</view>
+    <view class="refresh" bindtap="reFresh">
+      换一批<image class="refreshIcon" style="height:40rpx;width:40rpx" src="../../images/refresh.png"></image>
+    </view>
+  </view>
   <view class="line"></view>
   <view class="picShowList">
     <view class="picShowRow" wx:for="{{showPicList}}" wx:for-index="index">
       <!--view wx:for="{{showPicList}}" wx:for-item="item" wx:key="*this"-->
-        <button class="buttonImage" wx:for="{{showPicList[index]}}" wx:for-item="item" wx:key="*this"
+        <!--button class="buttonImage" wx:for="{{showPicList[index]}}" wx:for-item="item" wx:key="*this"
            bindtap="shop_image_pagejump" data-image="{{item}}" data-fileid='{{item.file_id}}'>
           <image class='image_search' src="{{item.file_id}}"></image>
-        </button>
+        </button-->
+        <image class="buttonImage" wx:for="{{showPicList[index]}}" wx:for-item="item" wx:key="*this"
+           bindtap="shop_image_pagejump" data-image="{{item}}" data-fileid='{{item.file_id}}'
+           src="{{item.file_id}}">
+        </image>
       <!--/view-->
     </view> 
   </view>

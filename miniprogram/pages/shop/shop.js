@@ -20,6 +20,7 @@ Page({
       {file_id :  "/images/test3.jpg"},
       {file_id : "/images/test2.jpg"}
     ],
+    isLoading:0,
     test_cloud_setdata:0,
     user_coin:0,
     motto: 'Hello World',
@@ -72,6 +73,7 @@ Page({
       url: '/pages/index/index?url='+ e.currentTarget.dataset.fileid
     })
   },
+
   bindConfirmClick: function(e) {
     var value = e.detail.value
 
@@ -80,6 +82,13 @@ Page({
         inputValue:value
       }
     );
+  },
+
+  bindKeyInput:function(e) {
+    var value = e.detail.value
+    this.setData ({
+      inputValue:value
+    })
   },
 
   matchingInput:function(input,label) {
@@ -96,23 +105,14 @@ Page({
     var v = this.data.inputValue
     this.setData({toSearch:v})
     let that = this
-
-   /* var initList = this.data.showPicList
-    var len = initList.length
-    console.log("initLength:",len)
-    var newList = initList.splice(9,len-9)
-    this.data.showPicList = newList
-    this.setData({
-      showPicList:this.data.showPicList
-    }) */
-    console.log("前：",this.data.showPicList)
+    /*console.log("前：",this.data.showPicList)
     var len = this.data.showPicList.length
     console.log("len:",len)
     this.data.showPicList.splice(3,len - 3)
-    /*this.setData({
-      showPicList:this.data.showPicList
-    })*/
-    console.log("后：",this.data.showPicList)
+    //this.setData({
+    //  showPicList:this.data.showPicList
+    //})
+    console.log("后：",this.data.showPicList)*/
     this.data.globalShowIndex = 0
     this.data.showListCache = []
     //暂存所有查找的图片路径
@@ -263,7 +263,6 @@ Page({
                             console.log("key:",key)
                           that.data.showListCache[globalPicIndex] = key
                           if (globalPicIndex < 9) {
-                            console.log("fuck")
                             that.data.showPicList[reflex2][reflex3]['file_id'] = key
                             that.setData({
                               showPicList:that.data.showPicList
@@ -388,9 +387,35 @@ Page({
     console.log("rank:"+this.data.user_rank+"expup:"+this.data.user_exp_Upbound)
   },
 
-  onReachBottom:function() {
-    var judge = 1
+  reFresh:function() {
+    var loadTime = this.data.globalShowIndex
+    var init = (loadTime+1)*9
+    var globalList = this.data.showListCache
+    console.log("globalList:",globalList)
+    if (init >= globalList.length) {
+      wx.showToast({
+        title: '抱歉，没有更多了',
+        duration: 2000
+      })
+    }
+    else {
+      for (var i = 0;i < 9;i++) {
+        var path = globalList[init+i]
+        console.log("path:",path)
+        var reflex1 = parseInt(i/3)
+        var reflex2 = i%3
+        this.data.showPicList[reflex1][reflex2]['file_id'] = path
+        this.setData({
+          showPicList:this.data.showPicList
+        })
+      }
+      this.data.globalShowIndex++
+    }
+  },
 
+ /* onReachBottom:function() {
+    var judge = 1
+    if (this.data.isLoading == 1) return;
     //第1种上拉加载方式：拼接数组
     var loadTime = this.data.globalShowIndex
     console.log("loadTime:",loadTime)
@@ -398,31 +423,29 @@ Page({
     var globalList = this.data.showListCache
     console.log("globalLenth:",globalList.length)
     //var tempList = this.data.showPicList
-    if (init >= globalList.length) {
-      
-      wx.showToast({
-        title: '抱歉，没有更多了',
-        duration:2000
-      })
-    }
-    else {
-      var temp3 = []
-      for (var i = init;i < init+3;i++) {
-        var path = globalList[i]
-        temp3.push({'file_id':path})
+   // setTimeout( () =>{
+      if (init >= globalList.length) {
+        wx.showToast({
+          title: '抱歉，没有更多了',
+          duration:2000
+        })
       }
-      this.data.showPicList.push(temp3)
-      this.setData({
-        showPicList:this.data.showPicList
-     })
-      /*this.data.showPicList = tempList
-      this.setData({
-        showPicList:this.data.showPicList
-      })
-      console.log("showPicList:",this.data.showPicList)*/
-      this.data.globalShowIndex++
-    }
-  },
+      else {
+        var temp3 = []
+        for (var i = init;i < init+3;i++) {
+          var path = globalList[i]
+          temp3.push({'file_id':path})
+        }
+        this.data.showPicList.push(temp3)
+        this.setData({
+          isLoading:0,
+          showPicList:this.data.showPicList
+       })
+        this.data.globalShowIndex++
+      }
+     // }, 2000)
+    
+  },*/
 
   onLoad: function () {
     var test = [[{'file_id':'111'},{'file_id':'222'}]]

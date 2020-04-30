@@ -31,9 +31,30 @@
   /*left: 45rpx;*/
 }
 
+.wordsAbovePics {
+  display: flex;
+  flex-direction: row;
+  align-content: center;
+  position: relative;
+}
+
 .showWhatToSearch{
   font-size: medium;
   margin: 10rpx;
+}
+
+.refresh {
+  display: flex;
+  flex-direction: row;
+  font-size: medium;
+  color: #0387FE;
+  position: absolute;
+  margin: 10rpx;
+  right: 0;
+}
+
+.refreshIcon {
+  margin-top: 7rpx;
 }
 
 .line{
@@ -215,7 +236,10 @@
 .picShowList {
   display: flex;
   flex-direction: column;
+  padding:10rpx;
   background-color: white;
+  max-height: fit-content;
+  height: 3000rpx;
 }
 
 .picShowRow {
