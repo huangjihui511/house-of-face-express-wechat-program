@@ -103,3 +103,7 @@ page{
   color: #1aad19;
   font-size: 0;
 }
+.textarea-wrp {
+  padding: 0 25rpx;
+  background-color: #fff;
+}

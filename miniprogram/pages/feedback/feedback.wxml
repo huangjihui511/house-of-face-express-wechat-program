@@ -1,11 +1,8 @@
 <!--miniprogram/pages/feedback/feedback.wxml-->
 <view class="page__hd">
-      <view class="page__title">产品反馈</view>
-      <view class="page__desc">感谢您宝贵的意见</view>
-</view>
-      <view class="page__hd">
+
       <view class="page__title">评分</view>
-      
+      <text>\n</text>
       <radio-group name="radio" bindchange="set_score" >
           <label><radio value="1"/>1分</label>
           <label><radio value="2"/>2分</label>
@@ -13,15 +10,22 @@
           <label><radio value="4"/>4分</label>
           <label><radio value="5"/>5分</label>
       </radio-group>
+      </view>
+      <view class="page__hd">
       <view class="textarea-wrp">
         <textarea auto-focus="true" style="height: 10em" placeholder="功能上的建议:" placeholder-style="color:green;" bindinput="bindinput_function"/>
       </view>
+      </view>
+      <view class="page__hd">
+
       <view class="textarea-wrp">
         <textarea auto-focus="true" style="height: 10em" placeholder="使用上的建议:" placeholder-style="color:green;" bindinput="bindinput_usage"/>
       </view>
+      </view>
+      <view class="page__hd">
+      
       <view class="textarea-wrp">
         <textarea auto-focus="true" style="height: 10em" placeholder="其他的建议:" placeholder-style="color:green;" bindinput="bindinput_other"/>
       </view>
-      
-</view>
+      </view>
 <button class="weui-btn" type="primary" bindtap="submit">提交</button>

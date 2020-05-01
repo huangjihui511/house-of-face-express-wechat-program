@@ -46,6 +46,20 @@ Page({
     console.log(e)
     var time = util.formatTime(new Date());
     console.log(time)
+    if (this.data.feedback_function == null && 
+      this.data.feedback_usage  == null &&
+      this.data.feedback_other == null) {
+        wx.showModal({
+          title: '反馈失败（不能提交空反馈）',
+          confirmText: '确定',
+          success: res=> {
+            wx.navigateBack({
+              complete: (res) => {},
+            })
+          }
+        })
+        return 
+      }
     wx.cloud.callFunction({
       name:"add_feedback",
       data: {

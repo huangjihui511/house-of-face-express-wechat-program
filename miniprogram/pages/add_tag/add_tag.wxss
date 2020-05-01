@@ -132,3 +132,7 @@ page{
   /* flex-flow:row wrap; */
   flex-direction:row;
 }
+.textarea-wrp {
+  padding: 0 25rpx;
+  background-color: #fff;
+}
