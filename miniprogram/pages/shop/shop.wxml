@@ -1,16 +1,22 @@
 <!--index.wxml-->
 <view class="container">
+
   <view class="search">
-    <view class="showWhatToSearch">查找你想要的表情：{{toSearch}}</view>
+    <!-- <view class="showWhatToSearch">查找你想要的表情：{{toSearch}}</view> -->
     <view class="searchInputConfirm">
       <input class="input" bindinput="bindConfirmClick" data-input="input"
-         laceholder="请输入搜索关键字">
+         placeholder="请输入搜索关键字">
       </input>
       <button class="button_confirm" style="width:150rpx" bindtap="confirm" >
         <text class="confirmText" style="font-size:medium">确认</text>
        <!-- <view class="confirmFont"></view>-->
       </button>
     </view>
+<view class="page__hd">
+        <view class="page__title">商店页面</view>
+        <view class="page__desc">浏通过关键词或者相关的句子找到匹配的表情</view>
+        <view class="page__desc">查看作者发布的其他表情，下载和收藏</view>
+  </view>
   </view>
   <view class="wordsAbovePics">
     <view class="showWhatToSearch">猜你想要</view>
