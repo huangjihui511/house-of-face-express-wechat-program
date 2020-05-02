@@ -51,6 +51,7 @@
         "selectedIconPath": "images/shop_fill.png",
         "text": "商店"
       },
+      
       {
         "pagePath": "pages/team2/my/index",
         "iconPath": "images/user_blank.png",

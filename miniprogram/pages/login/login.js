@@ -29,7 +29,7 @@ Page({
     // wx.navigateTo({
     //   url: '../notify/notify',
     // })
-    wx.reLaunch({url: '../team2/favorite_expression/index'})
+    wx.reLaunch({url: '../shop/shop'})
     //wx.navigateTo({url: '../index/index'})
   },
   login: function(e) {
