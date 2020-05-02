@@ -20,6 +20,10 @@ Page({
       {file_id :  "/images/test3.jpg"},
       {file_id : "/images/test2.jpg"}
     ],
+    //悬浮窗
+    isIos:false,
+    left:0,
+    top:0,
     isLoading:0,
     test_cloud_setdata:0,
     user_coin:0,
@@ -36,20 +40,23 @@ Page({
     showListCache:[],
     showPicList: [
       [
-        {file_id:''},
-        {file_id:''},
-        {file_id:''}
+        {file_id:''},{file_id:''},{file_id:''}
     ],
       [
-        {file_id:''},
-        {file_id:''},
-        {file_id:''}
+        {file_id:''},{file_id:''},{file_id:''}
     ],
     [
-      {file_id:''},
-      {file_id:''},
-      {file_id:''}
-    ]
+      {file_id:''},{file_id:''},{file_id:''}
+    ],
+    [
+      {file_id:''},{file_id:''},{file_id:''}
+  ],
+    [
+      {file_id:''},{file_id:''},{file_id:''}
+  ],
+  [
+    {file_id:''},{file_id:''},{file_id:''}
+  ]
     ],
     user_rank:5,
     user_exp:0,
@@ -115,6 +122,18 @@ Page({
     console.log("后：",this.data.showPicList)*/
     this.data.globalShowIndex = 0
     this.data.showListCache = []
+
+    for (var i = 0;i < 5;i++) {
+      for (var j = 0;j < 3;j++) {
+        this.data.showPicList[i][j]['file_id'] = ''
+        this.setData({
+          showPicList:this.data.showPicList
+        })
+      }
+    }
+
+    //console.log("showPicList:",this.data.showPicList)
+
     //暂存所有查找的图片路径
     var tempPaths = []
     
@@ -256,19 +275,28 @@ Page({
                         var ids = datas[f]['expression_id']
                         console.log("ids:",ids) 
                         for (var key in ids) {
-                          var reflex1 = globalPicIndex%9
+                          var reflex1 = globalPicIndex%18
                             var reflex2 =  parseInt(reflex1/3)
                             var reflex3 = reflex1%3
                             console.log("globalPicIndex:",globalPicIndex)
                             console.log("key:",key)
                           that.data.showListCache[globalPicIndex] = key
-                          if (globalPicIndex < 9) {
+                          if (globalPicIndex < 18) {
                             that.data.showPicList[reflex2][reflex3]['file_id'] = key
                             that.setData({
                               showPicList:that.data.showPicList
                             }) 
                           }
                           globalPicIndex++
+                      }
+                    }
+                    var fill = globalPicIndex
+                    if (fill < 18) {
+                      for (;fill < 18;fill++) {
+                        that.data.showPicList[parseInt(fill/3)][fill%3]['file_id'] = ''
+                        that.setData({
+                          showPicList:that.data.showPicList
+                        })
                       }
                     }
                     }
@@ -387,19 +415,25 @@ Page({
     console.log("rank:"+this.data.user_rank+"expup:"+this.data.user_exp_Upbound)
   },
 
-  reFresh:function() {
+  reFreshL:function() {
     var loadTime = this.data.globalShowIndex
-    var init = (loadTime+1)*9
+    var init = loadTime*18
     var globalList = this.data.showListCache
     console.log("globalList:",globalList)
-    if (init >= globalList.length) {
+    if (init == 0) {
       wx.showToast({
-        title: '抱歉，没有更多了',
+        title: '到头了^_^',
         duration: 2000
       })
     }
     else {
-      for (var i = 0;i < 9;i++) {
+      this.data.globalShowIndex--
+      this.setData({
+        globalShowIndex:this.data.globalShowIndex
+      })
+      var length = globalList.length
+      var init = this.data.globalShowIndex*18
+      for (var i = 0;i < 18;i++) {
         var path = globalList[init+i]
         console.log("path:",path)
         var reflex1 = parseInt(i/3)
@@ -409,7 +443,36 @@ Page({
           showPicList:this.data.showPicList
         })
       }
+    }
+  },
+
+  reFreshR:function() {
+    var loadTime = this.data.globalShowIndex
+    var init = (loadTime+1)*18
+    var globalList = this.data.showListCache
+    console.log("globalList:",globalList)
+    if (init >= globalList.length) {
+      wx.showToast({
+        title: '抱歉，没有更多了',
+        duration: 2000
+      })
+    }
+    else {
       this.data.globalShowIndex++
+      this.setData({
+        globalShowIndex:this.data.globalShowIndex
+      })
+      var length = globalList.length
+      for (var i = 0;i < 18;i++) {
+        var path = globalList[init+i]
+        console.log("path:",path)
+        var reflex1 = parseInt(i/3)
+        var reflex2 = i%3
+        this.data.showPicList[reflex1][reflex2]['file_id'] = path
+        this.setData({
+          showPicList:this.data.showPicList
+        })
+      }
     }
   },
 
@@ -448,16 +511,23 @@ Page({
   },*/
 
   onLoad: function () {
-    var test = [[{'file_id':'111'},{'file_id':'222'}]]
-    var cat = [{'file_id':'333'},{'file_id':'444'}]
-    test.push(cat)
-    console.log("++++++++++++++++++++++++++++",test)
-
+    this.setData({
+      globalShowIndex:this.data.globalShowIndex
+    })
+    wx.getSystemInfo({
+      success: (res) => {
+        if (res.platform == "android") {
+          this.setData({
+            isIos: false
+          })
+        }
+      }
+    })
     var that = this
     console.log("初始化推荐表情")
     db.collection('expression').where({
       public: true
-    }).limit(9).get({
+    }).limit(18).get({
       success:function(res) {
         var paths = res.data
         console.log("初始推荐表情:",paths)
@@ -533,5 +603,56 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  /**
+  * 拖拽移动(补丁)
+  */
+ handleSetMoveViewPos: function (e) {
+  // 在ios下永远都不会走这个方案，以免引起无用的计算
+  if (!ios) {
+    const MOVE_VIEW_RADIUS = 30 // 悬浮窗半径
+
+    const touchPosX = e.touches[0].clientX
+    const touchPosY = e.touches[0].clientY
+
+    const moveViewCenterPosX = this.data.left + MOVE_VIEW_RADIUS
+    const moveViewCenterPosY = this.data.top + MOVE_VIEW_RADIUS
+
+    // 确保手指在悬浮窗上才可以移动
+    if (Math.abs(moveViewCenterPosX - touchPosX) < MOVE_VIEW_RADIUS && Math.abs(moveViewCenterPosY - touchPosY) < MOVE_VIEW_RADIUS) {
+      if (touchPosX > 0 && touchPosY > 0) {
+        this.setData({
+          left: touchPosX - MOVE_VIEW_RADIUS,
+          top: touchPosY - MOVE_VIEW_RADIUS
+        })
+      } else {
+        this.setData({
+          left: 20, // 默认显示位置 left距离
+          top: 250  // 默认显示位置 top距离
+        })
+      }
+    }
   }
+},
+/**
+* 拖拽移动
+*/
+handleTouchMove: function (e) {
+  const MOVE_VIEW_RADIUS = 30 // 悬浮窗半径
+
+  const touchPosX = e.touches[0].clientX
+  const touchPosY = e.touches[0].clientY
+
+  if (touchPosX > 0 && touchPosY > 0) {
+    this.setData({
+      left: touchPosX - MOVE_VIEW_RADIUS,
+      top: touchPosY - MOVE_VIEW_RADIUS
+    })
+  } else {
+    this.setData({
+      left: 20, //默认显示位置 left距离
+      top: 250  //默认显示位置 top距离
+    })
+  }
+  },
 })

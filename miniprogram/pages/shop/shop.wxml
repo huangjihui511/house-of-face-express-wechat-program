@@ -1,6 +1,16 @@
 <!--index.wxml-->
 <view class="container">
-
+<movable-area style="height: 100%; width: 100%;">
+  <movable-view class="fixedMovable" style="height: 80rpx; width: 80rpx;" x="350" y="500" animation="false"
+    direction="all" bindtap="reFreshR">
+    <image src="../../images/toRight.png" style="height:80rpx;width:80rpx;"></image>
+      <!--image class="refreshIcon" style="height:100rpx;width:100rpx" src="../../images/xs.png"></image-->
+  </movable-view>
+  <movable-view class="fixedMovable" style="height: 80rpx; width: 80rpx;" x="280" y="500" animation="false"
+    direction="all" bindtap="reFreshL">
+    <image src="../../images/toLeft.png" style="height:80rpx;width:80rpx;"></image>
+      <!--image class="refreshIcon" style="height:100rpx;width:100rpx" src="../../images/xs.png"></image-->
+  </movable-view>
   <view class="search">
     <!-- <view class="showWhatToSearch">查找你想要的表情：{{toSearch}}</view> -->
     <view class="searchInputConfirm">
@@ -12,7 +22,7 @@
        <!-- <view class="confirmFont"></view>-->
       </button>
     </view>
-<view class="page__hd">
+  <view class="page__hd">
         <view class="page__title">商店页面</view>
         <view class="page__desc">浏通过关键词或者相关的句子找到匹配的表情</view>
         <view class="page__desc">查看作者发布的其他表情，下载和收藏</view>
@@ -21,7 +31,7 @@
   <view class="wordsAbovePics">
     <view class="showWhatToSearch">猜你想要</view>
     <view class="refresh" bindtap="reFresh">
-      换一批<image class="refreshIcon" style="height:40rpx;width:40rpx" src="../../images/refresh.png"></image>
+      当前页数：{{globalShowIndex+1}}<!--image class="refreshIcon" style="height:40rpx;width:40rpx" src="../../images/refresh.png"></image-->
     </view>
   </view>
   <view class="line"></view>
@@ -48,4 +58,21 @@
   <view class="page-section">
 
   </view-->
+
+  <!--view bindtouchmove="handleSetMoveViewPos">
+    <view wx-if="{{!isIos}}" class="move-view" style=" top:{{top}}px;left:{{left}}px;" bindtap="reFresh" catchtouchmove="handleTouchMove">
+        <image class="img" src="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=4294841024,3545417298&fm=179&app=42&f=PNG?w=56&h=56">
+        </image>
+    </view>
+    <cover-view wx-if="{{isIos}}" class="move-view" style=" top:{{top}}px;left:{{left}}px;" bindtap="reFresh" catchtouchmove="handleTouchMove">
+        <cover-image class="img" src="https://ss2.baidu.com/6ONYsjip0QIZ8tyhnq/it/u=4294841024,3545417298&fm=179&app=42&f=PNG?w=56&h=56">
+        </cover-image>
+    </cover-view>
+    <textarea placeholder='我是textarea组件，用来输入一些信息'></textarea>
+    <view>
+      一大段test，占个位，表示下存在感
+    </view>
+    
+</view-->
+</movable-area>
 </view>
