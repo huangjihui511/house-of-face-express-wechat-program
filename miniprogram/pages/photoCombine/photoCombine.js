@@ -1,5 +1,6 @@
 // pages/photoCombine/photoCombine.js
 const ctx = wx.createCanvasContext('photoCombine')
+const ctxw = wx.createCanvasContext('photoCombinew')
 Page({
 
   /**
@@ -10,6 +11,7 @@ Page({
     width: 0,
     heightForCanvas:0,
     widthForCanvas:0,
+    crosswise: false,
     downNum: 0,
     filePath: ''
   },
@@ -20,57 +22,61 @@ Page({
   onLoad: function (options) {
     let that = this
     var obj = this.data
-    var imagesArr = JSON.parse(options.imageUrls)
+    var pages = getCurrentPages()
+    var imagesArr = JSON.parse(pages[pages.length - 2].data.imageArr)
     
-    this.setData({
-      height:300
-    })
-    for(var i = 0; i < imagesArr.length; i++){
-      var imageUrl = imagesArr[i]
-      wx.getImageInfo({
-        src: imageUrl,
-        success: function (res) {
-          obj.downNum = obj.downNum + 1
-          console.log(res)
-          let width = res.width / res.height * 300
-          ctx.drawImage(res.path, obj.widthForCanvas, 0, width, 300)
-          obj.widthForCanvas = obj.widthForCanvas + width
-          that.setData({
-            width: obj.widthForCanvas
-          })
-          if (obj.downNum == imagesArr.length){
-            ctx.draw()
-            console.log(res.path)
-          }
-        }
+    if (options.dir == 'crosswise') {
+      this.setData({
+        crosswise: true,
+        height:300
       })
-      
-    // for(var i = 0; i < imagesArr.length; i++){
-    //   var imageUrl = imagesArr[i]
-    //   wx.getImageInfo({
-    //     src: imageUrl,
-    //     success: function (res) {
-    //       var width = res.width
-    //       var height = res.height
-    //       obj.downNum = obj.downNum + 1
-    //       console.log(res)
-    //       let sw = wx.getSystemInfoSync().windowWidth
-    //       if(width > sw){
-    //         width = sw
-    //         height = height / res.width * width
-    //       }
-    //       ctx.drawImage(res.path, (sw-width)/2.0, obj.heightForCanvas, width, height)
-    //       obj.heightForCanvas = obj.heightForCanvas + height
-    //       that.setData({
-    //         height: obj.heightForCanvas
-    //       })
-    //       if (obj.downNum == imagesArr.length){
-    //         ctx.draw()
-    //       }
-    //     }
-    //   })
+      for(var i = 0; i < imagesArr.length; i++){
+        var imageUrl = imagesArr[i]
+        wx.getImageInfo({
+          src: imageUrl,
+          success: function (res) {
+            obj.downNum = obj.downNum + 1
+            console.log(res)
+            let width = res.width / res.height * 300
+            ctxw.drawImage(res.path, obj.widthForCanvas, 0, width, 300)
+            obj.widthForCanvas = obj.widthForCanvas + width
+            that.setData({
+              width: obj.widthForCanvas
+            })
+            if (obj.downNum == imagesArr.length){
+              ctxw.draw()
+              console.log(res.path)
+            }
+          }
+        })
+      }
+    } else {
+      for(var i = 0; i < imagesArr.length; i++) {
+        var imageUrl = imagesArr[i]
+        wx.getImageInfo({
+          src: imageUrl,
+          success: function (res) {
+            var width = res.width
+            var height = res.height
+            obj.downNum = obj.downNum + 1
+            console.log(res)
+            let sw = wx.getSystemInfoSync().windowWidth
+            if(width > sw){
+              width = sw
+              height = height / res.width * width
+            }
+            ctx.drawImage(res.path, (sw-width)/2.0, obj.heightForCanvas, width, height)
+            obj.heightForCanvas = obj.heightForCanvas + height
+            that.setData({
+              height: obj.heightForCanvas
+            })
+            if (obj.downNum == imagesArr.length){
+              ctx.draw()
+            }
+          }
+        })
+      }
     }
-    
   },
 
   /**

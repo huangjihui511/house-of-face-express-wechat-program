@@ -21,6 +21,7 @@ Page({
     filter: false,
     joint: false,
     save: false,
+    imageArr: '',
     r: 33,
     g: 33,
     b: 33,
@@ -235,6 +236,24 @@ Page({
     
   },
 
+  crosswise() {
+    wx.navigateTo({
+      url: '/pages/photoCombine/photoCombine?dir=crosswise',
+    })
+    this.setData({
+      joint: false
+    })
+  },
+
+  lengthways() {
+    wx.navigateTo({
+      url: '/pages/photoCombine/photoCombine?dir=lengthways',
+    })
+    this.setData({
+      joint: false
+    })
+  },
+
   jointTap() {
     let that = this
     wx.chooseImage({
@@ -243,8 +262,8 @@ Page({
         let tempFilePaths = res.tempFilePaths
         tempFilePaths.unshift(that.data.curImage)
         var imagesArrJson = JSON.stringify(tempFilePaths);
-        wx.navigateTo({
-          url: '/pages/photoCombine/photoCombine?imageUrls=' + imagesArrJson,
+        that.setData({
+          imageArr: imagesArrJson
         })
       },
     })
