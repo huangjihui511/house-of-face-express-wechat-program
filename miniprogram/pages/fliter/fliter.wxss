@@ -9,16 +9,28 @@
 
 .bottom {
   width: 750rpx;
-  height: 20 px;
+  height: 30px;
   position: relative;
-  bottom: 60rpx;
   display: flex;
   justify-content: space-around;
+  align-items: center;
 }
 
 .list-item {
   width: 80rpx;
-  height: 60rpx;
-  margin: 20rpx 0;
+  height: 20px;
   border-radius: 20%;
+}
+
+.btnView{
+  height: 50px;
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.addTextBtn{
+  width: 80%;
+  height: 44px;
 }

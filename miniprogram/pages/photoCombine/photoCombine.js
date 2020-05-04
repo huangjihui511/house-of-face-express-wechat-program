@@ -7,46 +7,69 @@ Page({
    */
   data: {
     height:0,
+    width: 0,
     heightForCanvas:0,
-    downNum: 0
+    widthForCanvas:0,
+    downNum: 0,
+    filePath: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this
-    var obj = that.data
+    let that = this
+    var obj = this.data
     var imagesArr = JSON.parse(options.imageUrls)
-    let num = imagesArr.length
-    let screenWidth = wx.getSystemInfoSync().windowWidth
     
+    this.setData({
+      height:300
+    })
     for(var i = 0; i < imagesArr.length; i++){
       var imageUrl = imagesArr[i]
       wx.getImageInfo({
         src: imageUrl,
         success: function (res) {
-          var width = res.width
-          var height = res.height
           obj.downNum = obj.downNum + 1
           console.log(res)
-          let sw = wx.getSystemInfoSync().windowWidth
-          if(width > sw){
-            width = sw
-            height = height / res.width * width
-          }
-          ctx.drawImage(res.path, (sw-width)/2.0, obj.heightForCanvas, width, height)
-          obj.heightForCanvas = obj.heightForCanvas + height
+          let width = res.width / res.height * 300
+          ctx.drawImage(res.path, obj.widthForCanvas, 0, width, 300)
+          obj.widthForCanvas = obj.widthForCanvas + width
           that.setData({
-            height: obj.heightForCanvas
+            width: obj.widthForCanvas
           })
           if (obj.downNum == imagesArr.length){
             ctx.draw()
+            console.log(res.path)
           }
         }
       })
+      
+    // for(var i = 0; i < imagesArr.length; i++){
+    //   var imageUrl = imagesArr[i]
+    //   wx.getImageInfo({
+    //     src: imageUrl,
+    //     success: function (res) {
+    //       var width = res.width
+    //       var height = res.height
+    //       obj.downNum = obj.downNum + 1
+    //       console.log(res)
+    //       let sw = wx.getSystemInfoSync().windowWidth
+    //       if(width > sw){
+    //         width = sw
+    //         height = height / res.width * width
+    //       }
+    //       ctx.drawImage(res.path, (sw-width)/2.0, obj.heightForCanvas, width, height)
+    //       obj.heightForCanvas = obj.heightForCanvas + height
+    //       that.setData({
+    //         height: obj.heightForCanvas
+    //       })
+    //       if (obj.downNum == imagesArr.length){
+    //         ctx.draw()
+    //       }
+    //     }
+    //   })
     }
-    
     
   },
 
@@ -103,9 +126,6 @@ Page({
    * 点击保存图片
    */
   toSavePic(){
-    let sw = wx.getSystemInfoSync().windowWidth
-    var that = this
-    var obj = that.data
     wx.canvasToTempFilePath({
       canvasId: 'photoCombine',
       success(res) {

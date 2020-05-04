@@ -29,15 +29,17 @@ Page({
     wx.getImageInfo({
       src: url,
       success: function (res) {
-        let width = 0
         var rate = res.height / res.width
-        var height = wx.getSystemInfoSync().windowWidth * 600 / 750
-        if (res.width / 750 > res.height / 600) {
-          width = wx.getSystemInfoSync().windowWidth
-          height = Math.trunc(width * rate)
-        } else {
-          width = height / rate
-        }
+        let width = wx.getSystemInfoSync().windowWidth
+        let height = Math.trunc(width * rate)
+        // let width = 0
+        // var height = wx.getSystemInfoSync().windowWidth * 600 / 750
+        // if (res.width / 750 > res.height / 600) {
+        //   width = wx.getSystemInfoSync().windowWidth
+        //   height = Math.trunc(width * rate)
+        // } else {
+        //   width = height / rate
+        // }
         that.setData({
           cWidth: width,
           cHeight: height,

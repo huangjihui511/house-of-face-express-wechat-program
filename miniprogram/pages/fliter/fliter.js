@@ -24,7 +24,7 @@ Page({
       }
     ],
     cWidth: 0,
-    cHeight: 0
+    cHeight: 600
   },
 
   /**

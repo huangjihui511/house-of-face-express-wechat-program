@@ -8,10 +8,8 @@ Page({
    */
   data: {
     hasChoosedImg: false,
-    canvasWidth: 0,
-    canvasHeight: 0, // canvas的完整高度
-    canvasHeightLen: 0, // canvas的临时高度（用在操作栏影响画布高度时）
-    windowHeight: 0, // 屏幕高度
+    cHeight: 0,
+    cWidth: 0,
     prevPosition: [0, 0], // 前一个移动所在位置
     movePosition: [0, 0], // 当前移动位置
     background: '', // 背景图片，即导入的图片
@@ -55,11 +53,6 @@ Page({
     wx.getSystemInfo({
       success: function(res) {
         console.log(res);
-        that.setData({
-          canvasWidth: res.windowWidth,
-          canvasHeight: res.windowHeight - 50,
-          windowHeight: res.windowHeight
-        })
       },
     })
     // 选照片
@@ -67,17 +60,14 @@ Page({
       src: options.image,
       success: function (res) {
         // 获取图片信息，主要为宽高，选择合适的自适应方式（将最大边完整显示）
-        let [height, width] = [that.data.canvasWidth / res.width * res.height, that.data.canvasWidth];
-        if (height > that.data.windowHeight - 50) {
-          height = that.data.windowHeight - 50;
-          width = height / res.height * res.width;
-        }
+        let width = wx.getSystemInfoSync().windowWidth
+        let height = Math.trunc(width * rate)
         const ctx = wx.createCanvasContext('myCanvas');
         ctx.drawImage(res.path, 0, 0, width, height);
         ctx.draw();
         that.setData({
-          canvasHeight: height,
-          canvasWidth: width,
+          cHeight: height,
+          cWidth: width,
           background: res.path,
           hasChoosedImg: true
         });

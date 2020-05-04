@@ -1,6 +1,6 @@
 <canvas canvas-id="myCanvas" disable-scroll="true" bindtouchstart="touchStart"
   bindtouchmove="touchMove" wx:if="{{hasChoosedImg}}"
-  style="height: {{(canvasHeightLen == 0) ? canvasHeight : canvasHeightLen}}px; width: {{canvasWidth}}px;" 
+  style="height: {{cHeight}}px; width: {{cWidth}}px;" 
 />
 <view class="bottom">
   <block wx:for="{{btnInfo}}" wx:key="index">

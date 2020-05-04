@@ -1,5 +1,9 @@
-<canvas class='photoCombine' canvas-id="photoCombine" style = 'height:{{height}}px'>
+<scroll-view scroll-x>
+<canvas class='photoCombine' canvas-id="photoCombine" style = 'height:{{height}}px;width:{{width}}px'>
 </canvas>
+</scroll-view>
+
+
 <view class='btnView'>
   <button class='produceBtn' type='primary' bindtap='toSavePic'>
     保存编辑
