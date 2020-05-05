@@ -60,6 +60,7 @@ Page({
       src: options.image,
       success: function (res) {
         // 获取图片信息，主要为宽高，选择合适的自适应方式（将最大边完整显示）
+        let rate = res.height / res.width
         let width = wx.getSystemInfoSync().windowWidth
         let height = Math.trunc(width * rate)
         const ctx = wx.createCanvasContext('myCanvas');
