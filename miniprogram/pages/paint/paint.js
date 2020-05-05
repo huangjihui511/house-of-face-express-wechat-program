@@ -87,7 +87,11 @@ Page({
   },
 
   tapBtn: function (e) {
-    utils.tapBtn(e, this, 2);
+    if (e.target.dataset.type == 'clear') {
+      this.drawBack()
+    } else {
+      utils.tapBtn(e, this, 2);
+    }
   },
 
   touchStart: function (e) {
@@ -158,7 +162,7 @@ Page({
 
   drawBack() {
     const ctx = wx.createCanvasContext('myCanvas');
-    ctx.drawImage(this.data.background, 0, 0, this.data.canvasWidth, this.data.canvasHeight);
+    ctx.drawImage(this.data.background, 0, 0, this.data.cWidth, this.data.cHeight);
     ctx.draw();
     drawBack(this);
   },

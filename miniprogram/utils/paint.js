@@ -1,5 +1,6 @@
-const App = getApp()
-var recordPoints = App.globalData.recordPoints
+
+const App = getApp();
+const recordPoints = App.globalData.recordPoints;
 
 // 记录一条线的起始点，顺便记录一下这条线的颜色和为宽度
 export const startTouch = (e, color, width) => {

@@ -7,8 +7,8 @@
 .bottom {
   width: 750rpx;
   height: 100rpx;
-  position: absolute;
-  bottom: 0;
+  position: relative;
+  top: 500rpx;
   display: flex;
   justify-content: space-around;
 }
@@ -22,8 +22,8 @@
 
 .choose-box {
   width: 750rpx;
-  position: absolute;
-  bottom: 100rpx;
+  position: relative;
+  top: 0rpx;
 }
 
 .color-box {

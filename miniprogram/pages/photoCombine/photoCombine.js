@@ -132,8 +132,9 @@ Page({
    * 点击保存图片
    */
   toSavePic(){
+    let id = this.data.crosswise ? 'photoCombinew' : 'photoCombine'
     wx.canvasToTempFilePath({
-      canvasId: 'photoCombine',
+      canvasId: id,
       success(res) {
         var pages = getCurrentPages()
         pages[pages.length-2].adjustScale(res.tempFilePath)
