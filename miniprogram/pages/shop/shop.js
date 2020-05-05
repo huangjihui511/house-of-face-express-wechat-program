@@ -121,6 +121,9 @@ Page({
     //})
     console.log("后：",this.data.showPicList)*/
     this.data.globalShowIndex = 0
+    this.setData({
+      globalShowIndex:this.data.globalShowIndex
+    })
     this.data.showListCache = []
 
     for (var i = 0;i < 5;i++) {
