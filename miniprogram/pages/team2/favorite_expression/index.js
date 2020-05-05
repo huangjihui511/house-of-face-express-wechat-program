@@ -44,27 +44,27 @@ Page({
           show:false,
       },
       {
-        text: 'label2',
+        text: '开心',
         show:false,
       },
       {
-          text: 'label3',
+          text: '祝福',
           show:false,
       },
       {
-          text: 'label4',
+          text: '贫穷',
           show:false,
       },
       {
-          text: 'label5',
+          text: '嘲讽',
           show:false,
       },
       {
-          text: 'label6',
+          text: '羡慕',
           show:false,
       },
       {
-          text: 'label7',
+          text: '生气',
           show:false,
       }
     ],

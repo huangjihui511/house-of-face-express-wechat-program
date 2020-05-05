@@ -22,12 +22,12 @@ data: {
   imageSrc : null,
   label_list:[
     {title:"公开",selected:false},
-    {title:"label2",selected:false},
-    {title:"label3",selected:false},
-    {title:"label4",selected:false},
-    {title:"label5",selected:false},
-    {title:"label6",selected:false},
-    {title:"label7",selected:false},
+    {title:"开心",selected:false},
+    {title:"祝福",selected:false},
+    {title:"贫穷",selected:false},
+    {title:"嘲讽",selected:false},
+    {title:"羡慕",selected:false},
+    {title:"生气",selected:false},
   ],
   labels:['未公开'],
   image_src:"",
@@ -106,6 +106,11 @@ two2one(a) {
                       _this.setData({
                         [file2]:file1,
                       })
+                      wx.showToast({
+                        title: '加载成功',
+                        icon: "success",
+                        duration: 1000
+                      })
                     },
                     fail: console.error
                   })
@@ -179,9 +184,9 @@ chooseImage: async function chooseImage(e) {
       })
       _this.two2one(res.tempFilePaths[0])
       wx.showToast({
-        title: '请等待',
+        title: '加载中',
         icon: 'loading',
-        duration: 3000
+        duration: 10000000
       })
     },
     fail({errMsg}) {

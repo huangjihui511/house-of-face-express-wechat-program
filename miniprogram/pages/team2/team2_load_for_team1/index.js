@@ -21,12 +21,12 @@ data: {
   imageSrc : null,
   label_list:[
     {title:"公开",selected:false},
-    {title:"label2",selected:false},
-    {title:"label3",selected:false},
-    {title:"label4",selected:false},
-    {title:"label5",selected:false},
-    {title:"label6",selected:false},
-    {title:"label7",selected:false},
+    {title:"开心",selected:false},
+    {title:"祝福",selected:false},
+    {title:"贫穷",selected:false},
+    {title:"嘲讽",selected:false},
+    {title:"羡慕",selected:false},
+    {title:"生气",selected:false},
   ],
   labels:['未公开'],
   image_src:"",
@@ -226,6 +226,11 @@ submitted: function submitted(e) {
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
+    wx.showToast({
+      title: '加载中',
+      icon: 'loading',
+      duration: 10000000 
+    })
     var _this=this
     wx.cloud.callFunction({
       name:"get_label",
@@ -281,9 +286,9 @@ submitted: function submitted(e) {
           [file2]:file1,
         })
         wx.showToast({
-          title: '请等待',
-          icon: 'loading',
-          duration: 2000  
+          title: '加载成功',
+          icon: "success",
+          duration: 1000
         })
       },
       fail: console.error
