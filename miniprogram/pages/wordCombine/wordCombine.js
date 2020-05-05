@@ -133,13 +133,39 @@ Page({
   onAddText() {
     var that = this
     var obj = that.data;
-    that.setData({
-      graph: {
-        type: 'text',
-        text: obj.textToPrint,
-        color: that.data.currentColor
+    wx.showLoading({
+      title: '检测文字中',
+      duration: 5000
+    })
+    wx.cloud.callFunction({      
+      name: 'textCheck',      
+      data: ({        
+        text: obj.textToPrint    
+      }),
+      success: res => {
+        wx.hideLoading()
+        if (res.result.errCode != 0) {
+          wx.showToast({
+            title: '文字违规',
+          })
+        } else {  
+          that.setData({
+            graph: {
+              type: 'text',
+              text: obj.textToPrint,
+              color: that.data.currentColor
+            }
+          })
+        }
+      },
+      fail: err => {
+        console.log(err)
+        wx.hideLoading()
+        wx.showToast({
+          title: '文字检查失败！',
+        })
       }
-    });
+    })
   },
 
   /**

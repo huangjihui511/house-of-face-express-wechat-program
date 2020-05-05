@@ -119,7 +119,7 @@ Page({
                     wx.hideLoading()
                     if (res.result.errCode != 0) {
                       wx.showToast({
-                        title: '图片异常',
+                        title: '图片违规！',
                       })
                       that.setData({
                         choosed: false
