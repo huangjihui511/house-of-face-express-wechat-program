@@ -10,6 +10,7 @@ Page({
    * 页面的初始数据
    */
 data: {
+  check:true,
   empty:true,
   title: '上传图片',
   file_id: "",
@@ -106,11 +107,13 @@ two2one(a) {
                       _this.setData({
                         [file2]:file1,
                       })
-                      wx.showToast({
-                        title: '加载成功',
-                        icon: "success",
-                        duration: 1000
-                      })
+                      if(_this.data.check==true){
+                        wx.showToast({
+                          title: '加载成功',
+                          icon: "success",
+                          duration: 1000
+                        })
+                      }
                     },
                     fail: console.error
                   })
@@ -164,6 +167,9 @@ chooseImage: async function chooseImage(e) {
              icon: 'none',
              title: '图片含有违法信息，请换张图片',
              duration: 1000,
+           })
+           _this.setData({
+             check:false
            })
            setTimeout(function () {
             wx.redirectTo({

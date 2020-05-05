@@ -199,8 +199,8 @@ submitted: function submitted(e) {
       duration: 1000,
       success(data) {
         setTimeout(function () {
-          wx.redirectTo({
-            url: '../../login/login',
+          wx.reLaunch({
+            url: '../favorite_expression/index',
           })
         }, 1000) //延迟时间
       }
